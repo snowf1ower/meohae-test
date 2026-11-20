@@ -220,6 +220,9 @@ const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTA="https://instagram.com/m
 const SHEET_URL="https://script.google.com/macros/s/AKfycbzUDtHeLIdithkGoPez5AQN8cy8NPDVxUpRIp3bbMw8uLIqRvCsj_0Bz6deCYW1thwjUQ/exec"; // Apps Script 웹 앱. 비어 있으면 집계 안 함.
 const SID=Math.random().toString(36).slice(2,10);
 const FROM=new URLSearchParams(location.search).get('t')||'';
+const SRC=(new URLSearchParams(location.search).get('src')||'').slice(0,20);
+try{if(SRC)sessionStorage.setItem('src',SRC);}catch(e){}
+function getSrc(){try{return SRC||sessionStorage.getItem('src')||'';}catch(e){return SRC;}}
 function log(ev,extra){
   if(!SHEET_URL)return;
   const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:navigator.userAgent.slice(0,80),ts:new Date().toISOString()},extra||{}));
@@ -312,7 +315,7 @@ function loading(){
 function finish(){
   const s=score();const t=decide(s);
   const sorted=Object.values(s).sort((a,b)=>b-a);
-  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0});
+  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0,where:getSrc()});
   showResult(t,s);
   history.replaceState(null,'',location.pathname+'?t='+t+'&done=1');
 }
@@ -405,6 +408,7 @@ async function saveCard(){
   },'image/png');
 }
 
+log('visit',{where:getSrc()});
 /* shared link landing */
 (function(){
   const p=new URLSearchParams(location.search);const t=p.get('t');
