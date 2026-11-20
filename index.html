@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>딴짓 동물 테스트 · 공부하다 폰 들 때, 나는 어떤 동물일까?</title>
+<meta name="description" content="공부하다 폰 드는 순간, 나는 강아지일까 고양이일까? 10문항 1분, 딴짓 동물 테스트.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="딴짓 동물 테스트">
+<meta property="og:description" content="공부하다 폰 들 때, 나는 어떤 동물일까? 10문항, 1분.">
+<meta property="og:image" content="https://snowf1ower.github.io/meohae-test/img/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://snowf1ower.github.io/meohae-test/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/dog_bust.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2B2A33;--sub:#7A7884;--line:#EEEDF2;--soft:#F6F5F9;
+ --tint:#FFE8DA;--acc:#F2733A;--acc-ink:#B5451B;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;background:#fff;color:var(--ink);line-height:1.5;word-break:keep-all;-webkit-font-smoothing:antialiased}
+.jua{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400}
+.wrap{max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:18px 20px 36px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--sub);font-weight:700}
+.top .logo{font-family:Jua;font-size:15px;color:var(--ink)}
+.screen{display:none;flex:1;flex-direction:column}
+.screen.on{display:flex}
+.btn{appearance:none;border:0;width:100%;height:56px;border-radius:999px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;transition:transform .08s,opacity .15s;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:6px;color:inherit}
+.btn:active{transform:scale(.98)}
+.btn.dark{background:var(--ink);color:#fff;box-shadow:0 10px 24px rgba(43,42,51,.18)}
+.btn.acc{background:var(--acc);color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.btn.line{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost{background:transparent;color:var(--sub);height:44px;font-size:15px;box-shadow:none}
+.fade{animation:fade .3s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes pop{0%{transform:scale(.6) rotate(-6deg);opacity:0}70%{transform:scale(1.06) rotate(2deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes wob{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+img{display:block;max-width:100%}
+/* start */
+.zoo{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:30px;align-items:end}
+.zoo img{width:100%;height:110px;object-fit:contain;animation:bob 3.2s ease-in-out infinite}
+.zoo img:nth-child(2){animation-delay:.4s}.zoo img:nth-child(3){animation-delay:.8s}.zoo img:nth-child(4){animation-delay:1.2s}
+h1{font-size:34px;line-height:1.25;margin-top:26px;text-align:center}
+h1 em{font-style:normal;color:var(--acc)}
+.lead{color:var(--sub);text-align:center;margin-top:12px;font-size:15px}
+.stack{display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:28px}
+.tiny{font-size:12px;color:var(--sub);text-align:center}
+.friend{margin-top:24px;border-radius:24px;padding:16px 18px 16px 10px;display:flex;align-items:center;gap:12px}
+.friend img{width:84px;height:84px;object-fit:contain;flex:none}
+.friend .k{font-size:12px;font-weight:700;opacity:.7}
+.friend .n{font-family:Jua;font-size:21px;margin-top:2px;line-height:1.25}
+.friend .l{font-size:13px;margin-top:3px;opacity:.8}
+/* quiz */
+.qhead{display:flex;align-items:center;gap:12px;margin-top:22px}
+.qbadge{font-family:Jua;font-size:15px;background:var(--ink);color:#fff;border-radius:999px;padding:4px 12px}
+.prog{flex:1;height:8px;background:var(--soft);border-radius:8px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FFB38A,#F2733A);transition:width .4s ease;border-radius:8px}
+.q{font-family:Jua;font-size:26px;line-height:1.35;margin-top:30px;min-height:70px}
+.opts{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.opt{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:17px 18px;font-size:16px;font-weight:500;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);line-height:1.4;box-shadow:0 4px 14px rgba(43,42,51,.05);transition:.15s}
+.opt:active{transform:scale(.99)}
+.opt.pick{border-color:var(--ink);background:var(--soft);font-weight:700}
+/* loading */
+.load{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.load .orb{width:170px;height:170px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;position:relative}
+.load .orb img{width:120px;height:120px;object-fit:contain;position:absolute;transition:opacity .35s}
+.load h2{font-family:Jua;font-size:26px;margin-top:26px}
+.load p{color:var(--sub);margin-top:6px;min-height:24px}
+.dots{display:flex;gap:6px;margin-top:20px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#ddd;animation:bob 1s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+/* result */
+.hero{margin:14px -20px 0;padding:30px 20px 30px;border-radius:0 0 36px 36px;text-align:center;background:var(--tint)}
+.hero .you{font-size:14px;font-weight:700;opacity:.65}
+.hero .avatar{height:230px;margin:10px auto 0;display:flex;align-items:center;justify-content:center;animation:pop .55s cubic-bezier(.2,.9,.3,1.3) both}
+.hero .avatar img{height:230px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,0,0,.10))}
+.hero .tag{display:inline-block;margin-top:14px;background:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:800;color:var(--acc-ink)}
+.hero h2{font-family:Jua;font-size:36px;line-height:1.2;margin-top:10px}
+.hero .line{margin-top:10px;font-size:15px;opacity:.85}
+.sec{margin-top:26px}
+.sec h3{font-family:Jua;font-size:19px;display:flex;align-items:center;gap:8px}
+.sec h3 i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.moments{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.moments div{background:var(--soft);border-radius:6px 18px 18px 18px;padding:12px 14px;font-size:15px;font-weight:500}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pair>div{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:14px}
+.pair .k{font-size:12px;font-weight:800;color:var(--sub)}
+.pair .v{font-size:14px;font-weight:500;margin-top:4px;line-height:1.45}
+.bars{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;gap:10px;font-size:14px}
+.bar img{width:40px;height:40px;object-fit:contain}
+.bar .t{height:12px;background:var(--soft);border-radius:8px;overflow:hidden}
+.bar .t i{display:block;height:100%;width:0;border-radius:8px;transition:width .8s ease}
+.bar .p{text-align:right;font-weight:700;color:var(--sub)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.match>div{border-radius:20px;padding:14px 12px;text-align:center}
+.match img{width:84px;height:84px;object-fit:contain;margin:0 auto}
+.match .k{font-size:12px;font-weight:800;opacity:.7;margin-top:6px}
+.match .n{font-family:Jua;font-size:17px;margin-top:2px}
+.match .d{font-size:12px;margin-top:4px;opacity:.75;line-height:1.4}
+.fit{margin-top:12px;background:var(--soft);border-radius:20px;padding:18px;font-size:15px;line-height:1.6}
+.fit b{color:var(--acc-ink)}
+/* dog CTA with CSS speech bubble */
+.cta{margin-top:14px;border:2px solid var(--tint);border-radius:22px;padding:18px;background:#fff}
+.cta p{font-size:14px;line-height:1.55}
+.cta .btn{margin-top:12px;height:52px;font-size:16px}
+.scene{position:relative;height:190px;margin:-4px 0 6px;background:var(--tint);border-radius:18px;overflow:hidden}
+.scene img{position:absolute;left:18px;bottom:0;height:180px;object-fit:contain}
+.scene .bub{position:absolute;right:22px;top:26px;background:#fff;border:2.5px solid var(--ink);border-radius:22px;padding:10px 16px;font-family:Jua;font-size:24px;line-height:1;animation:wob 2.4s ease-in-out infinite;transform-origin:bottom left}
+.scene .bub:after{content:"";position:absolute;left:-14px;bottom:10px;width:18px;height:18px;background:#fff;border-left:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg) skew(10deg,10deg)}
+.scene .who{position:absolute;right:22px;top:84px;font-size:12px;color:var(--sub);font-weight:700}
+.smalllink{display:block;text-align:center;font-size:13px;color:var(--sub);margin-top:14px;text-decoration:underline;text-underline-offset:3px}
+/* floating share bar */
+.sharebar{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:none}
+.sharebar.on{display:block}
+.sharebar .in{max-width:430px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:8px}
+.sharebar .btn{height:50px;font-size:15px}
+.sharebar .btn.line{font-size:14px}
+.spacer{height:84px}
+.note{font-size:12px;color:var(--sub);margin-top:18px;line-height:1.5;text-align:center}
+/* 머해 소개 시트 */
+.dim{position:fixed;inset:0;background:rgba(43,42,51,.35);z-index:20;opacity:0;pointer-events:none;transition:.25s}
+.dim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:#fff;border-radius:28px 28px 0 0;padding:14px 22px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .38s cubic-bezier(.2,.9,.3,1.1);box-shadow:0 -10px 40px rgba(0,0,0,.12)}
+.sheet.on{transform:none}
+.sheet .in{max-width:430px;margin:0 auto}
+.sheet .grab{width:40px;height:4px;border-radius:4px;background:var(--line);margin:0 auto 14px}
+.sheet .row{display:flex;gap:14px;align-items:center}
+.sheet .row img{width:92px;height:92px;object-fit:contain;flex:none}
+.sheet .bubble{position:relative;display:inline-block;background:var(--soft);border-radius:4px 16px 16px 16px;padding:8px 12px;font-family:Jua;font-size:18px;margin-bottom:6px}
+.sheet .k{font-size:12px;font-weight:800;color:var(--sub)}
+.sheet h4{font-family:Jua;font-size:21px;line-height:1.3;margin-top:2px}
+.sheet p{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.55}
+.sheet .btns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px}
+.sheet .btns .btn{height:50px;font-size:15px}
+.sheet .btns .btn.ghost{height:50px;padding:0 14px;width:auto}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+canvas{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="logo">딴짓 동물 테스트</span><span>by 머해</span></div>
+
+  <section class="screen on" id="s-start">
+    <div id="friendBox"></div>
+    <div class="zoo" id="zoo"></div>
+    <h1 class="jua">공부하다 폰 들 때,<br>나는 <em>어떤 동물</em>일까?</h1>
+    <p class="lead">10문항 · 1분 · 결과에서 나한테 맞는 집중법까지</p>
+    <div class="stack">
+      <button class="btn dark" onclick="start()">테스트 시작하기</button>
+      <p class="tiny">재미로 보는 테스트예요</p>
+    </div>
+  </section>
+
+  <section class="screen" id="s-quiz">
+    <div class="qhead"><span class="qbadge" id="qn">Q1</span><div class="prog"><i id="bar"></i></div></div>
+    <div class="q" id="q"></div>
+    <div class="opts" id="opts"></div>
+    <div class="stack"><button class="btn ghost" onclick="back()" id="backBtn">← 이전 질문</button></div>
+  </section>
+
+  <section class="screen" id="s-load">
+    <div class="load">
+      <div class="orb" id="orb"></div>
+      <h2>어떤 동물인지 보는 중</h2>
+      <p id="loadMsg">폰 든 손 확인 중…</p>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-result">
+    <div class="hero" id="hero">
+      <div class="you">공부하다 폰 들 때, 나는</div>
+      <div class="avatar" id="avatar"></div>
+      <div class="tag" id="rtag"></div>
+      <h2 id="rname"></h2>
+      <div class="line" id="rline"></div>
+    </div>
+    <div class="sec"><h3><i></i>이런 순간 있지 않아?</h3><div class="moments" id="moments"></div></div>
+    <div class="sec"><h3><i></i>강점과 약점</h3><div class="pair"><div><div class="k">강점</div><div class="v" id="good"></div></div><div><div class="k">약점</div><div class="v" id="bad"></div></div></div></div>
+    <div class="sec"><h3><i></i>내 안의 동물 비율</h3><div class="bars" id="bars"></div></div>
+    <div class="sec"><h3><i></i>같이 공부하면</h3><div class="match" id="match"></div></div>
+    <div class="sec"><h3><i></i>나한테 맞는 집중법</h3><div class="fit" id="fit"></div><div id="ctaBox"></div></div>
+    <button class="btn ghost" style="margin-top:18px" onclick="restart()">다시 하기</button>
+    <p class="note">재미로 보는 테스트예요. 공부법은 사람마다 달라서, 어떤 동물이든 자기한테 맞는 걸 쓰면 돼요.</p>
+    <div class="spacer"></div>
+  </section>
+</div>
+
+<div class="sharebar" id="sharebar"><div class="in">
+  <button class="btn dark" onclick="shareNative()">친구한테 보내기</button>
+  <button class="btn line" onclick="saveCard()">이미지 저장</button>
+  <button class="btn line" onclick="copyLink()">링크 복사</button>
+</div></div>
+<div class="dim" id="dim" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet"><div class="in">
+  <div class="grab"></div>
+  <div class="row">
+    <img src="img/dog_bust.webp" alt="">
+    <div>
+      <div class="bubble">너 머해?</div>
+      <div class="k">이 테스트를 만든 앱</div>
+      <h4>머해는 딴짓하는 순간,<br>내가 고른 사람이 불러주는 앱이에요</h4>
+    </div>
+  </div>
+  <p>공부 중에 내가 정한 앱을 열면, 내가 고른 사진과 내가 쓴 말이 화면에 떠요. 막지 않아요. 돌아갈지는 내가 정해요. 지금 Android 무료 테스트 중이에요.</p>
+  <div class="btns" id="sheetBtns"></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<canvas id="cv" width="1080" height="1920"></canvas>
+
+<script>
+const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTA="https://instagram.com/meohae.project";
+const SHEET_URL="https://script.google.com/macros/s/AKfycbzUDtHeLIdithkGoPez5AQN8cy8NPDVxUpRIp3bbMw8uLIqRvCsj_0Bz6deCYW1thwjUQ/exec"; // Apps Script 웹 앱. 비어 있으면 집계 안 함.
+const SID=Math.random().toString(36).slice(2,10);
+const FROM=new URLSearchParams(location.search).get('t')||'';
+function log(ev,extra){
+  if(!SHEET_URL)return;
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:navigator.userAgent.slice(0,80),ts:new Date().toISOString()},extra||{}));
+  try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
+}
+const IMG={M:{b:'img/dog_bust.webp',f:'img/dog_full.webp'},S:{b:'img/cat_bust.webp',f:'img/cat_full.webp'},N:{b:'img/sq_bust.webp',f:'img/sq_full.webp'},L:{b:'img/tu_bust.webp',f:'img/tu_full.webp'}};
+
+const R={
+ M:{animal:"강아지",way:"누가 부르면 돌아와",name:"불렀어?\n…공부할게",line:"막으면 삐지고, 좋아하는 사람이 부르면 바로 돌아오는 타입",
+    tint:"#FFE8DA",acc:"#F2733A",accInk:"#B5451B",
+    moments:["잠금 앱 깔았다가 화나서 지운 적 있다","좋아하는 사람 사진 보면 \"아 해야지\" 한다","누가 옆에 있으면 폰을 덜 본다"],
+    good:"한마디면 돌아온다. 돌아오는 속도가 제일 빠름",bad:"혼자 있으면 그 한마디가 없음",
+    fit:"<b>막는 것 말고, 불러주는 방식이 맞아.</b> 강제로 막히면 풀고 싶어지는 타입이라 잠금 앱은 오래 못 가. 대신 내가 고른 사람이 딴짓하는 그 순간 \"너 머해?\" 하고 불러주면, 선택은 내가 하고 돌아오는 건 빨라.",
+    good_with:"L",bad_with:"S",why_good:"묵묵히 옆에 있는 거북이. 강아지가 폰 들면 눈빛 한 번이면 끝.",why_bad:"고양이랑 있으면 서로 \"5분만\" 하다 둘 다 한 시간."},
+ S:{animal:"고양이",way:"내가 정한 타이밍에 돌아와",name:"돌아갈 건데,\n내가 정함",line:"죄책감 없음, 남 말 안 들음, 근데 결국 함",
+    tint:"#E9E3F8",acc:"#7B68C8",accInk:"#4F3F96",
+    moments:["유튜브 하나 보고 진짜 하나만 본다","남이 뭐라 하든 내 페이스대로 간다","집중 안 되면 그냥 자고 내일 한다"],
+    good:"스스로 조절해서 번아웃이 적음",bad:"\"오늘은 컨디션이…\"가 일주일 가기도 함",
+    fit:"<b>앱은 거의 필요 없어.</b> 네 약점은 딴짓이 아니라 \"오늘은 패스\"가 길어지는 거라, 시작 시간만 고정하면 돼. 잠금도 기록도 부르는 것도 너한텐 과해. 가볍게 가.",
+    good_with:"N",bad_with:"S",why_good:"옆에서 숫자 쌓는 다람쥐 보면 은근히 자극받음.",why_bad:"고양이 둘이면 둘 다 \"오늘은 좀…\" 하고 끝."},
+ N:{animal:"다람쥐",way:"기록이 쌓이면 돌아와",name:"공부보다\n기록에 진심",line:"타이머 켜두면 끄기 아까워서 계속하는 타입",
+    tint:"#FFF0C9",acc:"#E39A1E",accInk:"#9A6208",
+    moments:["타이머 켜놓으면 끄기 아까워서 계속한다","연속 일수 깨지는 게 제일 싫다","남들 기록 보면 자극받는다"],
+    good:"꾸준함이 숫자로 쌓여서 눈에 보임",bad:"기록이 깨진 날, 아예 손을 놓음",
+    fit:"<b>타이머·기록 앱이 맞아.</b> 과목별 시간, 연속 일수, 주간 그래프처럼 쌓이는 게 보이는 도구. 비교가 자극이 되는 타입이라 랭킹도 괜찮아. 대신 기록이 깨진 날 규칙 하나만: \"0분이어도 켜기\".",
+    good_with:"L",bad_with:"M",why_good:"규칙 좋아하는 거북이랑은 서로 방해 안 하고 쭉 감.",why_bad:"강아지가 자꾸 말 걸어서 타이머가 끊김."},
+ L:{animal:"거북이",way:"폰이 안 보이면 돌아와",name:"안 보여야\n안 눌러",line:"한 번 열면 끝이라, 애초에 안 보이게 해야 하는 타입",
+    tint:"#DDF0E0",acc:"#3E9A5C",accInk:"#226B3A",
+    moments:["\"딱 하나만\"이 하나로 끝난 적이 없다","폰을 다른 방에 두면 진짜 잘된다","막히면 오히려 \"그래, 잘 막았다\" 하고 접는다"],
+    good:"환경만 잡히면 누구보다 오래 감",bad:"환경이 안 잡히면 하루가 통째로 사라짐",
+    fit:"<b>잠금 앱이 맞아.</b> 막히는 걸 받아들이는 타입이라 잠금이 스트레스가 아니라 안심이야. 허용 시간은 넉넉하게, 대신 예외를 두지 마. 불러주는 방식(머해)은 너한텐 약할 수 있어.",
+    good_with:"N",bad_with:"S",why_good:"다람쥐의 타이머 소리가 거북이한텐 안전한 배경음.",why_bad:"고양이가 자유롭게 폰 보는 거 보면 껍질이 열림."}
+};
+
+/* 10문항. 각 유형 8번씩 등장. Q3 1.5점, Q9 2점, 나머지 1점. 동점이면 Q9 답 → 가장 최근 답. */
+const Q=[
+ {q:"공부하다 \"딱 하나만\" 하고 유튜브를 켰어. 보통 어떻게 끝나?",o:[["진짜 하나만 보고 돌아와","S"],["정신 차리면 한 시간 지나 있어","L"],["타이머 돌아가는 게 신경 쓰여서 꺼","N"]]},
+ {q:"잠금 앱이 \"오늘 사용 시간 끝\" 하고 막으면?",o:[["그래, 잘 막았다. 접어","L"],["짜증 나. 풀 방법부터 찾아","M"],["막히기 전에 내 기록부터 챙겨","N"]]},
+ {q:"공부가 제일 잘되는 상황은?",o:[["폰을 아예 다른 방에 둘 때","L"],["누가 옆에서 같이 공부할 때","M"],["타이머 켜고 기록 쌓을 때","N"],["혼자 조용히, 알아서","S"]]},
+ {q:"누가 \"너 공부 안 해?\" 하면?",o:[["좋아하는 사람이 말하면 바로 해","M"],["남 말은 상관없어. 내 계획대로","S"],["말보다 내 기록 깨지는 게 더 신경 쓰여","N"]]},
+ {q:"공부 기록이나 인증 앱은?",o:[["매일 해. 숫자 쌓이는 게 재밌어","N"],["귀찮아서 안 해","S"],["하려고 폰 켰다가 딴 데로 새","L"]]},
+ {q:"시험 D-3인데 집중이 안 돼. 어떻게 해?",o:[["폰 끄고 독서실 가서 버텨","L"],["친구한테 \"나 공부한다\" 선언하고 해","M"],["그냥 해. 안 되면 자고 내일","S"]]},
+ {q:"\"5분만\" 하고 폰을 들었을 때, 나를 멈추는 건?",o:[["아무것도 못 멈춰. 미리 막아야 해","L"],["누가 보고 있다는 느낌","M"],["스스로 \"아 됐다\" 하는 순간","S"]]},
+ {q:"좋아하는 사람 사진을 공부 자극용으로 저장해둔 적은?",o:[["있어. 효과 있어","M"],["없어. 그런 거에 안 움직여","S"],["사진보단 순위표가 자극돼","N"]]},
+ {q:"강제로 막히는 것에 대해 솔직히?",o:[["나한텐 그게 맞아. 내 의지 못 믿어","L"],["반발심 생겨. 내가 선택해야 해","M"],["필요 없어. 알아서 돌아와","S"],["막는 것보다 눈에 보이는 숫자가 나아","N"]]},
+ {q:"공부 끝나고 제일 뿌듯한 순간은?",o:[["오늘 폰 안 봤다는 사실","L"],["\"오늘 3번 돌아왔다\" 같은 작은 승리","M"],["기록 시간, 연속 일수","N"]]}
+];
+const TIE_Q=8; // Q9
+const W=[1,1,1.5,1,1,1,1,1,2,1]; // Q3 1.5, Q9 2: 동점 거의 없이 네 유형 25%씩
+const ORDER=['M','S','N','L'];
+
+let i=0,ans=[];
+const $=s=>document.querySelector(s);
+const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const e=$(id);e.classList.add('on');e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade');window.scrollTo(0,0);$('#sharebar').classList.toggle('on',id==='#s-result');};
+function setTheme(t){const r=R[t];const d=document.documentElement.style;d.setProperty('--tint',r.tint);d.setProperty('--acc',r.acc);d.setProperty('--acc-ink',r.accInk);}
+
+$('#zoo').innerHTML=ORDER.map(t=>`<img src="${IMG[t].f}" alt="${R[t].animal}">`).join('');
+// preload busts
+ORDER.forEach(t=>{const im=new Image();im.src=IMG[t].b;});
+
+function start(){i=0;ans=[];show('#s-quiz');render();}
+function render(){
+  $('#bar').style.width=(i/Q.length*100)+'%';
+  $('#qn').textContent='Q'+(i+1);
+  $('#q').textContent=Q[i].q;
+  const box=$('#opts');box.innerHTML='';box.classList.remove('fade');void box.offsetWidth;box.classList.add('fade');
+  Q[i].o.forEach((o,k)=>{const b=document.createElement('button');b.className='opt'+(ans[i]===k?' pick':'');b.textContent=o[0];b.onclick=()=>pick(k,b);box.appendChild(b);});
+  $('#backBtn').style.visibility=i?'visible':'hidden';
+}
+function pick(k,b){ans[i]=k;b.classList.add('pick');setTimeout(()=>{i++;i<Q.length?render():loading();},230);}
+function back(){if(i>0){i--;render();}}
+function score(){const s={L:0,N:0,S:0,M:0};ans.forEach((k,qi)=>{s[Q[qi].o[k][1]]+=W[qi];});return s;}
+function decide(s){
+  const max=Math.max(...Object.values(s));
+  let tied=Object.keys(s).filter(t=>s[t]===max);
+  if(tied.length===1)return tied[0];
+  const t9=Q[TIE_Q].o[ans[TIE_Q]][1];
+  if(tied.includes(t9))return t9;
+  // 가장 최근에 고른 답의 유형
+  for(let qi=Q.length-1;qi>=0;qi--){const t=Q[qi].o[ans[qi]][1];if(tied.includes(t))return t;}
+  return tied[0];
+}
+function loading(){
+  show('#s-load');
+  const orb=$('#orb');orb.innerHTML=ORDER.map((t,k)=>`<img src="${IMG[t].b}" style="opacity:${k?0:1}">`).join('');
+  const msgs=["폰 든 손 확인 중…","\"5분만\" 횟수 세는 중…","잠금 앱 지운 기록 찾는 중…","동물 고르는 중…"];
+  let k=0;const iv=setInterval(()=>{k++;orb.querySelectorAll('img').forEach((d,j)=>d.style.opacity=j===k%4?1:0);$('#loadMsg').textContent=msgs[k%msgs.length];},650);
+  setTimeout(()=>{clearInterval(iv);finish();},2700);
+}
+function finish(){
+  const s=score();const t=decide(s);
+  const sorted=Object.values(s).sort((a,b)=>b-a);
+  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0});
+  showResult(t,s);
+  history.replaceState(null,'',location.pathname+'?t='+t+'&done=1');
+}
+function showResult(t,s){
+  const r=R[t];window._cur=t;setTheme(t);
+  $('#avatar').innerHTML=`<img src="${IMG[t].b}" alt="${r.animal}">`;
+  $('#rtag').textContent=r.animal+' · '+r.way;$('#rname').innerHTML=r.name.replace('\n','<br>');$('#rline').textContent=r.line;
+  $('#moments').innerHTML=r.moments.map(m=>`<div>${m}</div>`).join('');
+  $('#good').textContent=r.good;$('#bad').textContent=r.bad;
+  const tot=Object.values(s).reduce((a,b)=>a+b,0)||1;const pct={};for(const k in s)pct[k]=Math.round(s[k]/tot*100);
+  $('#bars').innerHTML=ORDER.slice().sort((a,b)=>pct[b]-pct[a]).map(k=>`<div class="bar"><img src="${IMG[k].b}"><div class="t"><i data-w="${pct[k]}" style="background:${R[k].acc}"></i></div><div class="p">${pct[k]}%</div></div>`).join('');
+  setTimeout(()=>document.querySelectorAll('.bar i').forEach(e=>e.style.width=e.dataset.w+'%'),150);
+  const g=R[r.good_with],b=R[r.bad_with];
+  $('#match').innerHTML=`<div style="background:${g.tint}"><img src="${IMG[r.good_with].f}"><div class="k">찰떡</div><div class="n">${g.animal}</div><div class="d">${r.why_good}</div></div><div style="background:#F3F2F6"><img src="${IMG[r.bad_with].f}"><div class="k">같이 망함</div><div class="n">${b.animal}</div><div class="d">${r.why_bad}</div></div>`;
+  $('#fit').innerHTML=r.fit;
+  const cta=$('#ctaBox');
+  if(t==='M'){
+    cta.innerHTML=`<div class="cta"><div class="scene"><img src="${IMG.M.f}" alt=""><div class="bub">너 머해?</div><div class="who">내가 고른 사람이</div></div><p><b>머해</b>는 강아지를 위해 만든 앱이야. 공부 중에 내가 정한 앱을 열면, 내가 고른 사람이 "너 머해?" 하고 불러줘. 막지 않고, 돌아갈지는 내가 정해. 지금 Android 무료 테스트 중.</p><a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'result',type:'M'})">머해 테스터 신청하기 (Android)</a><p class="tiny" style="margin-top:8px">아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어</p></div>`;
+  }else{
+    cta.innerHTML=`<div class="cta" style="border-color:var(--line)"><p>주변에 <b>강아지 타입</b> 있지? 잠금 앱 깔았다가 화내고 지우는 친구. 그 친구한텐 <b>머해</b>가 맞아. 아래 "친구한테 보내기"로 테스트 보내줘.</p></div><a class="smalllink" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'result_link',type:window._cur})">머해가 뭔지 궁금하면 →</a>`;
+  }
+  show('#s-result');
+  armSheet();
+}
+
+/* 머해 소개 시트: 결과 맨 아래 도달 시 1회 */
+let sheetShown=false,sheetTimer=null;
+function openSheet(){
+  if(sheetShown)return;sheetShown=true;
+  const t=window._cur;const b=$('#sheetBtns');
+  if(t==='M'){b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'M'})">테스터 신청하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
+  else{b.innerHTML=`<a class="btn dark" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'${t}'})">머해 구경하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_form',type:'${t}'})">Android면 테스터로 먼저 써볼 수 있어요 →</a>`;}
+  $('#dim').classList.add('on');$('#sheet').classList.add('on');log('sheet_open',{type:t});
+}
+function closeSheet(){$('#dim').classList.remove('on');$('#sheet').classList.remove('on');}
+function armSheet(){
+  sheetShown=false;clearTimeout(sheetTimer);
+  const target=document.querySelector('#s-result .note');
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();setTimeout(openSheet,600);}},{threshold:.6});io.observe(target);}
+  sheetTimer=setTimeout(openSheet,20000);
+}
+function restart(){closeSheet();clearTimeout(sheetTimer);history.replaceState(null,'',location.pathname);$('#friendBox').innerHTML='';show('#s-start');}
+
+/* share */
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1600);}
+const BASE='https://snowf1ower.github.io/meohae-test';
+function shareUrl(){const t=window._cur||'';return (BASE.startsWith('http')?BASE:location.origin+location.pathname.replace(/\/[^/]*$/,''))+'/r/'+t+'.html';}
+async function copyLink(){log('share',{how:'copy',type:window._cur});try{await navigator.clipboard.writeText(shareUrl());toast('링크를 복사했어');}catch(e){prompt('링크 복사',shareUrl());}}
+async function shareNative(){
+  log('share',{how:'native',type:window._cur});
+  const r=R[window._cur];const text=`나는 공부하다 폰 들면 "${r.animal}"이래 🐾 너는 어떤 동물? 딴짓 동물 테스트`;
+  if(navigator.share){try{await navigator.share({title:'딴짓 동물 테스트',text,url:shareUrl()});return;}catch(e){}}
+  copyLink();
+}
+function wrapText(c,text,x,y,maxW,lh){let line='';for(const ch of text){const t=line+ch;if(ch==='\n'||(c.measureText(t).width>maxW&&line)){c.fillText(line,x,y);line=ch==='\n'?'':ch;y+=lh;}else line=t;}c.fillText(line,x,y);return y+lh;}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function loadImg(src){return new Promise(res=>{const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src;});}
+function fitDraw(c,im,cx,cy,maxW,maxH){const s=Math.min(maxW/im.width,maxH/im.height);const w=im.width*s,h=im.height*s;c.drawImage(im,cx-w/2,cy-h/2,w,h);}
+async function saveCard(){
+  log('share',{how:'image',type:window._cur});
+  const t=window._cur,r=R[t];const cv=$('#cv'),c=cv.getContext('2d');
+  const J='Jua, "Noto Sans KR", sans-serif',F='"Noto Sans KR", sans-serif';
+  try{await document.fonts.load('60px Jua');await document.fonts.load('700 36px "Noto Sans KR"');}catch(e){}
+  const im=await loadImg(IMG[t].b),gi=await loadImg(IMG[r.good_with].f),bi=await loadImg(IMG[r.bad_with].f);
+  c.fillStyle='#fff';c.fillRect(0,0,1080,1920);
+  c.fillStyle=r.tint;c.fillRect(0,0,1080,860);c.beginPath();c.ellipse(540,860,760,100,0,0,Math.PI);c.fill();
+  c.fillStyle='#2B2A33';c.font='40px '+J;c.textAlign='left';c.fillText('딴짓 동물 테스트',96,130);
+  c.fillStyle='rgba(43,42,51,.55)';c.font='700 30px '+F;c.textAlign='right';c.fillText('by 머해',984,130);c.textAlign='center';
+  c.fillStyle='rgba(43,42,51,.6)';c.font='700 34px '+F;c.fillText('공부하다 폰 들 때, 나는',540,220);
+  if(im){c.shadowColor='rgba(0,0,0,.12)';c.shadowBlur=30;c.shadowOffsetY=14;fitDraw(c,im,540,490,680,480);c.shadowColor='transparent';}
+  c.fillStyle='#fff';const tag=r.animal+' · '+r.way;c.font='800 30px '+F;const tw=c.measureText(tag).width;rr(c,540-tw/2-30,775,tw+60,60,30);c.fill();
+  c.fillStyle=r.accInk;c.fillText(tag,540,816);
+  c.fillStyle='#2B2A33';c.font='92px '+J;let y=wrapText(c,r.name,540,1010,900,108);
+  c.fillStyle='#7A7884';c.font='500 36px '+F;y=wrapText(c,r.line,540,y+4,880,52);
+  c.textAlign='left';
+  y+=44;c.fillStyle='#2B2A33';c.font='40px '+J;c.fillText('이런 순간 있지 않아?',120,y);y+=34;
+  c.font='500 34px '+F;
+  for(const m of r.moments){const w=Math.min(c.measureText(m).width+64,840);c.fillStyle='#F6F5F9';rr(c,120,y,w,84,26);c.fill();c.fillStyle='#2B2A33';c.fillText(m,152,y+55);y+=96;}
+  // 찰떡 한 줄
+  y+=20;c.fillStyle=R[r.good_with].tint;rr(c,120,y,840,104,30);c.fill();if(gi)fitDraw(c,gi,185,y+55,90,90);
+  c.fillStyle='#2B2A33';c.font='32px '+J;c.fillText('찰떡 궁합 · '+R[r.good_with].animal,250,y+50);
+  c.fillStyle='#7A7884';c.font='500 26px '+F;c.fillText(r.why_good.length>30?r.why_good.slice(0,30)+'…':r.why_good,250,y+88);
+  c.fillStyle=r.acc;rr(c,120,1800,840,90,45);c.fill();
+  c.fillStyle='#fff';c.font='38px '+J;c.textAlign='center';c.fillText('너는 어떤 동물?  @meohae.project',540,1859);
+  cv.toBlob(async b=>{
+    try{if(window.claude&&window.claude.use){const dl=await window.claude.use('downloads');if(dl){try{await dl.save({filename:'meohae-animal.png',data:b});toast('이미지를 저장했어');}catch(e){if(e&&e.code!=='declined')toast('저장이 안 됐어. 링크 복사로 공유해줘');}return;}}}catch(e){}
+    const file=new File([b],'meohae-animal.png',{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'딴짓 동물 테스트'});return;}catch(e){}}
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='meohae-animal.png';a.click();toast('이미지를 저장했어');
+  },'image/png');
+}
+
+/* shared link landing */
+(function(){
+  const p=new URLSearchParams(location.search);const t=p.get('t');
+  if(t&&R[t]&&!p.get('done')){
+    const r=R[t];
+    $('#friendBox').innerHTML=`<div class="friend" style="background:${r.tint}"><img src="${IMG[t].b}" alt=""><div><div class="k">친구의 결과</div><div class="n">${r.name.replace('\n',' ')}</div><div class="l">${r.animal} · ${r.way}</div></div></div>`;
+  }
+})();
+</script>
+</body>
+</html>
