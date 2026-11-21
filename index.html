@@ -223,8 +223,10 @@ const FROM=new URLSearchParams(location.search).get('t')||'';
 const SRC=(new URLSearchParams(location.search).get('src')||'').slice(0,20);
 try{if(SRC)sessionStorage.setItem('src',SRC);}catch(e){}
 function getSrc(){try{return SRC||sessionStorage.getItem('src')||'';}catch(e){return SRC;}}
+try{if(new URLSearchParams(location.search).get('nolog')==='1')localStorage.setItem('meohae_nolog','1');}catch(e){}
+function noLog(){try{return localStorage.getItem('meohae_nolog')==='1';}catch(e){return false;}}
 function log(ev,extra){
-  if(!SHEET_URL)return;
+  if(!SHEET_URL||noLog())return;
   const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:navigator.userAgent.slice(0,80),ts:new Date().toISOString()},extra||{}));
   try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
 }
