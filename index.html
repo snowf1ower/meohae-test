@@ -195,6 +195,13 @@ h1 em{font-style:normal;color:var(--acc)}
 .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;z-index:9}
 .toast.on{opacity:1;transform:translateX(-50%)}
 canvas{display:none}
+/* 이미지 저장 오버레이 */
+.imgov{position:fixed;inset:0;z-index:30;background:rgba(20,18,28,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+.imgov.on{display:flex}
+.imgov img{max-height:68vh;max-width:92vw;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.imgov p{color:#fff;font-size:14px;font-weight:700;margin-top:14px;text-align:center}
+.imgov .row{display:flex;gap:8px;margin-top:12px;width:100%;max-width:360px}
+.imgov .btn{height:50px;font-size:15px}
 </style>
 </head>
 <body>
@@ -295,6 +302,7 @@ canvas{display:none}
   <div class="btns" id="sheetBtns"></div>
 </div></div>
 <div class="toast" id="toast"></div>
+<div class="imgov" id="imgov"><img id="imgovImg" alt="결과 카드"><p>이미지를 길게 눌러 저장하세요</p><div class="row"><button class="btn acc" onclick="dlCard()">다운로드</button><button class="btn line" onclick="$('#imgov').classList.remove('on')">닫기</button></div></div>
 <canvas id="cv" width="1080" height="1920"></canvas>
 
 <script>
@@ -518,10 +526,15 @@ async function saveCard(){
   c.fillStyle='#fff';c.font='38px '+J;c.textAlign='center';c.fillText('너는 어떤 동물?  @meohae.project',540,1859);
   cv.toBlob(async b=>{
     try{if(window.claude&&window.claude.use){const dl=await window.claude.use('downloads');if(dl){try{await dl.save({filename:'meohae-animal.png',data:b});toast('이미지를 저장했어');}catch(e){if(e&&e.code!=='declined')toast('저장이 안 됐어. 링크 복사로 공유해줘');}return;}}}catch(e){}
-    const file=new File([b],'meohae-animal.png',{type:'image/png'});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'딴짓 동물 테스트'});return;}catch(e){}}
-    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='meohae-animal.png';a.click();toast('이미지를 저장했어');
+    if(window._cardUrl)URL.revokeObjectURL(window._cardUrl);
+    window._cardUrl=URL.createObjectURL(b);
+    $('#imgovImg').src=window._cardUrl;$('#imgov').classList.add('on');
   },'image/png');
+}
+function dlCard(){
+  if(!window._cardUrl)return;
+  const a=document.createElement('a');a.href=window._cardUrl;a.download='meohae-animal.png';document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500);
+  toast('다운로드 폴더에 저장했어');
 }
 
 log('visit',{where:getSrc()});
