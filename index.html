@@ -109,6 +109,7 @@ h1 em{font-style:normal;color:var(--acc)}
 .mcta p{font-size:14px;line-height:1.55;margin-top:10px}
 .mcta .btn{margin-top:12px;height:52px;font-size:16px}
 /* quiz */
+.opt.skip{color:var(--sub);font-weight:500;background:transparent;border-style:dashed}
 .qhead{display:flex;align-items:center;gap:12px;margin-top:22px}
 .qbadge{font-family:Jua;font-size:15px;background:var(--ink);color:#fff;border-radius:999px;padding:4px 12px}
 .prog{flex:1;height:8px;background:var(--soft);border-radius:8px;overflow:hidden}
@@ -248,6 +249,7 @@ canvas{display:none}
   <section class="screen" id="s-quiz">
     <div class="qhead"><span class="qbadge" id="qn">Q1</span><div class="prog"><i id="bar"></i></div></div>
     <div class="q" id="q"></div>
+    <p class="tiny" id="qhint" style="margin-top:8px;line-height:1.5"></p>
     <div class="opts" id="opts"></div>
     <div class="stack"><button class="btn ghost" onclick="back()" id="backBtn">← 이전 질문</button></div>
   </section>
@@ -317,7 +319,7 @@ try{if(new URLSearchParams(location.search).get('nolog')==='1')localStorage.setI
 function noLog(){try{return localStorage.getItem('meohae_nolog')==='1';}catch(e){return false;}}
 function log(ev,extra){
   if(!SHEET_URL||noLog())return;
-  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:'v2 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},extra||{}));
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:'v3 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},extra||{}));
   try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
 }
 const IMG={M:{b:'img/dog_bust.webp',f:'img/dog_full.webp'},S:{b:'img/cat_bust.webp',f:'img/cat_full.webp'},N:{b:'img/sq_bust.webp',f:'img/sq_full.webp'},L:{b:'img/tu_bust.webp',f:'img/tu_full.webp'}};
@@ -349,24 +351,26 @@ const R={
     good_with:"N",bad_with:"S",why_good:"다람쥐의 타이머 소리가 거북이한텐 안전한 배경음.",why_bad:"고양이가 자유롭게 폰 보는 거 보면 껍질이 열림."}
 };
 
-/* 10문항. 각 유형 8번씩 등장. Q3 1.5점, Q9 2점, 나머지 1점. 동점이면 Q9 답 → 가장 최근 답. */
+/* v3. 동물 문항 Q1~Q8(유형별 8회, Q3 1.5점), Q9 수준·Q10 앱 경험(점수 없음). 포기 선지(0)는 Q6·Q7만, 맨 아래 고정. 동점: Q3 → Q8 → 가장 최근 답. */
+const HINT="최근 공부하려던 날들을 떠올려줘. 실제로 그랬던 쪽으로, 상상이면 그럴 것 같은 쪽으로. 딱 맞는 게 없으면 가장 가까운 쪽!";
 const Q=[
- {q:"공부하다 \"딱 하나만\" 하고 유튜브를 켰어. 보통 어떻게 끝나?",o:[["진짜 하나만 보고 돌아와","S"],["정신 차리면 한 시간 지나 있어","L"],["타이머 돌아가는 게 신경 쓰여서 꺼","N"]]},
- {q:"잠금 앱이 \"오늘 사용 시간 끝\" 하고 막으면?",o:[["그래, 잘 막았다. 접어","L"],["막힌 게 더 신경 쓰여서 풀 방법부터 찾아","M"],["막히기 전에 내 기록부터 챙겨","N"]]},
- {q:"공부가 제일 잘되는 상황은?",o:[["폰을 아예 다른 방에 둘 때","L"],["누가 옆에 앉아 있을 때","M"],["타이머 켜고 기록 쌓을 때","N"],["혼자 있을 때. 옆에 누가 있으면 오히려 신경 쓰여","S"]]},
- {q:"누가 \"너 공부 안 해?\" 하면?",o:[["엄마가 말하면 반발인데, 어떤 사람이 말하면 바로 해","M"],["남이 뭐라 하든 별로 안 들려","S"],["말보다 내 기록 깨지는 게 더 신경 쓰여","N"]]},
- {q:"공부 기록이나 인증 앱은?",o:[["매일 해. 숫자 쌓이는 게 재밌어","N"],["깔긴 했는데 안 켠 지 오래됐어","S"],["하려고 폰 켰다가 딴 데로 새","L"]]},
- {q:"시험 D-3인데 집중이 안 돼. 어떻게 해?",o:[["폰 끄고 독서실 가서 버텨","L"],["혼자면 안 되니까 누구랑 같이 하거나 선언하고 해","M"],["안 되면 그냥 접고 내일로 미뤄","S"]]},
- {q:"\"5분만\" 하고 폰을 들었을 때, 나를 멈추는 건?",o:[["아무것도 못 멈춰. 미리 막아야 해","L"],["\"너 뭐해?\" 한마디. 찔려서 돌아간 적 있어","M"],["딱히 없어. 보다가 어느 순간 그냥 내려놔","S"]]},
- {q:"좋아하는 사람 사진을 공부 자극용으로 저장해둔 적은?",o:[["있어. 보면 좀 찔려","M"],["없어. 있어도 별 느낌 없을 듯","S"],["사진보단 순위표가 자극돼","N"]]},
- {q:"강제로 막히는 것에 대해 솔직히?",o:[["나한텐 그게 맞아. 내 의지 못 믿어","L"],["막히면 반발심부터 생겨","M"],["막든 말든 어차피 내가 알아서 하게 돼","S"],["막는 것보다 눈에 보이는 숫자가 나아","N"]]},
- {q:"공부 끝나고 제일 뿌듯한 순간은?",o:[["오늘 폰 안 봤다는 사실","L"],["딴짓하다가도 돌아왔다는 것","M"],["기록 시간, 연속 일수","N"]]}
+ {q:"공부를 시작하려는데 폰부터 잡았어. 뭐가 있으면 폰을 놓을 것 같아?",o:[["폰이 손 안 닿는 데로 치워지는 것","L"],["누가 \"이제 하자\" 하고 불러주는 것","M"],["타이머가 돌아가서 시간이 보이는 것","N"],["내가 정해둔 시작 시간이 되는 것","S"]]},
+ {q:"공부가 유독 잘 풀린 날, 뭐가 달랐어?",o:[["폰을 안 보이는 데 두고 시작했어","L"],["누가 옆에 있었어","M"],["목표 시간을 정하고, 채워지는 걸 보면서 했어","N"],["내가 정한 순서대로 하고 쉬었어","S"]]},
+ {q:"폰을 멀리 두거나 사용 제한을 걸어두면?",o:[["다시 집기 번거로워서 하던 걸 더 붙잡게 돼","L"],["답답해서 다시 가져오거나 제한을 풀어","M"],["제한보다 본 시간이 숫자로 보이는 게 더 먹혀","N"],["크게 안 달라져. 원래 정해둔 만큼 보고 내려놔","S"]]},
+ {q:"어려운 부분에서 막혀서 폰을 들었어. 뭐가 있으면 다시 문제를 볼 것 같아?",o:[["폰이 눈앞에서 없어지는 것","L"],["누가 \"다시 해보자\" 하고 불러주는 것","M"],["남은 분량이 눈에 보이는 것","N"],["쉬기로 한 만큼 다 쉬는 것","S"]]},
+ {q:"검색하려고 폰을 켰다가 다른 앱까지 열었어. 뭐가 있으면 닫을 것 같아?",o:[["앱이 잠겨서 더 못 보는 것","L"],["누가 \"뭐 해?\" 하고 불러주는 것","M"],["지나간 시간이 화면에 보이는 것","N"],["보던 걸 끝까지 다 보는 것","S"]]},
+ {q:"쉬는 시간에 폰을 들었어. 다시 시작할 때가 되면?",o:[["폰을 안 보이는 데 두고 시작해","L"],["누가 \"다시 하자\" 하면 시작해","M"],["채워야 할 시간이 남은 걸 보고 시작해","N"],["쉬기로 한 데까지 보고 시작해","S"]],skip:"\"이거까지만\" 하다가 쉬는 시간이 계속 늘어나"},
+ {q:"폰 보고 있는데 누가 \"공부 안 해?\"라고 했어. 그다음은?",o:[["폰을 다른 데 갖다 놓고 책을 펴","L"],["그 말을 들으면 폰을 놓고 책을 펴","M"],["오늘 공부한 시간을 확인하고 책을 펴","N"],["보던 것까지만 보고 책을 펴","S"]],skip:"\"어, 할게\" 하고 계속 봐"},
+ {q:"폰을 보고 있을 때, 어떤 화면이 뜨면 공부로 돌아갈 것 같아?",o:[["앱 잠금 화면","L"],["내가 고른 사람 사진이랑 한마디","M"],["오늘 공부한 시간과 폰 본 시간","N"],["내가 적어둔 \"여기까지만\" 한 줄","S"]]},
+ {q:"딴짓하고 난 뒤, 그날 공부는 결국 어떻게 돼?",fixed:true,o:[["계속 보다가 그날은 접는 날이 많아","1"],["조금은 하는데, 하려던 건 많이 남아","2"],["늦게라도 그날 할 건 대체로 마쳐","3"],["폰 때문에 크게 밀리진 않아","4"]]},
+ {q:"잠금 앱이나 공부 타이머 앱은?",fixed:true,o:[["지금 쓰고 있어","1"],["써봤는데 지금은 안 써","2"],["안 써봤어","3"]]}
 ];
-const TIE_Q=8; // Q9
-const W=[1,1,1.5,1,1,1,1,1,2,1]; // Q3 1.5, Q9 2: 동점 거의 없이 네 유형 25%씩
+const W=[1,1,1.5,1,1,1,1,1,0,0];
+const TIE=[2,7]; // Q3 → Q8
 const ORDER=['M','S','N','L'];
 
-let i=0,ans=[];
+let i=0,ans=[],VIEW=[];
+function buildView(){VIEW=Q.map(q=>{let o=q.o.slice();if(!q.fixed){for(let a=o.length-1;a>0;a--){const b=Math.floor(Math.random()*(a+1));[o[a],o[b]]=[o[b],o[a]];}}if(q.skip)o=o.concat([[q.skip,'0']]);return o;});}
 const $=s=>document.querySelector(s);
 const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const e=$(id);e.classList.add('on');e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade');window.scrollTo(0,0);$('#sharebar').classList.toggle('on',id==='#s-result');document.querySelector('.top').style.display=id==='#s-popup'?'none':'';};
 function setTheme(t){const r=R[t];const d=document.documentElement.style;d.setProperty('--tint',r.tint);d.setProperty('--acc',r.acc);d.setProperty('--acc-ink',r.accInk);}
@@ -382,7 +386,7 @@ const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 const CTA_TXT=IOS?'iOS 사전예약 · 출시 알림 받기':'머해 테스터 신청하기 (Android)';
 const CTA_SUB=IOS?'지금은 Android만 테스트 중이에요. 폼에 남겨두면 iOS 나올 때 제일 먼저 알려드려요.':'아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어';
 Object.values(WHO).forEach(w=>{const im=new Image();im.src=w.img;});
-function start(){i=0;ans=[];who='';choice='';show('#s-quiz');render();}
+function start(){i=0;ans=[];who='';choice='';buildView();show('#s-quiz');render();}
 function adBreak(){
   const g=$('.pcards');if(Math.random()<.5)g.appendChild(g.firstElementChild);
   document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));show('#s-pick');log('pick_view',{where:getSrc()});
@@ -406,21 +410,22 @@ function render(){
   $('#bar').style.width=(i/Q.length*100)+'%';
   $('#qn').textContent='Q'+(i+1);
   $('#q').textContent=Q[i].q;
+  $('#qhint').textContent=i===0?HINT:'';$('#qhint').style.display=i===0?'':'none';
   const box=$('#opts');box.innerHTML='';box.classList.remove('fade');void box.offsetWidth;box.classList.add('fade');
-  Q[i].o.forEach((o,k)=>{const b=document.createElement('button');b.className='opt'+(ans[i]===k?' pick':'');b.textContent=o[0];b.onclick=()=>pick(k,b);box.appendChild(b);});
+  VIEW[i].forEach((o,k)=>{const b=document.createElement('button');b.className='opt'+(ans[i]===k?' pick':'')+(o[1]==='0'?' skip':'');b.textContent=o[0];b.onclick=()=>pick(k,b);box.appendChild(b);});
   $('#backBtn').style.visibility=i?'visible':'hidden';
 }
 function pick(k,b){ans[i]=k;b.classList.add('pick');setTimeout(()=>{i++;i<Q.length?render():adBreak();},230);}
 function back(){if(i>0){i--;render();}}
-function score(){const s={L:0,N:0,S:0,M:0};ans.forEach((k,qi)=>{s[Q[qi].o[k][1]]+=W[qi];});return s;}
+function score(){const s={L:0,N:0,S:0,M:0};ans.forEach((k,qi)=>{const t=VIEW[qi][k][1];if(t in s)s[t]+=W[qi];});return s;}
+function ansStr(){return ans.map((k,qi)=>VIEW[qi][k][1]).join('');}
 function decide(s){
   const max=Math.max(...Object.values(s));
   let tied=Object.keys(s).filter(t=>s[t]===max);
   if(tied.length===1)return tied[0];
-  const t9=Q[TIE_Q].o[ans[TIE_Q]][1];
-  if(tied.includes(t9))return t9;
+  for(const qi of TIE){const t=VIEW[qi][ans[qi]][1];if(tied.includes(t))return t;}
   // 가장 최근에 고른 답의 유형
-  for(let qi=Q.length-1;qi>=0;qi--){const t=Q[qi].o[ans[qi]][1];if(tied.includes(t))return t;}
+  for(let qi=Q.length-1;qi>=0;qi--){const t=VIEW[qi][ans[qi]][1];if(tied.includes(t))return t;}
   return tied[0];
 }
 function loading(){
@@ -433,7 +438,7 @@ function loading(){
 function finish(){
   const s=score();const t=decide(s);
   const sorted=Object.values(s).sort((a,b)=>b-a);
-  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0,where:getSrc(),how:(who||'-')+':'+(choice||'-')});
+  log('result',{type:t,answers:ansStr(),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0,where:getSrc(),how:(who||'-')+':'+(choice||'-')});
   showResult(t,s);
   history.replaceState(null,'',location.pathname+'?t='+t+'&done=1');
 }
