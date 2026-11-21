@@ -87,6 +87,9 @@ h1 em{font-style:normal;color:var(--acc)}
 .pp .bb{background:#F2F2F4;border-radius:4px 16px 16px 16px;padding:10px 14px;font-size:15px;font-weight:600;line-height:1.35}
 .pp .ln+.ln .bb{border-radius:16px}
 .pp .hint{font-size:12px;color:#8A879A;margin:10px 0 0 2px}
+.pp .me{display:flex;justify-content:flex-end;margin-top:10px}
+.pp .me span{background:#F47119;color:#fff;border-radius:16px 4px 16px 16px;padding:10px 14px;font-size:15px;font-weight:700;animation:fade .25s ease both}
+.pp .btns button:disabled{opacity:.5}
 .pp .task{margin-top:auto;background:#F5F5F7;border-radius:14px;padding:10px 14px}
 .pp .task small{display:block;font-size:11px;color:#9A97A6;font-weight:600}
 .pp .task b{font-size:15px;font-weight:800}
@@ -98,7 +101,7 @@ h1 em{font-style:normal;color:var(--acc)}
 /* 결과 상단 한 줄 */
 .hero .came{display:inline-block;font-size:13px;font-weight:800;background:rgba(255,255,255,.7);border-radius:999px;padding:5px 12px;margin-bottom:8px}
 /* 결과 속 머해 CTA (고른 사람 썸네일) */
-.mcta{margin-top:12px;border:2px solid var(--tint);border-radius:22px;padding:16px;background:#fff}
+.mcta{margin-top:18px;border:2px solid var(--tint);border-radius:22px;padding:16px;background:#fff}
 .mcta .row{display:flex;gap:12px;align-items:center}
 .mcta .row img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center 15%;flex:none}
 .mcta .k{font-size:12px;font-weight:800;color:var(--sub)}
@@ -228,6 +231,7 @@ canvas{display:none}
         <div class="ln"><div class="av" id="ppAv"></div><div class="bb">너 머해?</div></div>
         <div class="ln"><div class="av sp"></div><div class="bb">결과 보고, 우리 하던 거 하자.</div></div>
         <div class="hint">방금 시작했잖아, 조금만 더</div>
+        <div id="ppMe"></div>
         <div class="task"><small>지금 할 공부</small><b>영어 단어 외우기 <span style="font-weight:500;color:#9A97A6;font-size:12px">· 예시</span></b></div>
         <div class="btns"><button class="go" onclick="popupChoice('go')">결과 보고 공부할게</button><button class="stay" onclick="popupChoice('stay')">결과 보고 더 놀게</button></div>
         <div class="foot">MEOHAE</div>
@@ -260,10 +264,11 @@ canvas{display:none}
       <div class="line" id="rline"></div>
     </div>
     <div class="sec"><h3><i></i>이런 순간 있지 않아?</h3><div class="moments" id="moments"></div></div>
+    <div id="ctaBox"></div>
     <div class="sec"><h3><i></i>강점과 약점</h3><div class="pair"><div><div class="k">강점</div><div class="v" id="good"></div></div><div><div class="k">약점</div><div class="v" id="bad"></div></div></div></div>
     <div class="sec"><h3><i></i>내 안의 동물 비율</h3><div class="bars" id="bars"></div></div>
     <div class="sec"><h3><i></i>같이 공부하면</h3><div class="match" id="match"></div></div>
-    <div class="sec"><h3><i></i>나한테 맞는 집중법</h3><div class="fit" id="fit"></div><div id="ctaBox"></div></div>
+    <div class="sec"><h3><i></i>나한테 맞는 집중법</h3><div class="fit" id="fit"></div></div>
     <button class="btn ghost" style="margin-top:18px" onclick="restart()">다시 하기</button>
     <p class="note">재미로 보는 테스트예요. 공부법은 사람마다 달라서, 어떤 동물이든 자기한테 맞는 걸 쓰면 돼요.</p>
     <div class="spacer"></div>
@@ -286,7 +291,7 @@ canvas{display:none}
       <h4>머해는 딴짓하는 순간,<br>내가 고른 사람이 불러주는 앱이에요</h4>
     </div>
   </div>
-  <p>공부 중에 내가 정한 앱을 열면, 내가 고른 사진과 내가 쓴 말이 화면에 떠요. 막지 않아요. 돌아갈지는 내가 정해요. 지금 Android 무료 테스트 중이에요.</p>
+  <p>공부 중에 내가 정한 앱을 열면, 내가 고른 사진과 내가 쓴 말이 화면에 떠요. 막지 않아요. 돌아갈지는 내가 정해요. 지금 Android 무료 테스트 중이에요.<span id="sheetIos"></span></p>
   <div class="btns" id="sheetBtns"></div>
 </div></div>
 <div class="toast" id="toast"></div>
@@ -365,18 +370,30 @@ ORDER.forEach(t=>{const im=new Image();im.src=IMG[t].b;});
 /* 광고타임: Q10 → 사진 고르기 → 팝업 → 결과 */
 const WHO={D:{img:'img/popup_doyun.jpg',name:'도윤',py:'22%'},J:{img:'img/popup_jieun.jpg',name:'지은',py:'28%'}};
 let who='',choice='';
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
+const CTA_TXT=IOS?'iOS 사전예약 · 출시 알림 받기':'머해 테스터 신청하기 (Android)';
+const CTA_SUB=IOS?'지금은 Android만 테스트 중이에요. 폼에 남겨두면 iOS 나올 때 제일 먼저 알려드려요.':'아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어';
 Object.values(WHO).forEach(w=>{const im=new Image();im.src=w.img;});
 function start(){i=0;ans=[];who='';choice='';show('#s-quiz');render();}
-function adBreak(){document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));show('#s-pick');log('pick_view',{where:getSrc()});}
-function pickWho(w,el){if(who)return;who=w;el.classList.add('sel');log('pick',{how:w});setTimeout(showPopup,420);}
+function adBreak(){
+  const g=$('.pcards');if(Math.random()<.5)g.appendChild(g.firstElementChild);
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));show('#s-pick');log('pick_view',{where:getSrc()});
+}
+function pickWho(w,el){if(who)return;who=w;el.classList.add('sel');log('pick',{how:w,where:el===$('.pcards').firstElementChild?'L':'R'});setTimeout(showPopup,420);}
 function showPopup(){
-  const w=WHO[who];
+  const w=WHO[who];$('#ppMe').innerHTML='';document.querySelectorAll('#s-popup .btns button').forEach(b=>b.disabled=false);
   $('#ppPic').style.setProperty('--py',w.py);
   let im=$('#ppPic img');if(!im){im=document.createElement('img');$('#ppPic').prepend(im);}im.src=w.img;im.alt='';
   $('#ppName').textContent=w.name;$('#ppAv').innerHTML=`<img src="${w.img}" alt="">`;
   show('#s-popup');
 }
-function popupChoice(c){choice=c;log('popup',{how:who,where:c});loading();}
+function popupChoice(c){
+  if(choice)return;choice=c;log('popup',{how:who,where:c});
+  if(c==='x'){loading();return;}
+  document.querySelectorAll('#s-popup .btns button').forEach(b=>b.disabled=true);
+  $('#ppMe').innerHTML=`<div class="me"><span>${c==='go'?'결과 보고 공부할게':'결과 보고 더 놀게'}</span></div>`;
+  setTimeout(loading,1000);
+}
 function render(){
   $('#bar').style.width=(i/Q.length*100)+'%';
   $('#qn').textContent='Q'+(i+1);
@@ -432,7 +449,7 @@ function showResult(t,s){
             :'잠금 앱이 맞는 타입이야. 그래도 막히는 게 지칠 때, 막지 않는 방식 하나 알아둬.';
   $('#ctaBox').innerHTML=`<div class="mcta"><div class="row"><img src="${w.img}" alt=""><div><div class="k">아까 그 화면, 머해예요</div><h4>유튜브 켤 때마다<br>${w.name}이 "너 머해?" 해줘요</h4></div></div>
     <p>${line}</p><p style="margin-top:6px;color:var(--sub);font-size:13px">사진도 한마디도 내가 정해요. ${w.name}은 예시일 뿐, 네 최애로 바꾸면 돼요. 막지 않아요. 돌아갈지는 내가 정해요.</p>
-    <a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'demo',type:'${t}',how:'${who}'})">머해 테스터 신청하기 (Android)</a><p class="tiny" style="margin-top:8px">아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어</p></div>`;
+    <a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${IOS?'demo_ios':'demo'}',type:'${t}',how:'${who}'})">${CTA_TXT}</a><p class="tiny" style="margin-top:8px">${CTA_SUB}</p></div>`;
   show('#s-result');
   armSheet();
   if('IntersectionObserver' in window){const el=$('#ctaBox .mcta');const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type:t,how:who});}},{threshold:.5});io.observe(el);}
@@ -443,8 +460,10 @@ let sheetShown=false,sheetTimer=null;
 function openSheet(){
   if(sheetShown)return;sheetShown=true;
   const t=window._cur;const b=$('#sheetBtns');
-  if(t==='M'){b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'M'})">테스터 신청하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
-  else{b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'${t}'})">테스터 신청하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_insta',type:'${t}'})">머해 인스타 구경하기 →</a>`;}
+  const st=IOS?'iOS 사전예약':'테스터 신청하기',sw=IOS?'sheet_ios':'sheet';
+  if(t==='M'){b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'M'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
+  else{b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'${t}'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_insta',type:'${t}'})">머해 인스타 구경하기 →</a>`;}
+  $('#sheetIos').textContent=IOS?' 아이폰은 사전예약 받고 있어요.':'';
   $('#dim').classList.add('on');$('#sheet').classList.add('on');log('sheet_open',{type:t});
 }
 function closeSheet(){$('#dim').classList.remove('on');$('#sheet').classList.remove('on');}
