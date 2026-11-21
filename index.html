@@ -54,6 +54,57 @@ h1 em{font-style:normal;color:var(--acc)}
 .friend .k{font-size:12px;font-weight:700;opacity:.7}
 .friend .n{font-family:Jua;font-size:21px;margin-top:2px;line-height:1.25}
 .friend .l{font-size:13px;margin-top:3px;opacity:.8}
+/* 광고타임 1: 사진 고르기 (앱 온보딩 톤) */
+.adk{display:inline-flex;align-items:center;gap:6px;margin-top:26px;font-size:12px;font-weight:800;color:var(--sub);background:var(--soft);border-radius:999px;padding:5px 12px;align-self:flex-start}
+.adk b{color:#F47119}
+.pickh{font-family:Jua;font-size:26px;line-height:1.3;margin-top:14px}
+.picksub{color:var(--sub);font-size:14px;margin-top:6px}
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.pcard{position:relative;border:0;padding:0;background:#fff;border-radius:22px;overflow:hidden;cursor:pointer;font:inherit;color:inherit;text-align:left;box-shadow:0 6px 18px rgba(43,42,51,.08);outline:3px solid transparent;outline-offset:-3px;transition:outline-color .15s,transform .1s}
+.pcard:active{transform:scale(.98)}
+.pcard img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.pcard .nm{padding:10px 12px 12px;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:space-between}
+.pcard .nm i{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:inline-block}
+.pcard.sel{outline-color:#F47119}
+.pcard.sel .nm i{background:#F47119;border-color:#F47119;position:relative}
+.pcard.sel .nm i:after{content:"";position:absolute;left:6px;top:2px;width:4px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* 광고타임 2: 팝업 (앱 화면 그대로) */
+#s-popup{margin:-18px -20px -36px;padding:0;background:#fff;min-height:100vh;min-height:100svh}
+.pp{display:flex;flex-direction:column;min-height:100vh;min-height:100svh;max-width:430px;margin:0 auto;width:100%}
+.pp .pic{position:relative;height:50vh;height:50svh;min-height:300px;overflow:hidden;flex:none}
+.pp .pic img{width:100%;height:100%;object-fit:cover;object-position:center var(--py,20%)}
+.pp .pic:after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(255,255,255,0),#fff)}
+.pp .tag{position:absolute;left:14px;top:14px;z-index:2;font-size:11px;font-weight:800;color:#444;background:rgba(255,255,255,.88);border-radius:999px;padding:4px 10px}
+.pp .x{position:absolute;right:14px;top:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);border:0;font-size:18px;color:#333;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pp .body{padding:0 20px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;flex:1;margin-top:2px;position:relative;z-index:2}
+.pp .who{display:flex;align-items:baseline;gap:6px;margin-left:44px}
+.pp .who b{font-size:15px;font-weight:800}
+.pp .who i{font-style:normal;font-size:12px;color:#9A97A6}
+.pp .ln{display:flex;gap:8px;margin-top:6px;align-items:flex-start}
+.pp .av{width:36px;height:36px;border-radius:50%;overflow:hidden;flex:none;background:#eee}
+.pp .av img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.pp .av.sp{visibility:hidden}
+.pp .bb{background:#F2F2F4;border-radius:4px 16px 16px 16px;padding:10px 14px;font-size:15px;font-weight:600;line-height:1.35}
+.pp .ln+.ln .bb{border-radius:16px}
+.pp .hint{font-size:12px;color:#8A879A;margin:10px 0 0 2px}
+.pp .task{margin-top:auto;background:#F5F5F7;border-radius:14px;padding:10px 14px}
+.pp .task small{display:block;font-size:11px;color:#9A97A6;font-weight:600}
+.pp .task b{font-size:15px;font-weight:800}
+.pp .btns{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.pp .btns button{appearance:none;border:0;width:100%;height:54px;border-radius:12px;font:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.pp .btns .go{background:#F47119;color:#fff}
+.pp .btns .stay{background:#F5F5F7;color:#333}
+.pp .foot{text-align:center;font-size:11px;color:#9A97A6;font-weight:800;letter-spacing:.6px;margin-top:12px}
+/* 결과 상단 한 줄 */
+.hero .came{display:inline-block;font-size:13px;font-weight:800;background:rgba(255,255,255,.7);border-radius:999px;padding:5px 12px;margin-bottom:8px}
+/* 결과 속 머해 CTA (고른 사람 썸네일) */
+.mcta{margin-top:12px;border:2px solid var(--tint);border-radius:22px;padding:16px;background:#fff}
+.mcta .row{display:flex;gap:12px;align-items:center}
+.mcta .row img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center 15%;flex:none}
+.mcta .k{font-size:12px;font-weight:800;color:var(--sub)}
+.mcta h4{font-family:Jua;font-size:19px;line-height:1.3;margin-top:2px}
+.mcta p{font-size:14px;line-height:1.55;margin-top:10px}
+.mcta .btn{margin-top:12px;height:52px;font-size:16px}
 /* quiz */
 .qhead{display:flex;align-items:center;gap:12px;margin-top:22px}
 .qbadge{font-family:Jua;font-size:15px;background:var(--ink);color:#fff;border-radius:999px;padding:4px 12px}
@@ -158,6 +209,31 @@ canvas{display:none}
     </div>
   </section>
 
+  <section class="screen" id="s-pick">
+    <span class="adk"><b>광고타임</b> 결과 보기 전에 하나만 ㅎㅎ · 만든 사람이 직접 씀</span>
+    <div class="pickh">딴짓할 때 누가<br>"너 머해?" 해주면 좋겠어?</div>
+    <p class="picksub">사진 하나만 골라줘. 바로 보여줄게.</p>
+    <div class="pcards">
+      <button class="pcard" onclick="pickWho('D',this)"><img src="img/popup_doyun.jpg" alt="도윤"><div class="nm">도윤<i></i></div></button>
+      <button class="pcard" onclick="pickWho('J',this)"><img src="img/popup_jieun.jpg" alt="지은"><div class="nm">지은<i></i></div></button>
+    </div>
+    <p class="tiny" style="margin-top:18px">예시 인물이에요. 실제 앱에선 내 사진을 넣어요.</p>
+  </section>
+
+  <section class="screen" id="s-popup">
+    <div class="pp">
+      <div class="pic" id="ppPic"><span class="tag">머해 미리보기 · 유튜브 켰을 때</span><button class="x" onclick="popupChoice('x')" aria-label="닫기">✕</button></div>
+      <div class="body">
+        <div class="who"><b id="ppName"></b><i>방금</i></div>
+        <div class="ln"><div class="av" id="ppAv"></div><div class="bb">너 머해?</div></div>
+        <div class="ln"><div class="av sp"></div><div class="bb">결과 보고, 우리 하던 거 하자.</div></div>
+        <div class="hint">방금 시작했잖아, 조금만 더</div>
+        <div class="task"><small>지금 할 공부</small><b>영어 단어 외우기 <span style="font-weight:500;color:#9A97A6;font-size:12px">· 예시</span></b></div>
+        <div class="btns"><button class="go" onclick="popupChoice('go')">결과 보고 공부할게</button><button class="stay" onclick="popupChoice('stay')">결과 보고 더 놀게</button></div>
+        <div class="foot">MEOHAE</div>
+      </div>
+    </div>
+  </section>
   <section class="screen" id="s-quiz">
     <div class="qhead"><span class="qbadge" id="qn">Q1</span><div class="prog"><i id="bar"></i></div></div>
     <div class="q" id="q"></div>
@@ -176,6 +252,7 @@ canvas{display:none}
 
   <section class="screen" id="s-result">
     <div class="hero" id="hero">
+      <div id="came"></div>
       <div class="you">공부하다 폰 들 때, 나는</div>
       <div class="avatar" id="avatar"></div>
       <div class="tag" id="rtag"></div>
@@ -227,7 +304,7 @@ try{if(new URLSearchParams(location.search).get('nolog')==='1')localStorage.setI
 function noLog(){try{return localStorage.getItem('meohae_nolog')==='1';}catch(e){return false;}}
 function log(ev,extra){
   if(!SHEET_URL||noLog())return;
-  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:navigator.userAgent.slice(0,80),ts:new Date().toISOString()},extra||{}));
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:'v2 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},extra||{}));
   try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
 }
 const IMG={M:{b:'img/dog_bust.webp',f:'img/dog_full.webp'},S:{b:'img/cat_bust.webp',f:'img/cat_full.webp'},N:{b:'img/sq_bust.webp',f:'img/sq_full.webp'},L:{b:'img/tu_bust.webp',f:'img/tu_full.webp'}};
@@ -278,14 +355,28 @@ const ORDER=['M','S','N','L'];
 
 let i=0,ans=[];
 const $=s=>document.querySelector(s);
-const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const e=$(id);e.classList.add('on');e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade');window.scrollTo(0,0);$('#sharebar').classList.toggle('on',id==='#s-result');};
+const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const e=$(id);e.classList.add('on');e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade');window.scrollTo(0,0);$('#sharebar').classList.toggle('on',id==='#s-result');document.querySelector('.top').style.display=id==='#s-popup'?'none':'';};
 function setTheme(t){const r=R[t];const d=document.documentElement.style;d.setProperty('--tint',r.tint);d.setProperty('--acc',r.acc);d.setProperty('--acc-ink',r.accInk);}
 
 $('#zoo').innerHTML=ORDER.map(t=>`<img src="${IMG[t].f}" alt="${R[t].animal}">`).join('');
 // preload busts
 ORDER.forEach(t=>{const im=new Image();im.src=IMG[t].b;});
 
-function start(){i=0;ans=[];show('#s-quiz');render();}
+/* 광고타임: Q10 → 사진 고르기 → 팝업 → 결과 */
+const WHO={D:{img:'img/popup_doyun.jpg',name:'도윤',py:'22%'},J:{img:'img/popup_jieun.jpg',name:'지은',py:'28%'}};
+let who='',choice='';
+Object.values(WHO).forEach(w=>{const im=new Image();im.src=w.img;});
+function start(){i=0;ans=[];who='';choice='';show('#s-quiz');render();}
+function adBreak(){document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));show('#s-pick');log('pick_view',{where:getSrc()});}
+function pickWho(w,el){if(who)return;who=w;el.classList.add('sel');log('pick',{how:w});setTimeout(showPopup,420);}
+function showPopup(){
+  const w=WHO[who];
+  $('#ppPic').style.setProperty('--py',w.py);
+  let im=$('#ppPic img');if(!im){im=document.createElement('img');$('#ppPic').prepend(im);}im.src=w.img;im.alt='';
+  $('#ppName').textContent=w.name;$('#ppAv').innerHTML=`<img src="${w.img}" alt="">`;
+  show('#s-popup');
+}
+function popupChoice(c){choice=c;log('popup',{how:who,where:c});loading();}
 function render(){
   $('#bar').style.width=(i/Q.length*100)+'%';
   $('#qn').textContent='Q'+(i+1);
@@ -294,7 +385,7 @@ function render(){
   Q[i].o.forEach((o,k)=>{const b=document.createElement('button');b.className='opt'+(ans[i]===k?' pick':'');b.textContent=o[0];b.onclick=()=>pick(k,b);box.appendChild(b);});
   $('#backBtn').style.visibility=i?'visible':'hidden';
 }
-function pick(k,b){ans[i]=k;b.classList.add('pick');setTimeout(()=>{i++;i<Q.length?render():loading();},230);}
+function pick(k,b){ans[i]=k;b.classList.add('pick');setTimeout(()=>{i++;i<Q.length?render():adBreak();},230);}
 function back(){if(i>0){i--;render();}}
 function score(){const s={L:0,N:0,S:0,M:0};ans.forEach((k,qi)=>{s[Q[qi].o[k][1]]+=W[qi];});return s;}
 function decide(s){
@@ -312,12 +403,12 @@ function loading(){
   const orb=$('#orb');orb.innerHTML=ORDER.map((t,k)=>`<img src="${IMG[t].b}" style="opacity:${k?0:1}">`).join('');
   const msgs=["폰 든 손 확인 중…","\"5분만\" 횟수 세는 중…","잠금 앱 지운 기록 찾는 중…","동물 고르는 중…"];
   let k=0;const iv=setInterval(()=>{k++;orb.querySelectorAll('img').forEach((d,j)=>d.style.opacity=j===k%4?1:0);$('#loadMsg').textContent=msgs[k%msgs.length];},650);
-  setTimeout(()=>{clearInterval(iv);finish();},2700);
+  setTimeout(()=>{clearInterval(iv);finish();},2000);
 }
 function finish(){
   const s=score();const t=decide(s);
   const sorted=Object.values(s).sort((a,b)=>b-a);
-  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0,where:getSrc()});
+  log('result',{type:t,answers:ans.join(''),score:Object.values(s).join('/'),margin:sorted[0]-sorted[1],tie:sorted[0]===sorted[1]?1:0,where:getSrc(),how:(who||'-')+':'+(choice||'-')});
   showResult(t,s);
   history.replaceState(null,'',location.pathname+'?t='+t+'&done=1');
 }
@@ -333,14 +424,18 @@ function showResult(t,s){
   const g=R[r.good_with],b=R[r.bad_with];
   $('#match').innerHTML=`<div style="background:${g.tint}"><img src="${IMG[r.good_with].f}"><div class="k">찰떡</div><div class="n">${g.animal}</div><div class="d">${r.why_good}</div></div><div style="background:#F3F2F6"><img src="${IMG[r.bad_with].f}"><div class="k">같이 망함</div><div class="n">${b.animal}</div><div class="d">${r.why_bad}</div></div>`;
   $('#fit').innerHTML=r.fit;
-  const cta=$('#ctaBox');
-  if(t==='M'){
-    cta.innerHTML=`<div class="cta"><div class="scene"><img src="${IMG.M.f}" alt=""><div class="bub">너 머해?</div><div class="who">내가 고른 사람이</div></div><p><b>머해</b>는 강아지를 위해 만든 앱이야. 공부 중에 내가 정한 앱을 열면, 내가 고른 사람이 "너 머해?" 하고 불러줘. 막지 않고, 돌아갈지는 내가 정해. 지금 Android 무료 테스트 중.</p><a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'result',type:'M'})">머해 테스터 신청하기 (Android)</a><p class="tiny" style="margin-top:8px">아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어</p></div>`;
-  }else{
-    cta.innerHTML=`<div class="cta" style="border-color:var(--line)"><p>주변에 <b>강아지 타입</b> 있지? 잠금 앱 깔았다가 화내고 지우는 친구. 그 친구한텐 <b>머해</b>가 맞아. 아래 "친구한테 보내기"로 테스트 보내줘.</p></div><a class="smalllink" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'result_link',type:window._cur})">머해가 뭔지 궁금하면 →</a>`;
-  }
+  $('#came').innerHTML=choice==='go'?'<span class="came">약속한 거다? 결과 보고 공부 ㄱ</span>':choice==='stay'?'<span class="came">솔직하네 ㅋㅋ 결과는 여기</span>':'';
+  const w=WHO[who]||WHO.D;
+  const line=t==='M'?'내가 고른 사람이 "너 머해?" 하고 부르면, 돌아오는 건 네가 제일 빨라. 머해가 딱 너를 위해 만든 앱이야.'
+            :t==='S'?'막지 않아. 돌아갈지는 네가 정해. 머해도 똑같이 생각해.'
+            :t==='N'?'기록은 네가 쌓고, 딴짓하는 순간만 누가 한 번 불러줘. 머해는 그 한 번이야.'
+            :'잠금 앱이 맞는 타입이야. 그래도 막히는 게 지칠 때, 막지 않는 방식 하나 알아둬.';
+  $('#ctaBox').innerHTML=`<div class="mcta"><div class="row"><img src="${w.img}" alt=""><div><div class="k">아까 그 화면, 머해예요</div><h4>유튜브 켤 때마다<br>${w.name}이 "너 머해?" 해줘요</h4></div></div>
+    <p>${line}</p><p style="margin-top:6px;color:var(--sub);font-size:13px">사진도 한마디도 내가 정해요. ${w.name}은 예시일 뿐, 네 최애로 바꾸면 돼요. 막지 않아요. 돌아갈지는 내가 정해요.</p>
+    <a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'demo',type:'${t}',how:'${who}'})">머해 테스터 신청하기 (Android)</a><p class="tiny" style="margin-top:8px">아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어</p></div>`;
   show('#s-result');
   armSheet();
+  if('IntersectionObserver' in window){const el=$('#ctaBox .mcta');const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type:t,how:who});}},{threshold:.5});io.observe(el);}
 }
 
 /* 머해 소개 시트: 결과 맨 아래 도달 시 1회 */
@@ -349,7 +444,7 @@ function openSheet(){
   if(sheetShown)return;sheetShown=true;
   const t=window._cur;const b=$('#sheetBtns');
   if(t==='M'){b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'M'})">테스터 신청하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
-  else{b.innerHTML=`<a class="btn dark" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'${t}'})">머해 구경하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_form',type:'${t}'})">Android면 테스터로 먼저 써볼 수 있어요 →</a>`;}
+  else{b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet',type:'${t}'})">테스터 신청하기</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_insta',type:'${t}'})">머해 인스타 구경하기 →</a>`;}
   $('#dim').classList.add('on');$('#sheet').classList.add('on');log('sheet_open',{type:t});
 }
 function closeSheet(){$('#dim').classList.remove('on');$('#sheet').classList.remove('on');}
@@ -359,7 +454,7 @@ function armSheet(){
   if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();setTimeout(openSheet,600);}},{threshold:.6});io.observe(target);}
   sheetTimer=setTimeout(openSheet,20000);
 }
-function restart(){closeSheet();clearTimeout(sheetTimer);history.replaceState(null,'',location.pathname);$('#friendBox').innerHTML='';show('#s-start');}
+function restart(){closeSheet();clearTimeout(sheetTimer);who='';choice='';history.replaceState(null,'',location.pathname);$('#friendBox').innerHTML='';show('#s-start');}
 
 /* share */
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1600);}
