@@ -63,7 +63,7 @@ h1 em{font-style:normal;color:var(--acc)}
 .pcard{position:relative;border:0;padding:0;background:#fff;border-radius:22px;overflow:hidden;cursor:pointer;font:inherit;color:inherit;text-align:left;box-shadow:0 6px 18px rgba(43,42,51,.08);outline:3px solid transparent;outline-offset:-3px;transition:outline-color .15s,transform .1s}
 .pcard:active{transform:scale(.98)}
 .pcard img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.pcard .nm{padding:10px 12px 12px;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:space-between}
+.pcard .nm{padding:10px 12px 12px;font-weight:700;font-size:14px;color:var(--sub);display:flex;align-items:center;justify-content:space-between}
 .pcard .nm i{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:inline-block}
 .pcard.sel{outline-color:#F47119}
 .pcard.sel .nm i{background:#F47119;border-color:#F47119;position:relative}
@@ -217,8 +217,8 @@ canvas{display:none}
     <div class="pickh">딴짓할 때 누가<br>"너 머해?" 해주면 좋겠어?</div>
     <p class="picksub">사진 하나만 골라줘. 바로 보여줄게.</p>
     <div class="pcards">
-      <button class="pcard" onclick="pickWho('D',this)"><img src="img/popup_doyun.jpg" alt="도윤"><div class="nm">도윤<i></i></div></button>
-      <button class="pcard" onclick="pickWho('J',this)"><img src="img/popup_jieun.jpg" alt="지은"><div class="nm">지은<i></i></div></button>
+      <button class="pcard" onclick="pickWho('D',this)"><img src="img/popup_doyun.jpg" alt=""><div class="nm"><span>이 사람</span><i></i></div></button>
+      <button class="pcard" onclick="pickWho('J',this)"><img src="img/popup_jieun.jpg" alt=""><div class="nm"><span>이 사람</span><i></i></div></button>
     </div>
     <p class="tiny" style="margin-top:18px">예시 인물이에요. 실제 앱에선 내 사진을 넣어요.</p>
   </section>
@@ -368,7 +368,7 @@ $('#zoo').innerHTML=ORDER.map(t=>`<img src="${IMG[t].f}" alt="${R[t].animal}">`)
 ORDER.forEach(t=>{const im=new Image();im.src=IMG[t].b;});
 
 /* 광고타임: Q10 → 사진 고르기 → 팝업 → 결과 */
-const WHO={D:{img:'img/popup_doyun.jpg',name:'도윤',py:'22%'},J:{img:'img/popup_jieun.jpg',name:'지은',py:'28%'}};
+const WHO={D:{img:'img/popup_doyun.jpg',name:'내 최애',py:'22%'},J:{img:'img/popup_jieun.jpg',name:'내 최애',py:'28%'}};
 let who='',choice='';
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 const CTA_TXT=IOS?'iOS 사전예약 · 출시 알림 받기':'머해 테스터 신청하기 (Android)';
@@ -447,8 +447,8 @@ function showResult(t,s){
             :t==='S'?'막지 않아. 돌아갈지는 네가 정해. 머해도 똑같이 생각해.'
             :t==='N'?'기록은 네가 쌓고, 딴짓하는 순간만 누가 한 번 불러줘. 머해는 그 한 번이야.'
             :'잠금 앱이 맞는 타입이야. 그래도 막히는 게 지칠 때, 막지 않는 방식 하나 알아둬.';
-  $('#ctaBox').innerHTML=`<div class="mcta"><div class="row"><img src="${w.img}" alt=""><div><div class="k">아까 그 화면, 머해예요</div><h4>유튜브 켤 때마다<br>${w.name}이 "너 머해?" 해줘요</h4></div></div>
-    <p>${line}</p><p style="margin-top:6px;color:var(--sub);font-size:13px">사진도 한마디도 내가 정해요. ${w.name}은 예시일 뿐, 네 최애로 바꾸면 돼요. 막지 않아요. 돌아갈지는 내가 정해요.</p>
+  $('#ctaBox').innerHTML=`<div class="mcta"><div class="row"><img src="${w.img}" alt=""><div><div class="k">아까 그 화면, 머해예요</div><h4>유튜브 켤 때마다<br>내가 고른 최애가 "너 머해?" 해줘요</h4></div></div>
+    <p>${line}</p><p style="margin-top:6px;color:var(--sub);font-size:13px">사진도 한마디도 내가 정해요. 방금 그 사람은 예시고, 내 최애 사진으로 바꾸면 돼요. 막지 않아요. 돌아갈지는 내가 정해요.</p>
     <a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${IOS?'demo_ios':'demo'}',type:'${t}',how:'${who}'})">${CTA_TXT}</a><p class="tiny" style="margin-top:8px">${CTA_SUB}</p></div>`;
   show('#s-result');
   armSheet();
