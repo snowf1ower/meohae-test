@@ -308,7 +308,7 @@ canvas{display:none}
 <canvas id="cv" width="1080" height="1920"></canvas>
 
 <script>
-const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTA="https://instagram.com/meohae.project";
+const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="install.html", INSTA="https://instagram.com/meohae.project";
 const SHEET_URL="https://script.google.com/macros/s/AKfycbzUDtHeLIdithkGoPez5AQN8cy8NPDVxUpRIp3bbMw8uLIqRvCsj_0Bz6deCYW1thwjUQ/exec"; // Apps Script 웹 앱. 비어 있으면 집계 안 함.
 const SID=Math.random().toString(36).slice(2,10);
 const FROM=new URLSearchParams(location.search).get('t')||'';
@@ -383,8 +383,8 @@ ORDER.forEach(t=>{const im=new Image();im.src=IMG[t].b;});
 const WHO={D:{img:'img/popup_doyun.jpg',name:'내 최애',py:'22%'},J:{img:'img/popup_jieun.jpg',name:'내 최애',py:'28%'}};
 let who='',choice='';
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
-const CTA_TXT=IOS?'iOS 사전예약 · 출시 알림 받기':'머해 테스터 신청하기 (Android)';
-const CTA_SUB=IOS?'지금은 Android만 테스트 중이에요. 폼에 남겨두면 iOS 나올 때 제일 먼저 알려드려요.':'아이폰이면 같은 폼에서 출시 알림만 받아둘 수 있어';
+const CTA_TXT=IOS?'iOS 사전예약 · 출시 알림 받기':'머해 설치하기 (Android · 3분)';
+const CTA_SUB=IOS?'지금은 Android만 테스트 중이에요. 폼에 남겨두면 iOS 나올 때 제일 먼저 알려드려요.':'비공개 테스트라 설치가 4단계예요. 한 페이지에서 끝나요.';
 Object.values(WHO).forEach(w=>{const im=new Image();im.src=w.img;});
 function start(){i=0;ans=[];who='';choice='';buildView();show('#s-quiz');render();}
 function adBreak(){
@@ -462,7 +462,7 @@ function showResult(t,s){
             :'잠금 앱이 맞는 타입이야. 그래도 막히는 게 지칠 때, 막지 않는 방식 하나 알아둬.';
   $('#ctaBox').innerHTML=`<div class="mcta"><div class="row"><img src="${w.img}" alt=""><div><div class="k">아까 그 화면, 머해예요</div><h4>유튜브 켤 때마다<br>내가 고른 최애가 "너 머해?" 해줘요</h4></div></div>
     <p>${line}</p><p style="margin-top:6px;color:var(--sub);font-size:13px">사진도 한마디도 내가 정해요. 방금 그 사람은 예시고, 내 최애 사진으로 바꾸면 돼요. 막지 않아요. 돌아갈지는 내가 정해요.</p>
-    <a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${IOS?'demo_ios':'demo'}',type:'${t}',how:'${who}'})">${CTA_TXT}</a><p class="tiny" style="margin-top:8px">${CTA_SUB}</p></div>`;
+    <a class="btn acc" href="${IOS?FORM:INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${IOS?'demo_ios':'demo'}',type:'${t}',how:'${who}'})">${CTA_TXT}</a><p class="tiny" style="margin-top:8px">${CTA_SUB}</p></div>`;
   show('#s-result');
   armSheet();
   if('IntersectionObserver' in window){const el=$('#ctaBox .mcta');const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type:t,how:who});}},{threshold:.5});io.observe(el);}
@@ -473,9 +473,9 @@ let sheetShown=false,sheetTimer=null;
 function openSheet(){
   if(sheetShown)return;sheetShown=true;
   const t=window._cur;const b=$('#sheetBtns');
-  const st=IOS?'iOS 사전예약':'테스터 신청하기',sw=IOS?'sheet_ios':'sheet';
-  if(t==='M'){b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'M'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
-  else{b.innerHTML=`<a class="btn acc" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'${t}'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_insta',type:'${t}'})">머해 인스타 구경하기 →</a>`;}
+  const st=IOS?'iOS 사전예약':'설치하기 (Android)',sw=IOS?'sheet_ios':'sheet';
+  if(t==='M'){b.innerHTML=`<a class="btn acc" href="${IOS?FORM:INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'M'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button>`;}
+  else{b.innerHTML=`<a class="btn acc" href="${IOS?FORM:INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${sw}',type:'${t}'})">${st}</a><button class="btn ghost" onclick="closeSheet()">닫기</button><a class="smalllink" style="grid-column:1/-1;margin-top:4px" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'sheet_insta',type:'${t}'})">머해 인스타 구경하기 →</a>`;}
   $('#sheetIos').textContent=IOS?' 아이폰은 사전예약 받고 있어요.':'';
   $('#dim').classList.add('on');$('#sheet').classList.add('on');log('sheet_open',{type:t});
 }

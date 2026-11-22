@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>머해 설치하기 · Android 비공개 테스트</title>
+<meta name="description" content="머해 테스터 설치 4단계. 신청 → 그룹 가입 → 테스터 되기 → 설치. 3분이면 돼요.">
+<meta property="og:title" content="머해 설치하기 (Android 비공개 테스트)">
+<meta property="og:description" content="신청 → 그룹 가입 → 테스터 되기 → 설치. 이 페이지 하나로 끝.">
+<meta property="og:image" content="https://snowf1ower.github.io/meohae-test/img/og.jpg">
+<meta property="og:url" content="https://snowf1ower.github.io/meohae-test/install.html">
+<meta name="theme-color" content="#F47119">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1F1B2E;--sub:#6B6680;--line:#E8E5F0;--soft:#F4F1FA;--acc:#F47119;--ok:#2E9E6B;--tint:#FFE8DA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:430px;margin:0 auto;padding:18px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:800;color:var(--sub)}
+.top a{color:inherit;text-decoration:none}
+h1{font-family:Jua;font-weight:400;font-size:30px;line-height:1.25;margin-top:26px}
+.lead{color:var(--sub);font-size:14.5px;margin-top:10px}
+.lead b{color:var(--ink)}
+.prog{margin-top:18px;background:var(--soft);border-radius:999px;height:8px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+.pt{font-size:12.5px;font-weight:800;color:var(--sub);margin-top:6px}
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.step{border:2px solid var(--line);border-radius:22px;padding:16px;transition:border-color .2s,background .2s}
+.step.done{border-color:#CFEBDD;background:#F3FBF6}
+.step .h{display:flex;gap:10px;align-items:flex-start}
+.n{width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.done .n{background:var(--ok)}
+.done .n:after{content:"✓"}
+.done .n span{display:none}
+.step h2{font-size:17px;font-weight:800;line-height:1.3}
+.step p{font-size:13.5px;color:var(--sub);margin-top:4px}
+.step p b{color:var(--ink);font-weight:700}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;border-radius:14px;background:var(--acc);color:#fff;font-weight:800;font-size:15.5px;text-decoration:none;margin-top:12px;border:0;font-family:inherit;cursor:pointer}
+.done .btn{background:#fff;color:var(--ok);border:2px solid #CFEBDD}
+.btn small{font-weight:600;opacity:.85;font-size:12px}
+.mark{display:block;width:100%;margin-top:8px;background:none;border:0;color:var(--sub);font:inherit;font-size:12.5px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.fin{display:none;margin-top:16px;background:var(--tint);border-radius:22px;padding:18px;text-align:center}
+.fin.on{display:block}
+.fin h3{font-family:Jua;font-weight:400;font-size:22px}
+.fin p{font-size:14px;color:var(--sub);margin-top:6px}
+.help{margin-top:26px}
+.help h3{font-size:15px;font-weight:800;margin-bottom:8px}
+.help details{border-top:1px solid var(--line);padding:11px 0}
+.help summary{font-size:14px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.help summary:after{content:"+";color:var(--sub)}
+.help details[open] summary:after{content:"–"}
+.help details p{font-size:13.5px;color:var(--sub);margin-top:8px}
+.help a{color:var(--acc);font-weight:700}
+.foot{margin-top:28px;font-size:12px;color:var(--sub);text-align:center}
+.foot a{color:inherit}
+.ios{display:none;margin-top:14px;border:2px dashed var(--line);border-radius:18px;padding:14px;font-size:13.5px;color:var(--sub)}
+.ios.on{display:block}
+.ios a{color:var(--acc);font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>머해 · 비공개 테스트</span><a href="./">딴짓 동물 테스트 →</a></div>
+  <h1>설치는 4단계,<br>이 페이지 하나로 끝.</h1>
+  <p class="lead">버튼은 전부 새 창으로 열려요. 하나 끝내고 <b>이 페이지로 돌아와서</b> 다음 걸 누르면 돼요. 어디까지 했는지는 여기 남아요.</p>
+  <div class="ios" id="ios">아이폰이네요. 지금은 Android만 테스트 중이에요. <a href="https://forms.gle/kUWucQ8Qv56563cZ8" target="_blank" rel="noopener" onclick="log('install_step',{where:'ios_form'})">같은 폼에 남겨두면</a> iOS 나올 때 제일 먼저 알려드려요.</div>
+  <div class="prog"><i id="bar"></i></div>
+  <div class="pt" id="pt">0 / 4</div>
+
+  <div class="steps" id="steps">
+    <div class="step" data-k="1">
+      <div class="h"><div class="n"><span>1</span></div><div><h2>신청 폼 쓰기 (1분)</h2>
+        <p>첫 칸 이메일은 <b>폰 Play 스토어에 로그인된 구글 계정</b>으로. 다른 계정이면 설치가 안 돼요.</p></div></div>
+      <a class="btn" href="https://forms.gle/kUWucQ8Qv56563cZ8" target="_blank" rel="noopener" onclick="hit(1)">신청 폼 열기</a>
+    </div>
+    <div class="step" data-k="2">
+      <div class="h"><div class="n"><span>2</span></div><div><h2>테스터 그룹 가입</h2>
+        <p>열리는 페이지의 파란 <b>"그룹 가입"</b> 버튼만 누르면 돼요. 같은 구글 계정으로요. 메일 설정은 "이메일 없음"으로 해도 돼요.</p></div></div>
+      <a class="btn" href="https://groups.google.com/g/meohae-testers/about" target="_blank" rel="noopener" onclick="hit(2)">그룹 가입 페이지 열기</a>
+    </div>
+    <div class="step" data-k="3">
+      <div class="h"><div class="n"><span>3</span></div><div><h2>"테스터 되기" 누르기</h2>
+        <p>Google Play 테스트 참여 페이지예요. <b>테스터 되기</b> 한 번만 누르면 끝. "앱을 찾을 수 없음"이 뜨면 2단계 직후라 그래요 — 5~10분 뒤 다시 눌러주세요.</p></div></div>
+      <a class="btn" href="https://play.google.com/apps/testing/com.meohae.focus" target="_blank" rel="noopener" onclick="hit(3)">테스터 되기 페이지 열기</a>
+    </div>
+    <div class="step" data-k="4">
+      <div class="h"><div class="n"><span>4</span></div><div><h2>Play 스토어에서 설치</h2>
+        <p>3단계 끝나면 바로 설치돼요. 스토어에서 "비공개 테스트" 표시가 보이면 정상이에요.</p></div></div>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.meohae.focus" target="_blank" rel="noopener" onclick="hit(4)">설치하러 가기</a>
+    </div>
+  </div>
+
+  <div class="fin" id="fin"><h3>다 됐어요. 고마워요!</h3><p>앱 열고 사진 한 장, 한마디 하나 넣으면 준비 끝. 14일 동안 지우지 말고 써주세요. 불편한 건 앱 안 "의견 보내기"로.</p></div>
+
+  <div class="help">
+    <h3>안 될 때</h3>
+    <details><summary>"앱을 찾을 수 없음" / "이 앱은 사용할 수 없습니다"</summary><p>① 2단계 그룹 가입이 됐는지 ② 폼·그룹·폰 스토어가 <b>같은 구글 계정</b>인지 확인하고 ③ 5~10분 뒤 3단계를 다시 눌러주세요. 그룹 가입이 Play에 반영되는 데 시간이 조금 걸려요.</p></details>
+    <details><summary>폰에 구글 계정이 여러 개예요</summary><p>Play 스토어 앱 → 오른쪽 위 프로필 → 폼에 적은 계정으로 바꾼 뒤 3·4단계를 다시 해주세요.</p></details>
+    <details><summary>뒤로가기 했더니 폼이 새로 떠요</summary><p>괜찮아요. 폼은 한 번만 내면 돼요. 이 페이지로 돌아와서 다음 단계를 누르면 돼요.</p></details>
+    <details><summary>그래도 안 돼요</summary><p>인스타 <a href="https://instagram.com/meohae.project" target="_blank" rel="noopener">@meohae.project</a> DM으로 "설치 안 돼요 + 어느 단계에서 막혔는지" 보내주세요. 직접 봐드려요.</p></details>
+  </div>
+
+  <p class="foot">이메일은 테스트 안내에만 쓰고 끝나면 지워요 · <a href="./">딴짓 동물 테스트</a></p>
+</div>
+<script>
+const SHEET_URL="https://script.google.com/macros/s/AKfycbzUDtHeLIdithkGoPez5AQN8cy8NPDVxUpRIp3bbMw8uLIqRvCsj_0Bz6deCYW1thwjUQ/exec";
+const SID=Math.random().toString(36).slice(2,10);
+const SRC=(new URLSearchParams(location.search).get('src')||'').slice(0,20);
+try{if(SRC)sessionStorage.setItem('src',SRC);}catch(e){}
+function getSrc(){try{return SRC||sessionStorage.getItem('src')||'';}catch(e){return SRC;}}
+try{if(new URLSearchParams(location.search).get('nolog')==='1')localStorage.setItem('meohae_nolog','1');}catch(e){}
+function noLog(){try{return localStorage.getItem('meohae_nolog')==='1';}catch(e){return false;}}
+function log(ev,extra){
+  if(!SHEET_URL||noLog())return;
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:'',ua:'v3 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},extra||{}));
+  try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
+}
+const KEY='meohae_install';
+let done={};try{done=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+function paint(){
+  let n=0;document.querySelectorAll('.step').forEach(s=>{const k=s.dataset.k;const d=!!done[k];s.classList.toggle('done',d);if(d)n++;
+    let m=s.querySelector('.mark');if(!m){m=document.createElement('button');m.className='mark';s.appendChild(m);}
+    m.textContent=d?'다시 하기':'이미 했어요 (체크만)';m.onclick=()=>{done[k]=!done[k];save();paint();};});
+  document.getElementById('bar').style.width=(n/4*100)+'%';document.getElementById('pt').textContent=n+' / 4';
+  document.getElementById('fin').classList.toggle('on',n===4);
+}
+function hit(k){done[k]=true;save();setTimeout(paint,300);log('install_step',{where:String(k)});}
+paint();
+if(/iPhone|iPad|iPod/.test(navigator.userAgent))document.getElementById('ios').classList.add('on');
+log('install_view',{where:getSrc()});
+</script>
+</body>
+</html>
