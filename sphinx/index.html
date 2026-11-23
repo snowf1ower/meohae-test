@@ -10,12 +10,12 @@
 <meta property="og:image" content="https://snowf1ower.github.io/meohae-test/sphinx/img/og.jpg">
 <meta property="og:url" content="https://snowf1ower.github.io/meohae-test/sphinx/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#FFFAF4">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/sphinx_ask.webp">
 <style>
-:root{--bg:#FFFAF4;--ink:#3A2A22;--sub:#8E7B6E;--line:#EADFD2;--soft:#F6ECDD;--peach:#FFEFE3;--acc:#F2733A;--acc2:#FFB07A}
+:root{--bg:#fff;--ink:#2E211B;--sub:#85746A;--line:#E9E1D8;--soft:#FBF1E6;--peach:#FFF0E4;--acc:#F47119;--acc2:#FFA35C}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{min-height:100%;background:var(--bg)}
 body{font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.5;word-break:keep-all;-webkit-font-smoothing:antialiased}
@@ -23,23 +23,23 @@ img{display:block;max-width:100%}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .jua{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400}
-.wrap{position:relative;max-width:430px;margin:0 auto;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:18px 22px 30px;overflow:hidden}
+.wrap{position:relative;max-width:430px;margin:0 auto;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:18px 22px 31%;overflow:hidden;background:url(img/dunes.webp) 50% 100%/100% auto no-repeat}
+.wrap.res{padding-bottom:32px;background:none}
 .head{width:76%;margin:0 auto;padding-bottom:8px;border-bottom:1.5px solid rgba(58,42,34,.55);position:relative;z-index:1}
 .scr{display:none;flex:1;flex-direction:column;position:relative;z-index:1}
 .scr.on{display:flex}
-.dunes{position:absolute;left:0;right:0;bottom:0;width:100%;height:130px;z-index:0;pointer-events:none}
-.wrap.res .dunes{display:none}
-.stack{margin-top:auto;padding-top:24px}
+.stack{margin-top:24px}
 .tiny{font-size:12.5px;color:var(--sub);text-align:center}
 
 .btn{appearance:none;border:0;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:58px;padding:8px 18px;border-radius:999px;font-family:Jua,"Noto Sans KR",sans-serif;font-size:21px;text-decoration:none;color:var(--ink);background:#fff;transition:transform .08s}
 .btn:active{transform:scale(.98)}
-.btn.go{background:linear-gradient(180deg,#F58742,var(--acc));color:#fff;box-shadow:0 8px 18px rgba(242,115,58,.28)}
+.btn.go{background:linear-gradient(180deg,#FF8632,var(--acc));color:#fff;box-shadow:0 8px 18px rgba(244,113,25,.28)}
 .btn.go:after{content:"";width:9px;height:9px;border-right:2.5px solid #fff;border-top:2.5px solid #fff;transform:rotate(45deg);margin-left:2px}
 .btn.line{border:1.5px solid var(--line)}
 
 /* 시작 */
-.pill{align-self:center;margin-top:22px;background:var(--peach);color:var(--sub);font-size:13px;font-weight:700;border-radius:999px;padding:4px 14px}
+.pill{align-self:center;margin-top:22px;background:var(--peach);color:var(--ink);font-size:13.5px;font-weight:700;border-radius:999px;padding:4px 14px}
+.pill:before,.pill:after{content:"···";color:var(--acc);letter-spacing:1px;margin:0 6px}
 h1{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:44px;line-height:1.16;text-align:center;margin-top:10px}
 h1 em{font-style:normal;color:var(--acc);position:relative;display:inline-block}
 .spark{position:absolute;width:26px;height:26px}
@@ -51,7 +51,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .heroS img{animation:bob 3.4s ease-in-out infinite}
 .heroS .spark{right:-14px;top:14%;transform:scaleX(-1) rotate(-30deg)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.lead{color:var(--sub);text-align:center;margin-top:12px;font-size:15.5px;line-height:1.65}
+.lead{color:var(--ink);text-align:center;margin-top:12px;font-size:16px;line-height:1.65}
 .shelf{display:flex;justify-content:center;align-items:flex-end;gap:12px}
 .shelf img{width:42px;transition:opacity .5s,filter .5s,transform .5s;transform-origin:50% 100%}
 #s-start .shelf{margin-top:20px}#s-start .shelf img{width:50px}
@@ -66,13 +66,13 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .talk .who .spark{right:-2px;top:-6px;transform:scaleX(-1) rotate(-40deg) scale(.8)}
 .talk .who img.nod{animation:nod .32s}
 @keyframes nod{0%{transform:scale(.93)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
-.say{position:relative;flex:1;background:var(--soft);border-radius:24px;padding:16px 18px;font-size:18.5px;font-weight:500;line-height:1.5;min-height:92px;display:flex;align-items:center}
+.say{position:relative;flex:1;background:var(--soft);border-radius:24px;padding:16px 18px;font-size:18px;font-weight:600;line-height:1.5;min-height:96px;display:flex;align-items:center}
 .say:before{content:"";position:absolute;left:-7px;bottom:26px;width:16px;height:16px;background:var(--soft);border-radius:0 0 0 12px;transform:skewX(28deg)}
 .opts{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.opt{appearance:none;position:relative;width:100%;min-height:60px;padding:15px 46px 15px 20px;background:#fff;border:1.5px solid var(--line);border-radius:16px;font-family:inherit;font-size:16.5px;font-weight:500;line-height:1.4;text-align:left;color:var(--ink);transition:transform .08s,background .15s,border-color .15s}
+.opt{appearance:none;position:relative;width:100%;min-height:60px;padding:15px 46px 15px 20px;background:#fff;border:1.5px solid var(--line);border-radius:16px;font-family:inherit;font-size:16.5px;font-weight:600;line-height:1.4;text-align:left;color:var(--ink);transition:transform .08s,background .15s,border-color .15s}
 .opt:after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;margin-top:-5px;border-right:2px solid var(--sub);border-top:2px solid var(--sub);transform:rotate(45deg)}
 .opt:active{transform:scale(.99)}
-.opt.sel{background:var(--peach);border-color:var(--acc);color:#C9521C;font-weight:700}
+.opt.sel{background:var(--peach);border-color:var(--acc);color:#C24A0C;font-weight:700}
 .opt.sel:after{right:14px;margin-top:-11px;width:22px;height:22px;border:0;border-radius:50%;transform:none;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M6.5 11.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/22px no-repeat}
 .opts.hide{visibility:hidden}
 .skip{margin-top:14px;font-size:12.5px;color:var(--sub);text-align:center;min-height:19px}
@@ -143,18 +143,13 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 </head>
 <body>
 <div class="wrap" id="wrap">
-  <svg class="dunes" viewBox="0 0 430 130" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M250 74l34-44 34 44zM300 74l20-26 20 26z" fill="#FBE3C6"/>
-    <path d="M0 78c60-26 120-24 190 0s150 26 240-10v62H0z" fill="#FCEBD7"/>
-    <path d="M0 104c80-22 150-16 230 2s130 14 200-6v30H0z" fill="#FADFC2"/>
-  </svg>
   <img class="head" src="img/icons.webp" alt="">
 
   <section class="scr on" id="s-start">
     <span class="pill">머해 테스트</span>
     <h1>스핑크스가<br><em><span class="spark l"><i></i><i></i><i></i></span>맞혀볼게<span class="spark r"><i></i><i></i><i></i></span></em></h1>
     <div class="heroS"><img src="img/sphinx_ask.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div>
-    <p class="lead">석관 다섯 개 중 하나에 네가 들어 있다.<br>몇 개만 묻고 맞혀보지!</p>
+    <p class="lead">석관 다섯 개 중 하나에 네가 들어 있어.<br>몇 개만 물어보고 맞혀볼게!</p>
     <div class="shelf"><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""></div>
     <div class="stack"><button class="btn go" id="startBtn">맞혀봐</button></div>
   </section>
@@ -214,22 +209,22 @@ function log(ev,x){
 
 /* ===== 문항 ===== (선지는 앞에서부터 2·1·0점) */
 const Q={
- q1:{t:'"딱 하나만 보고 끄자."\n그래서?',o:['진짜 껐다','세 개쯤 봤다','해가 떴다']},
- q2:{t:'공부 중에 알림이 울렸다.',o:['이따 본다','확인만 하고 내려놓았다… 고 생각했다','답장하다 다른 앱까지 한 바퀴 돌았다']},
- q3:{t:'30분 날린 걸\n깨달은 순간.',o:['"지금이라도 하자"','"5분만 더 보고…"','"기왕 이렇게 된 거"']},
- q4:{t:'10번 흔들리면,\n다시 책으로 돌아가는 건?',o:['거의 다','절반쯤','한두 번, 아니면 0번']},
- q5:{t:'하루를 날린 날,\n자기 전에 드는 생각.',o:['"내일은 진짜 한다"','"아… 또 이랬네"','"뭐, 재밌었으니 됐다"']},
- q6:{t:'보던 걸 스스로 끈\n마지막 기억.',o:['오늘도 껐다','이번 주에 한 번쯤','배터리가 대신 꺼줬다']},
- q7:{t:'공부자극 영상이나\n스터디윗미.',o:['자주 본다. 보고 나면 이미 공부한 기분이다','가끔 본다','안 본다']},
- q8:{t:'다짐이나 계획을\n써서 붙여본 적.',o:['지금도 붙어 있다','붙였다가 민망해서 뗐다','그런 건 안 한다']},
- cat:{t:'좋아하는 사람이나 캐릭터,\n있나?',o:['있다, 딱 한 명','많아서 못 고른다','딱히 없다']},
- d1:{t:'하루 폰 사용 시간은?',o:['3시간 이하','4~6시간','7시간 이상','무서워서 안 본다'],keep:1},
- d2:{t:'공부는 주로 어디서?',o:['집·자취방에서 혼자','독서실·스터디카페에서 혼자','누가 같이 있는 데서'],keep:1},
- d3:{t:'잠금 앱, 써봤나?',o:['지금 쓴다','써봤는데 지웠다','안 써봤다'],keep:1},
- fdel:{t:'왜 지웠나?',o:['내가 풀어버려서','급할 때 막혀서 짜증 나서','귀찮아서'],keep:1},
- fuse:{t:'걸어놓고 푼 적은?',o:['자주','가끔','없다'],keep:1},
- fno:{t:'왜 안 써봤나?',o:['막히는 게 싫어서','필요 없을 것 같아서','몰라서'],keep:1},
- fsq:{t:'딴 데 갔다가\n돌아오기까지 보통?',o:['금방','10분쯤','한참'],keep:1}
+ q1:{t:'"딱 하나만 보고 끄자!" 하고 폰을 켰어. 그래서 어떻게 됐어?',o:['진짜 껐어','세 개쯤 봤어','해가 떴어']},
+ q2:{t:'공부하는데 알림이 울렸어. 넌 어떻게 해?',o:['이따 봐','확인만 하고 내려놓았다… 고 생각했어','답장하다 다른 앱까지 한 바퀴 돌았어']},
+ q3:{t:'30분 날린 걸 깨달은 순간, 무슨 생각이 들어?',o:['"지금이라도 하자"','"5분만 더 보고…"','"기왕 이렇게 된 거"']},
+ q4:{t:'공부하다 열 번 흔들린다 치자. 다시 책으로 돌아가는 건 몇 번쯤이야?',o:['거의 다','절반쯤','한두 번, 아니면 0번']},
+ q5:{t:'딴짓으로 하루를 날린 날 있지? 자기 전에 무슨 생각이 들어?',o:['"내일은 진짜 한다"','"아… 또 이랬네"','"뭐, 재밌었으니 됐다"']},
+ q6:{t:'보던 걸 네 손으로 끈 게 마지막으로 언제였어?',o:['오늘도 껐어','이번 주에 한 번쯤','배터리가 대신 꺼줬어']},
+ q7:{t:'공부자극 영상이나 스터디윗미, 자주 봐?',o:['자주 봐. 보고 나면 이미 공부한 기분이야','가끔 봐','안 봐']},
+ q8:{t:'다짐이나 계획을 종이에 써서 붙여본 적 있어?',o:['지금도 붙어 있어','붙였다가 민망해서 뗐어','그런 건 안 해']},
+ cat:{t:'혹시 좋아하는 사람이나 캐릭터 있어?',o:['있어, 딱 한 명','많아서 못 골라','딱히 없어']},
+ d1:{t:'하루에 폰을 얼마나 써?',o:['3시간 이하','4~6시간','7시간 이상','무서워서 안 봤어'],keep:1},
+ d2:{t:'공부는 주로 어디서 해?',o:['집·자취방에서 혼자','독서실·스터디카페에서 혼자','누가 같이 있는 데서'],keep:1},
+ d3:{t:'잠금 앱은 써본 적 있어?',o:['지금 써','써봤는데 지웠어','안 써봤어'],keep:1},
+ fdel:{t:'그건 왜 지웠어?',o:['내가 풀어버려서','급할 때 막혀서 짜증 나서','귀찮아서'],keep:1},
+ fuse:{t:'걸어놓고 네가 푼 적도 있어?',o:['자주','가끔','없어'],keep:1},
+ fno:{t:'안 써본 이유가 있어?',o:['막히는 게 싫어서','필요 없을 것 같아서','몰라서'],keep:1},
+ fsq:{t:'딴 데 갔다가 돌아오기까지 보통 얼마나 걸려?',o:['금방','10분쯤','한참'],keep:1}
 };
 /* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
 const ORDER=['T','S','D','H','C'];
@@ -292,19 +287,19 @@ async function run(){
   const r=pts('q1')+pts('q2')+pts('q3')+pts('q4');
   if(r>=7){
     type='T';total=8;drawSarcs(['T']);log('path',{type:'T',score:String(r)});
-    await say('…벌써 알겠다.\n확인만 좀 하자.','aha');
+    await say('오, 벌써 알 것 같은데?\n몇 개만 확인할게.','aha');
   }else if(r<=3&&A.q5===2){
     type='C';total=9;drawSarcs(['C']);log('path',{type:'C',score:String(r)});
-    await say('…벌써 알 것 같은데.\n하나만 더 묻자.','aha');
+    await say('오, 벌써 알 것 같은데?\n하나만 더 물어볼게.','aha');
     await ask('cat');
   }else{
     drawSarcs(['S','D','H']);log('path',{type:'mid',score:String(r)});
-    await say('흠…\n양 끝 둘은 아니군.','hmm');
+    await say('흠… 양 끝 둘은\n아닌 것 같아.','hmm');
     for(const k of['q6','q7','q8'])await ask(k);
     const r2=r+pts('q6'), ritual=pts('q7')+pts('q8');
     type=r2>=5?'S':(ritual>=2?'H':'D');
     drawSarcs([type]);log('path',{type,score:r2+'/'+ritual});
-    await say('거의 다 왔다.\n확인만 좀 하자.','hmm');
+    await say('거의 다 왔어.\n몇 개만 더 물어볼게.','hmm');
   }
   for(const k of['d1','d2','d3'])await ask(k);
   if(type==='D'||type==='H')await ask(['fuse','fdel','fno'][A.d3]);
@@ -326,7 +321,7 @@ async function openBox(){
     $('#flash').classList.add('on');await sleep(260);
     renderResult();show('#s-result');await sleep(60);$('#flash').classList.remove('on');return;
   }
-  btn.style.visibility='hidden';$('#rvtext').textContent='나온다, 나온다…';
+  btn.style.visibility='hidden';$('#rvtext').textContent='나온다, 나온다…!';
   const b=$('#box');b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
   log('open',{type});
   await sleep(1200);
