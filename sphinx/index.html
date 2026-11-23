@@ -231,6 +231,7 @@ let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 const SID=DID+'.'+rnd(4);                       /* 폰 고유 번호 . 이번 방문 */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
+if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
 const NOLOG=ls('meohae_nolog')==='1'||!/^https?:$/.test(location.protocol)||/^(localhost|127\.)/.test(location.hostname);
 function log(ev,x){
   if(NOLOG)return;
@@ -272,7 +273,7 @@ const ORDER=['T','S','D','H','C'];
 const R={
  T:{name:'거북이',img:'turtle',quote:'"폰? 가방에 있을걸."',desc:'흔들려도 대체로 자기 흐름을 금방 찾는 편. 친구들이 "쟤는 원래 저래" 하는 그 사람이다. 단점은 필기 빌려달라는 연락이 많다는 것.'},
  S:{name:'다람쥐',img:'squirrel',quote:'"아 맞다, 공부."',desc:'딴 데 갔다가도 대체로 혼자 돌아오는 편. 다만 잠깐 다녀온다는 게 도토리 묻고 오느라 길어지는 날이 있다.'},
- D:{name:'강아지',img:'dog',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 혼자서는 돌아가기가 쉽지 않은 편. 못 돌아가는 게 아니라 잡아주는 게 없었던 것. 한 번 잡아주면 돌아갈 줄은 안다.'},
+ D:{name:'강아지',img:'dog',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 공부하다 딴길로 새면 돌아올 타이밍을 놓치곤 한다. "아 맞다, 공부 중이었지" 하고 떠올릴 계기가 도움이 될 수 있는 편.'},
  H:{name:'햄스터',img:'hamster',quote:'"이번엔 진짜 한다."',desc:'다시 해보려는 마음은 있다. 마음먹는 것도 잘한다. 그런데 유혹 앞에서는 그 마음이 오래 못 버티는 편. 쳇바퀴는 열심히 도는데 제자리인 날이 많다.'},
  C:{name:'고양이',img:'cat',quote:'"됐어, 재밌었잖아."',desc:'지금은 공부에 마음이 별로 없다. 잡아줘도 누워 있는 편. 대신 마음이 생기는 날에는 누구보다 가볍게 일어날지도 모른다.'}
 };
@@ -387,11 +388,11 @@ function mhCard(){
     :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`;
   if(type==='T')return `<div class="mcta small"><h4>넌 필요 없겠다.</h4><p>대신 주변에 강아지 한 마리쯤 있지? 보내줘.</p><button class="btn go" onclick="share('friend')">주변 강아지한테 보내주기</button></div>`;
   if(type==='C'){
-    const first=A.cat===2?'좋아하는 것도 딱히 없다고? 진짜 고양이네. 이런 게 있다는 것만 알아둬.':'지금은 공부에 마음이 없다고 했지. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
+    const first=A.cat===2?'딱 떠오르는 사람이나 캐릭터는 없구나. 필요할 때 이런 방식도 있다는 것만 알아둬.':'지금은 공부에 마음이 없다고 했지. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
     return `<div class="mcta small">${head}<p class="first">${first}</p><p>사진도 한마디도 네가 정해. 막지도 않고, 시키지도 않아.</p><a class="btn line" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'insta',type:'C'})">머해 구경하기</a></div>`;
   }
   if(type==='S'){
-    const first=['돌아오는 데 5분도 안 걸린다고 했지.','돌아오는 데 5분에서 15분쯤 걸린다고 했지.','돌아오는 데 15분 넘게 걸린다고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
+    const first=['돌아오는 데 5분도 안 걸린다고 했지.','돌아오는 데 5분에서 15분쯤 걸린다고 했지.','돌아오는 데 15분 이상 걸린다고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
     return `<div class="mcta small">${head}<p class="first">${first}</p><p>딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 조금 더 일찍 돌아올 계기가 되게.</p>${alone}${go('small',false)}</div>`;
   }
   /* 강아지·햄스터: 막아두는 앱 경험과 그 이유로 첫 줄을 고른다 */
@@ -399,10 +400,10 @@ function mhCard(){
   if(A.d3===1)first=[
     '막아두는 앱, 결국 네가 제한을 풀어버렸다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야. 어떤 느낌인지만 봐.',
     '필요한 순간에도 막혀서 불편했다고 했지. 머해는 막지 않아. 계속 볼 수도 있고, 돌아갈 수도 있어.',
-    '설정하고 켜는 게 번거로웠다고 했지. 머해는 사진 한 장, 한마디, 그리고 공부 시작. 이 셋이면 돼.',
+    '설정하고 켜는 게 번거로웠다고 했지. 머해는 처음부터 꾸밀 필요는 없어. 기본 응원으로 먼저 시작하고, 사진과 한마디는 원할 때 바꿔도 돼.',
     '막아두는 앱은 지금 안 쓴다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fdel];
   else if(A.d3===0)first=A.fuse===2
-    ?'막아두는 앱을 잘 쓰고 있다고 했지. 머해는 그 옆에서, 안 막고 한 번 잡아주는 쪽이야.'
+    ?'공부 중 제한을 풀고 딴짓한 적은 없다고 했지. 머해는 막는 대신, 켜는 순간 한 번 잡아주는 방식이야.'
     :'제한을 풀고 계속 본 적이 있다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.';
   else first=[
     '막히는 게 싫다고 했지. 머해는 네 선택은 남겨 두고, 한 번 잡아주기만 해.',
@@ -413,7 +414,7 @@ function mhCard(){
   const second=type==='D'
     ?`딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. ${more}`
     :`${A.q8===0?'다시 해보자는 다짐은 이미 자주 한다고 했지. 다짐':'해보고 싶은 마음은 이미 있다고 했지. 마음'}은 하기 전에만 힘을 줘. 머해는 새는 그 순간에, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘.`;
-  return `<div class="mcta">${head}<p class="first">${first}</p><p>${second}</p>${alone}${go('big',true)}<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'비공개 테스트라 버튼 세 번이면 설치 끝'}</p></div>`;
+  return `<div class="mcta">${head}<p class="first">${first}</p><p>${second}</p>${alone}${go('big',true)}<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어'}</p></div>`;
 }
 function renderResult(){
   const r=R[type];
