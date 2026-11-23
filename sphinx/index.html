@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>스핑크스가 맞혀볼게 · 머해 테스트</title>
-<meta name="description" content="석관 다섯 개 중에 네가 있다. 스핑크스가 몇 가지만 묻고 맞혀볼게.">
+<meta name="description" content="다섯 석관 중에 너랑 닮은 친구가 있어. 스핑크스가 몇 가지 물어보고 맞혀볼게.">
 <meta property="og:title" content="스핑크스가 맞혀볼게 · 머해 테스트">
-<meta property="og:description" content="석관 다섯 개 중에 네가 있다. 몇 가지만 묻고 맞혀볼게.">
+<meta property="og:description" content="다섯 석관 중에 너랑 닮은 친구가 있어. 몇 가지 물어보고 맞혀볼게.">
 <meta property="og:image" content="https://snowf1ower.github.io/meohae-test/sphinx/img/og.jpg">
 <meta property="og:url" content="https://snowf1ower.github.io/meohae-test/sphinx/">
 <meta name="twitter:card" content="summary_large_image">
@@ -180,9 +180,9 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
     <span class="pill">머해 테스트</span>
     <h1>스핑크스가<br><em><span class="spark l"><i></i><i></i><i></i></span>맞혀볼게<span class="spark r"><i></i><i></i><i></i></span></em></h1>
     <div class="heroS"><img src="img/sphinx_ask.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div>
-    <p class="lead">석관 다섯 개 중 하나에 네가 들어 있어.<br>몇 개만 물어보고 맞혀볼게!</p>
+    <p class="lead">이 다섯 석관 중에 너랑 닮은 친구가 있어.<br>몇 가지 물어보고 맞혀볼게!</p>
     <div class="shelf"><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""></div>
-    <div class="stack"><button class="btn go" id="startBtn">맞혀봐</button></div>
+    <div class="stack"><button class="btn go" id="startBtn">맞혀봐</button><p class="tiny" style="margin-top:12px">요즘 공부할 때를 떠올려서, 가장 가까운 답을 골라줘</p></div>
   </section>
 
   <section class="scr" id="s-quiz">
@@ -194,7 +194,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
   </section>
 
   <section class="scr" id="s-reveal">
-    <div class="talk" style="margin-top:34px"><div class="who"><img id="sph2" src="img/sphinx_aha.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div><div class="say big" id="rvtext">아, 알 것 같다!</div></div>
+    <div class="talk" style="margin-top:34px"><div class="who"><img id="sph2" src="img/sphinx_aha.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div><div class="say big" id="rvtext">알아냈어. 네 정체는…!</div></div>
     <div class="pit" id="pit">
       <img class="coffin" id="box" src="img/sarc_closed.webp" alt="석관">
     </div>
@@ -209,7 +209,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
       <p class="quote" id="rquote"></p>
     </div>
     <p class="desc" id="rdesc"></p>
-    <div class="sec"><h3>다섯 중에 넌 여기</h3><div class="line5" id="line5"></div><div class="names" id="names"></div><div class="ends"><span>잘 안 샘</span><span>안 돌아감</span></div></div>
+    <div class="sec"><h3>다섯 친구 중에 넌 여기</h3><div class="line5" id="line5"></div><div class="names" id="names"></div><div class="ends"><span>혼자서도 잘 돌아옴</span><span>지금은 쉬는 중</span></div></div>
     <div class="sec"><h3>스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col" id="saw"></div></div></div>
     <div class="row2"><button class="btn go" id="shareBtn">결과 공유하기</button><button class="btn line" id="copyBtn">링크 복사</button></div>
     <div id="mhBox"></div>
@@ -234,37 +234,47 @@ if(P.get('nolog')==='1')ls('meohae_nolog','1');
 const NOLOG=ls('meohae_nolog')==='1'||!/^https?:$/.test(location.protocol)||/^(localhost|127\.)/.test(location.hostname);
 function log(ev,x){
   if(NOLOG)return;
-  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:'s1 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},x||{}));
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:SURVEY+' '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},x||{}));
   try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
 }
 
-/* ===== 문항 ===== (선지는 앞에서부터 2·1·0점) */
+/* ===== 문항 (설문 버전 2) =====
+   답은 화면 위치가 아니라 선지의 고정 번호(0·1·2…)로 저장한다. 0번이 2점, 1번이 1점, 2번이 0점.
+   ord: 없음=섞기 / 'flip'=순서가 있는 선지라 그대로 또는 통째로 뒤집기 / 'keep'=고정 */
+const SURVEY='s2';
 const Q={
- q1:{t:'"딱 하나만 보고 끄자!" 하고 폰을 켰어. 그래서 어떻게 됐어?',o:['진짜 껐어','세 개쯤 봤어','해가 떴어']},
- q2:{t:'공부하는데 알림이 울렸어. 넌 어떻게 해?',o:['이따 봐','확인만 하고 내려놓았다… 고 생각했어','답장하다 다른 앱까지 한 바퀴 돌았어']},
- q3:{t:'30분 날린 걸 깨달은 순간, 무슨 생각이 들어?',o:['"지금이라도 하자"','"5분만 더 보고…"','"기왕 이렇게 된 거"']},
- q4:{t:'공부하다 열 번 흔들린다 치자. 다시 책으로 돌아가는 건 몇 번쯤이야?',o:['거의 다','절반쯤','한두 번, 아니면 0번']},
- q5:{t:'딴짓으로 하루를 날린 날 있지? 자기 전에 무슨 생각이 들어?',o:['"내일은 진짜 한다"','"아… 또 이랬네"','"뭐, 재밌었으니 됐다"']},
- q6:{t:'보던 걸 네 손으로 끈 게 마지막으로 언제였어?',o:['오늘도 껐어','이번 주에 한 번쯤','배터리가 대신 꺼줬어']},
- q7:{t:'공부자극 영상이나 스터디윗미, 자주 봐?',o:['자주 봐. 보고 나면 이미 공부한 기분이야','가끔 봐','안 봐']},
- q8:{t:'다짐이나 계획을 종이에 써서 붙여본 적 있어?',o:['지금도 붙어 있어','붙였다가 민망해서 뗐어','그런 건 안 해']},
- cat:{t:'혹시 좋아하는 사람이나 캐릭터 있어?',o:['있어, 딱 한 명','많아서 못 골라','딱히 없어']},
- d1:{t:'하루에 폰을 얼마나 써?',o:['3시간 이하','4~6시간','7시간 이상','무서워서 안 봤어'],keep:1},
- d2:{t:'공부는 주로 어디서 해?',o:['집·자취방에서 혼자','독서실·스터디카페에서 혼자','누가 같이 있는 데서'],keep:1},
- d3:{t:'잠금 앱은 써본 적 있어?',o:['지금 써','써봤는데 지웠어','안 써봤어'],keep:1},
- fdel:{t:'그건 왜 지웠어?',o:['내가 풀어버려서','급할 때 막혀서 짜증 나서','귀찮아서'],keep:1},
- fuse:{t:'걸어놓고 네가 푼 적도 있어?',o:['자주','가끔','없어'],keep:1},
- fno:{t:'안 써본 이유가 있어?',o:['막히는 게 싫어서','필요 없을 것 같아서','몰라서'],keep:1},
- fsq:{t:'딴 데 갔다가 돌아오기까지 보통 얼마나 걸려?',o:['금방','10분쯤','한참'],keep:1}
+ q1:{t:'"딱 하나만 보고 끄자!" 하고 폰을 켜면, 보통 어떻게 돼?',o:['진짜 하나만 보고 꺼','몇 개 더 보고 꺼','끄는 타이밍을 놓치고 한참 봐']},
+ q2:{t:'공부 중 알림이 울리면, 보통 어떻게 해?',o:['일단 공부하고 나중에 봐','확인만 하고 다시 공부해','답장하다 다른 앱까지 한 바퀴 돌아']},
+ q3:{t:'딴짓으로 30분이 지난 걸 깨달았어. 무슨 생각이 들어?',o:['"지금이라도 하자."','"5분만 더 보고…."','"기왕 이렇게 된 거."']},
+ q4:{t:'공부하다 딴짓을 열 번 했다고 치자. 스스로 다시 공부로 돌아오는 건 몇 번쯤이야?',o:['거의 다','절반쯤','한두 번, 아니면 0번'],ord:'flip'},
+ q5:{t:'딴짓하느라 하려던 공부를 못 한 날, 자기 전엔?',o:['"내일은 꼭 해내고 싶어."','"해야 하는데… 또 미뤘네."','"지금은 공부에 별로 마음이 없어."']},
+ q6:{t:'보던 게 아직 재밌는데, 공부로 돌아가야 한다는 생각이 들면?',o:['더 보고 싶어도 끄고 돌아가','조금 더 보긴 해도, 내가 끄고 돌아가','돌아가야지 생각하면서도 계속 봐']},
+ q7:{t:'공부를 잘해보고 싶은 마음은 어느 쪽이야?',o:['커. 이번엔 제대로 해보고 싶어','있긴 있어. 해야겠다는 생각은 해','요즘은 그 마음이 별로 안 생겨'],ord:'flip'},
+ q8:{t:'딴짓하고 나면, "다시 해보자"며 다짐하는 편이야?',o:['자주 그래. 또 새로 마음먹어','가끔 그래','그런 다짐은 잘 안 해'],ord:'flip'},
+ cat:{t:'혹시 좋아하는 사람이나 캐릭터 있어?',o:['있어, 딱 한 명','여럿 있어','딱히 없어'],ord:'keep',free:1},
+ d1:{t:'최근 일주일, 하루 평균 폰을 얼마나 썼어?',o:['4시간 미만','4시간 이상~7시간 미만','7시간 이상','잘 모르겠어'],ord:'keep',free:1},
+ d2:{t:'요즘 가장 자주 공부하는 환경은?',o:['집·자취방에서 혼자','집 밖에서 혼자 (도서관·카페 등)','친구나 스터디원과 함께','그때그때 달라'],ord:'keep',free:1},
+ d3:{t:'공부할 때 딴짓 앱을 못 쓰게 막아두는 앱이나 기능, 써봤어?',o:['지금도 써','써봤는데 지금은 안 써','안 써봤어'],ord:'keep',free:1},
+ fdel:{t:'안 쓰게 된 가장 큰 이유는?',o:['결국 내가 제한을 풀어버려서','필요한 순간에도 막혀서 불편했어','설정하고 켜는 게 번거로웠어','다른 이유야'],ord:'keep',free:1},
+ fuse:{t:'공부 중 제한을 풀고, 딴짓을 계속한 적도 있어?',o:['자주 있어','가끔 있어','없어'],ord:'keep',free:1},
+ fno:{t:'아직 안 써본 가장 큰 이유는?',o:['막히는 게 싫어서','필요성을 못 느껴서','그런 앱이 있는지 몰랐어','다른 이유야'],ord:'keep',free:1},
+ fsq:{t:'딴짓하다 스스로 다시 공부로 돌아오기까지, 보통 얼마나 걸려?',o:['5분 미만','5분 이상~15분 미만','15분 이상','그때그때 달라서 모르겠어'],ord:'keep',free:1}
 };
+/* ===== 판정 =====
+   경계값은 그대로: 1~4번 합 7 이상 거북이 / 3 이하이면서 5번 마지막 답이면 고양이 /
+   나머지는 1~4번+6번 합 5 이상 다람쥐, 아니면 7·8번 합 2 이상 햄스터, 그 밖은 강아지.
+   free:1 문항(취향·공통 데이터·마지막 추가 질문)은 여기서 쓰지 않는다. */
+const P2=(a,k)=>2-a[k];
+function decideEarly(a){const r=P2(a,'q1')+P2(a,'q2')+P2(a,'q3')+P2(a,'q4');return r>=7?'T':(r<=3&&a.q5===2?'C':'mid');}
+function decideMid(a){const r2=P2(a,'q1')+P2(a,'q2')+P2(a,'q3')+P2(a,'q4')+P2(a,'q6'),will=P2(a,'q7')+P2(a,'q8');return r2>=5?'S':(will>=2?'H':'D');}
 /* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
 const ORDER=['T','S','D','H','C'];
 const R={
- T:{name:'거북이',img:'turtle',tint:'#E4F2E1',quote:'"폰? 가방에 있을걸."',desc:'흔들리는 일이 드물다. 흔들려도 티가 안 난다. 친구들이 "쟤는 원래 저래" 하는 그 사람. 단점은 필기 빌려달라는 연락이 많다는 것.'},
- S:{name:'다람쥐',img:'squirrel',tint:'#FFE8DA',quote:'"아 맞다, 공부."',desc:'딴 데 갔다가도 혼자 돌아올 줄 안다. 문제는 돌아오는 데 걸리는 시간. 잠깐 다녀온다는 게 도토리 묻고 오느라 한참이다.'},
- D:{name:'강아지',img:'dog',tint:'#FFF0D2',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 돌아가는 건 열 번에 한두 번. 못 돌아가는 게 아니라 잡아주는 게 없었던 것. 한 번 잡아주면 돌아갈 줄은 안다.'},
- H:{name:'햄스터',img:'hamster',tint:'#FFE9E2',quote:'"내일부터 진짜 한다."',desc:'의욕은 다섯 중 1등. 공부자극 영상도 보고 다짐도 써 붙였다. 그런데 쳇바퀴만 열심히 돌았다. 유혹 앞에서 다짐은 3초를 못 버틴다.'},
- C:{name:'고양이',img:'cat',tint:'#EEE7F8',quote:'"됐어, 재밌었잖아."',desc:'한번 누우면 끝. 잡아줘도 안 간다. 그런데 후회도 없다. 그건 좀 부럽다.'}
+ T:{name:'거북이',img:'turtle',quote:'"폰? 가방에 있을걸."',desc:'흔들려도 대체로 자기 흐름을 금방 찾는 편. 친구들이 "쟤는 원래 저래" 하는 그 사람이다. 단점은 필기 빌려달라는 연락이 많다는 것.'},
+ S:{name:'다람쥐',img:'squirrel',quote:'"아 맞다, 공부."',desc:'딴 데 갔다가도 대체로 혼자 돌아오는 편. 다만 잠깐 다녀온다는 게 도토리 묻고 오느라 길어지는 날이 있다.'},
+ D:{name:'강아지',img:'dog',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 혼자서는 돌아가기가 쉽지 않은 편. 못 돌아가는 게 아니라 잡아주는 게 없었던 것. 한 번 잡아주면 돌아갈 줄은 안다.'},
+ H:{name:'햄스터',img:'hamster',quote:'"이번엔 진짜 한다."',desc:'다시 해보려는 마음은 있다. 마음먹는 것도 잘한다. 그런데 유혹 앞에서는 그 마음이 오래 못 버티는 편. 쳇바퀴는 열심히 도는데 제자리인 날이 많다.'},
+ C:{name:'고양이',img:'cat',quote:'"됐어, 재밌었잖아."',desc:'지금은 공부에 마음이 별로 없다. 잡아줘도 누워 있는 편. 대신 마음이 생기는 날에는 누구보다 가볍게 일어날지도 모른다.'}
 };
 const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="../install.html?src=sphinx", INSTA="https://instagram.com/meohae.project";
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -289,8 +299,8 @@ function ask(key){
   return new Promise(res=>{
     const q=Q[key];mood('ask');
     $('#qtext').innerHTML=q.t.replace(/\n/g,'<br>');
-    $('#skip').textContent='';
-    const idx=q.o.map((_,i)=>i), ord=q.keep?idx:shuffle(idx);
+    $('#skip').textContent=q.free?'이 답은 동물 결과를 바꾸지 않아':'';
+    const idx=q.o.map((_,i)=>i), ord=q.ord==='keep'?idx:q.ord==='flip'?(Math.random()<.5?idx:idx.slice().reverse()):shuffle(idx);
     const box=$('#opts');box.classList.remove('hide');box.innerHTML='';
     ord.forEach(i=>{const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
       b.onclick=()=>{if(box.dataset.lock)return;box.dataset.lock=1;b.classList.add('sel');A[key]=i;asked++;
@@ -315,33 +325,33 @@ async function run(){
   A={};type='';asked=0;total=12;$('#bar').style.width='0';
   $('#sarcs').innerHTML='';drawSarcs(null);show('#s-quiz');log('start');
   for(const k of['q1','q2','q3','q4','q5'])await ask(k);
-  const r=pts('q1')+pts('q2')+pts('q3')+pts('q4');
-  if(r>=7){
+  const early=decideEarly(A), r=pts('q1')+pts('q2')+pts('q3')+pts('q4');
+  if(early==='T'){
     type='T';total=8;drawSarcs(['T']);log('path',{type:'T',score:String(r)});
-    await say('오, 벌써 알 것 같은데?\n몇 개만 확인할게.','aha');
-  }else if(r<=3&&A.q5===2){
+    await say('오, 벌써 알 것 같은데?\n세 가지만 더 확인할게.','aha');
+  }else if(early==='C'){
     type='C';total=9;drawSarcs(['C']);log('path',{type:'C',score:String(r)});
-    await say('오, 벌써 알 것 같은데?\n하나만 더 물어볼게.','aha');
+    await say('오, 벌써 알 것 같은데?\n네 취향도 궁금한걸.','aha');
     await ask('cat');
   }else{
     drawSarcs(['S','D','H']);log('path',{type:'mid',score:String(r)});
-    await say('흠… 양 끝 둘은\n아닌 것 같아.','hmm');
+    await say('흠… 이제 셋 중\n하나인 것 같은데?','hmm');
     for(const k of['q6','q7','q8'])await ask(k);
-    const r2=r+pts('q6'), ritual=pts('q7')+pts('q8');
-    type=r2>=5?'S':(ritual>=2?'H':'D');
-    drawSarcs([type]);log('path',{type,score:r2+'/'+ritual});
-    await say('거의 다 왔어.\n몇 개만 더 물어볼게.','hmm');
+    type=decideMid(A);                              /* 여기서 동물이 정해지고, 뒤 문항은 바꾸지 못한다 */
+    drawSarcs([type]);log('path',{type,score:(r+pts('q6'))+'/'+(pts('q7')+pts('q8'))});
+    await say('좋아. 이제 네 공부 습관도\n조금만 더 알려줘.','hmm');
   }
+  const fixed=type;
   for(const k of['d1','d2','d3'])await ask(k);
-  if(type==='D'||type==='H')await ask(['fuse','fdel','fno'][A.d3]);
-  if(type==='S')await ask('fsq');
-  running=false;reveal();
+  if(fixed==='D'||fixed==='H')await ask(['fuse','fdel','fno'][A.d3]);
+  if(fixed==='S')await ask('fsq');
+  type=fixed;running=false;reveal();
 }
 
 let opening=false;
 function reveal(){
   opening=false;$('#box').style.opacity='1';
-  $('#rvtext').textContent='아, 알 것 같다!';$('#sph2').src='img/sphinx_aha.webp';
+  $('#rvtext').textContent='알아냈어. 네 정체는…!';$('#sph2').src='img/sphinx_aha.webp';
   $('#openBtn').style.visibility='visible';
   show('#s-reveal');
 }
@@ -377,20 +387,32 @@ function mhCard(){
     :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`;
   if(type==='T')return `<div class="mcta small"><h4>넌 필요 없겠다.</h4><p>대신 주변에 강아지 한 마리쯤 있지? 보내줘.</p><button class="btn go" onclick="share('friend')">주변 강아지한테 보내주기</button></div>`;
   if(type==='C'){
-    const first=A.cat===2?'좋아하는 것도 딱히 없다고? 진짜 고양이네. 이런 게 있다는 것만 알아둬.':'하기 싫은 건 알겠어. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
+    const first=A.cat===2?'좋아하는 것도 딱히 없다고? 진짜 고양이네. 이런 게 있다는 것만 알아둬.':'지금은 공부에 마음이 없다고 했지. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
     return `<div class="mcta small">${head}<p class="first">${first}</p><p>사진도 한마디도 네가 정해. 막지도 않고, 시키지도 않아.</p><a class="btn line" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'insta',type:'C'})">머해 구경하기</a></div>`;
   }
   if(type==='S'){
-    const first=A.fsq===0?'금방 돌아온다고 했지. 그 금방이 더 짧아지게.':`돌아오는 데 ${Q.fsq.o[A.fsq]} 걸린다고 했지.`;
-    return `<div class="mcta small">${head}<p class="first">${first}</p><p>딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 돌아오는 시간이 짧아지게.</p>${alone}${go('small',false)}</div>`;
+    const first=['돌아오는 데 5분도 안 걸린다고 했지.','돌아오는 데 5분에서 15분쯤 걸린다고 했지.','돌아오는 데 15분 넘게 걸린다고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
+    return `<div class="mcta small">${head}<p class="first">${first}</p><p>딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 조금 더 일찍 돌아올 계기가 되게.</p>${alone}${go('small',false)}</div>`;
   }
+  /* 강아지·햄스터: 막아두는 앱 경험과 그 이유로 첫 줄을 고른다 */
   let first;
-  if(A.d3===1)first=['잠금 앱, 네가 풀어버려서 지웠다고 했지. 머해는 안 막아.','급할 때 막혀서 지웠다고 했지. 머해는 안 막아.','귀찮아서 지웠다고 했지. 머해는 사진 한 장, 한마디만 정하면 끝이야.'][A.fdel];
-  else if(A.d3===0)first=A.fuse===2?'잠금은 잘 지킨다고 했지. 머해는 그 옆에서, 안 막고 잡아주는 쪽이야.':'걸어놓고도 푼다고 했지. 막는 건 결국 네가 이겨.';
-  else first=A.fno===0?'막히는 게 싫다고 했지. 머해는 안 막아.':'잠금 앱은 안 써봤다고 했지. 머해는 막는 앱이 아니야.';
+  if(A.d3===1)first=[
+    '막아두는 앱, 결국 네가 제한을 풀어버렸다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야. 어떤 느낌인지만 봐.',
+    '필요한 순간에도 막혀서 불편했다고 했지. 머해는 막지 않아. 계속 볼 수도 있고, 돌아갈 수도 있어.',
+    '설정하고 켜는 게 번거로웠다고 했지. 머해는 사진 한 장, 한마디, 그리고 공부 시작. 이 셋이면 돼.',
+    '막아두는 앱은 지금 안 쓴다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fdel];
+  else if(A.d3===0)first=A.fuse===2
+    ?'막아두는 앱을 잘 쓰고 있다고 했지. 머해는 그 옆에서, 안 막고 한 번 잡아주는 쪽이야.'
+    :'제한을 풀고 계속 본 적이 있다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.';
+  else first=[
+    '막히는 게 싫다고 했지. 머해는 네 선택은 남겨 두고, 한 번 잡아주기만 해.',
+    '막아두는 앱은 필요를 못 느꼈다고 했지. 머해는 이렇게 생긴 앱이야. 필요할 때 떠올려줘.',
+    '그런 앱이 있는지 몰랐다고 했지. 막는 앱도 있고, 머해처럼 안 막고 한 번 잡아주는 앱도 있어.',
+    '막아두는 앱은 안 써봤다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fno];
+  const more=A.q4===2?'네가 말한 "한두 번"이, 조금이라도 늘게.':'스스로 돌아오는 횟수가, 조금이라도 늘게.';
   const second=type==='D'
-    ?'딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 열 번에 한두 번이, 조금이라도 늘게.'
-    :'다짐은 이미 충분해. 다짐은 하기 전에만 힘을 줘. 머해는 새는 그 순간에, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘.';
+    ?`딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. ${more}`
+    :`${A.q8===0?'다시 해보자는 다짐은 이미 자주 한다고 했지. 다짐':'해보고 싶은 마음은 이미 있다고 했지. 마음'}은 하기 전에만 힘을 줘. 머해는 새는 그 순간에, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘.`;
   return `<div class="mcta">${head}<p class="first">${first}</p><p>${second}</p>${alone}${go('big',true)}<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'비공개 테스트라 버튼 세 번이면 설치 끝'}</p></div>`;
 }
 function renderResult(){
@@ -407,7 +429,7 @@ function renderResult(){
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
 async function share(how){
-  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 석관 다섯 개 중에 네가 있대.':`스핑크스가 맞춘 나: ${r.name} ${r.quote}`;
+  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 다섯 석관 중에 너랑 닮은 친구가 있대.':`스핑크스가 맞춘 나: ${r.name} ${r.quote}`;
   log('share',{how,type});
   if(navigator.share){try{await navigator.share({title:'스핑크스가 맞혀볼게',text,url:shareUrl()});return;}catch(e){if(e&&e.name==='AbortError')return;}}
   copyLink(true);
