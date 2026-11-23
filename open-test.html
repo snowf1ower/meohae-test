@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>열기 시험</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 24px 20px 48px; background: #fff7ec; color: #2b2622; line-height: 1.5; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  p { margin: 0 0 18px; font-size: 14px; color: #6b625a; }
+  a.btn { display: block; padding: 18px 16px; margin: 0 0 12px; border-radius: 14px; background: #f47a3a; color: #fff; font-size: 17px; font-weight: 700; text-decoration: none; text-align: center; }
+  a.btn.plain { background: #fff; color: #2b2622; border: 2px solid #e6d9c8; }
+  .note { font-size: 13px; color: #6b625a; margin: -4px 0 18px; }
+  pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; background: #fff; border: 1px solid #e6d9c8; border-radius: 10px; padding: 12px; color: #6b625a; }
+</style>
+</head>
+<body>
+  <h1>열기 시험 페이지</h1>
+  <p>인스타 앱 안에서 이 페이지를 열고, 아래 버튼을 하나씩 눌러보세요.</p>
+
+  <a class="btn" href="intent://groups.google.com/g/meohae-testers#Intent;scheme=https;package=com.android.chrome;end">1. 크롬으로 열기</a>
+  <div class="note">크롬이 열리고 구글 그룹 화면이 뜨면 성공</div>
+
+  <a class="btn" href="intent://groups.google.com/g/meohae-testers#Intent;scheme=https;package=com.google.android.googlequicksearchbox;end">2. 구글 앱으로 열기</a>
+  <div class="note">구글 앱이 열리고 구글 그룹 화면이 뜨면 성공</div>
+
+  <a class="btn plain" href="https://groups.google.com/g/meohae-testers">3. 그냥 열기 (비교용)</a>
+  <div class="note">인스타 안에서 그대로 열림. 로그인하라고 나오는지 확인</div>
+
+  <p>지금 이 페이지를 연 브라우저:</p>
+  <pre id="ua"></pre>
+
+<script>
+  var ua = navigator.userAgent;
+  var where = /Instagram/.test(ua) ? "인스타 앱 안 브라우저" : "인스타 밖 브라우저 (시험 조건이 아님)";
+  document.getElementById("ua").textContent = where + "\n\n" + ua;
+</script>
+</body>
+</html>
