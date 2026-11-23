@@ -18,13 +18,16 @@
 :root{--bg:#fff;--ink:#2E211B;--sub:#85746A;--line:#E9E1D8;--soft:#FBF1E6;--peach:#FFF0E4;--acc:#F47119;--acc2:#FFA35C}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{min-height:100%;background:var(--bg)}
-body{font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.5;word-break:keep-all;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;display:flex;flex-direction:column;font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.5;word-break:keep-all;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .jua{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400}
-.wrap{position:relative;max-width:430px;margin:0 auto;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:18px 22px 31%;overflow:hidden;background:url(img/dunes.webp) 50% 100%/100% auto no-repeat}
-.wrap.res{padding-bottom:32px;background:none}
+/* 화면이 길어도 내용과 모래 언덕은 붙어 있고, 그 아래는 모래땅으로 채운다 */
+.wrap{position:relative;width:100%;max-width:430px;margin:0 auto;flex:none;min-height:100vh;min-height:min(100svh,740px);display:flex;flex-direction:column;padding:18px 22px 133px;padding-bottom:calc(min(100vw,430px)*.31);overflow:hidden;background:url(img/dunes.webp) 50% 100%/100% auto no-repeat}
+.wrap.res{padding-bottom:32px;background:none;min-height:0}
+.ground{flex:1;width:100%;max-width:430px;margin:0 auto;background:linear-gradient(to bottom,#FEE9CA 0,#FEE9CA 70px,#fff 280px)}
+.wrap.res+.ground{display:none}
 .head{width:76%;margin:0 auto;padding-bottom:8px;border-bottom:1.5px solid rgba(58,42,34,.55);position:relative;z-index:1}
 .scr{display:none;flex:1;flex-direction:column;position:relative;z-index:1}
 .scr.on{display:flex}
@@ -94,6 +97,24 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .pit .tw.a{left:12%;top:16%}.pit .tw.b{right:10%;bottom:30%;animation-delay:.5s;scale:.8}
 @keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
 
+/* 석관 열기 연출: 주변이 어두워지고 석관이 커진 뒤 빛이 터지면서 결과로 넘어간다 */
+.spot{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;overflow:hidden;background:rgba(30,21,16,0);transition:background .4s,opacity .45s}
+.spot.on{display:flex}
+.spot.dark{background:rgba(30,21,16,.84)}
+.spot img{position:relative;z-index:2;height:270px;transform:scale(.95);transition:transform .55s cubic-bezier(.2,.9,.3,1.25),opacity .2s}
+.spot.dark img{transform:scale(1.3)}
+.spot.shake img{animation:shake2 1.25s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake2{0%{transform:scale(1.3) rotate(0)}8%{transform:scale(1.3) rotate(-4deg)}16%{transform:scale(1.3) rotate(4deg)}24%{transform:scale(1.32) rotate(-6deg)}32%{transform:scale(1.32) rotate(6deg)}40%{transform:scale(1.34) rotate(-8deg)}48%{transform:scale(1.34) rotate(8deg)}56%{transform:scale(1.37) rotate(-10deg)}64%{transform:scale(1.37) rotate(10deg)}72%{transform:scale(1.4) rotate(-11deg)}80%{transform:scale(1.42) rotate(11deg)}90%{transform:scale(1.46) rotate(-6deg)}100%{transform:scale(1.5) rotate(0)}}
+.spot .rays{position:absolute;left:50%;top:50%;width:170vmax;height:170vmax;margin:-85vmax 0 0 -85vmax;background:repeating-conic-gradient(from 0deg,rgba(255,206,120,0) 0 9deg,rgba(255,214,140,.6) 9deg 18deg);-webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 16%,transparent 38%);mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 16%,transparent 38%);opacity:0;transition:opacity .7s;animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spot .glow{position:absolute;left:50%;top:50%;width:440px;height:440px;margin:-220px 0 0 -220px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.98) 0,rgba(255,196,110,.55) 36%,rgba(255,196,110,0) 70%);opacity:0;transform:scale(.5);transition:opacity .7s,transform 1.25s ease-in}
+.spot.glowing .rays{opacity:1}
+.spot.glowing .glow{opacity:1;transform:scale(1.2)}
+.spot.burst{background:#fff}
+.spot.burst .glow{background:radial-gradient(circle,#fff 0,#fff 56%,rgba(255,255,255,0) 72%);transform:scale(7);transition:transform .4s ease-in,opacity .2s}
+.spot.burst .rays,.spot.burst img{opacity:0}
+.spot.out{opacity:0}
+
 /* 결과 */
 .hero{margin:22px -6px 0;padding:22px 16px 26px;border-radius:30px;text-align:center;background:var(--peach)}
 .hero .from{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:var(--sub)}
@@ -138,6 +159,16 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .flash.on{opacity:1}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;padding:10px 16px;border-radius:99px;opacity:0;transition:opacity .25s;z-index:20;pointer-events:none}
 .toast.on{opacity:1}
+/* 작은 폰: 시작 화면이 한 화면에 들어오게 */
+@media (max-height:720px){
+ h1{font-size:36px;margin-top:6px}
+ .pill{margin-top:14px}
+ .heroS{width:46%;margin-top:10px}
+ #s-start .shelf{margin-top:14px}#s-start .shelf img{width:42px}
+ .stack{margin-top:16px}
+ .talk{margin-top:16px}.opts{margin-top:16px;gap:10px}.opt{min-height:54px;padding-top:12px;padding-bottom:12px}
+ #s-quiz .shelf{margin-top:16px}.prog{margin-top:16px}
+}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -166,8 +197,6 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
     <div class="talk" style="margin-top:34px"><div class="who"><img id="sph2" src="img/sphinx_aha.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div><div class="say big" id="rvtext">아, 알 것 같다!</div></div>
     <div class="pit" id="pit">
       <img class="coffin" id="box" src="img/sarc_closed.webp" alt="석관">
-      <img class="opened" src="img/sarc_open.webp" alt=""><img class="pet" id="pet" alt="">
-      <i class="tw a"></i><i class="tw b"></i>
     </div>
     <div class="stack"><button class="btn go" id="openBtn">석관 열기</button></div>
   </section>
@@ -187,6 +216,8 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
     <div class="foot"><button id="againBtn">다시 하기</button><br>머해는 막지 않고, 한 번 잡아주는 앱이야</div>
   </section>
 </div>
+<div class="ground"></div>
+<div class="spot" id="spot" aria-hidden="true"><i class="rays"></i><i class="glow"></i><img src="img/sarc_closed.webp" alt=""></div>
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"></div>
 
@@ -307,27 +338,27 @@ async function run(){
   running=false;reveal();
 }
 
-let opened=false;
+let opening=false;
 function reveal(){
-  opened=false;$('#pit').classList.remove('open');$('#box').classList.remove('shake');
-  $('#pet').src='img/'+R[type].img+'.webp';
+  opening=false;$('#box').style.opacity='1';
   $('#rvtext').textContent='아, 알 것 같다!';$('#sph2').src='img/sphinx_aha.webp';
-  $('#openBtn').textContent='석관 열기';$('#openBtn').style.visibility='visible';
+  $('#openBtn').style.visibility='visible';
   show('#s-reveal');
 }
 async function openBox(){
-  const btn=$('#openBtn');
-  if(opened){                                   /* 두 번째 누름: 결과 보기 */
-    $('#flash').classList.add('on');await sleep(260);
-    renderResult();show('#s-result');await sleep(60);$('#flash').classList.remove('on');return;
-  }
-  btn.style.visibility='hidden';$('#rvtext').textContent='나온다, 나온다…!';
-  const b=$('#box');b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
-  log('open',{type});
-  await sleep(1200);
-  $('#pit').classList.add('open');$('#rvtext').textContent='역시!';
-  await sleep(650);
-  opened=true;btn.textContent='결과 확인하기';btn.style.visibility='visible';
+  if(opening)return;opening=true;
+  const sp=$('#spot');
+  $('#openBtn').style.visibility='hidden';log('open',{type});
+  sp.className='spot on';void sp.offsetWidth;
+  sp.classList.add('dark');$('#box').style.opacity='0';      /* 어두워지고 석관이 커진다 */
+  await sleep(550);
+  sp.classList.add('glowing','shake');                        /* 빛이 새어 나오며 흔들린다 */
+  await sleep(1300);
+  sp.classList.add('burst');                                  /* 빛이 터진다 */
+  await sleep(520);
+  renderResult();show('#s-result');
+  sp.classList.add('out');await sleep(460);
+  sp.className='spot';
 }
 
 /* ===== 결과 ===== */
