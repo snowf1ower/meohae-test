@@ -142,6 +142,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .row2{display:grid;grid-template-columns:1.3fr 1fr;gap:10px;margin-top:32px}
 .row2 .btn{min-height:54px;font-size:19px}
 .row2 .btn.go:after{display:none}
+.row2.one{grid-template-columns:1fr}
 .mcta{margin-top:32px;border:1.5px solid var(--acc);border-radius:24px;padding:18px 16px;background:#fff}
 .mcta .row{display:flex;gap:12px;align-items:center}
 .mcta .row img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center 15%;flex:none}
@@ -153,6 +154,32 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .mcta .btn.go:after{display:none}
 .mcta.small{border-color:var(--line)}
 .mcta.small .k{color:var(--sub)}
+/* 결과 바로 아래에 오는 머해 영역 */
+.hero.compact{padding:18px 16px 20px}
+.hero.compact .me{height:150px;margin-top:8px}
+.hero.compact h2{font-size:38px;margin-top:6px}
+.hero .because{font-size:15px;font-weight:600;line-height:1.55;margin-top:10px}
+.hero .because:empty{display:none}
+.mh2{margin-top:18px;border:2px solid var(--acc);border-radius:26px;padding:20px 16px 18px;background:#fff}
+.mh2 .k{font-family:Jua,"Noto Sans KR",sans-serif;font-size:17px;color:var(--acc)}
+.mh2 h4{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:24px;line-height:1.3;margin-top:4px}
+.mh2 p{font-size:15px;line-height:1.65;margin-top:10px}
+.mh2 p.first{font-weight:700}
+.mh2 p.key{font-size:16.5px;font-weight:800;text-align:center;margin-top:14px}
+.mh2 .btn{margin-top:16px;min-height:56px;font-size:20px}
+.mh2 .btn.go:after{display:none}
+.mh2.small{border-color:var(--line);border-width:1.5px;margin-top:26px}
+.mh2.small h4{font-size:21px}
+.mh2.small .k{color:var(--sub)}
+.mh2 .more{display:none}
+.mh2.open .more{display:block}
+.mh2.open .opener{display:none}
+.phone{position:relative;width:66%;margin:16px auto 0;aspect-ratio:9/16;border:3px solid var(--ink);border-radius:28px;overflow:hidden;background:#fff url(img/demo_poster.webp) center/cover no-repeat;box-shadow:0 12px 26px rgba(46,33,27,.14)}
+.phone video{display:block;width:100%;height:100%;object-fit:cover}
+.steps{list-style:none;counter-reset:st;display:grid;gap:7px;margin-top:14px}
+.steps li{counter-increment:st;position:relative;padding-left:30px;font-size:14.5px;line-height:1.5}
+.steps li:before{content:counter(st);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--peach);color:#C24A0C;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
 .foot{margin-top:28px;font-size:12.5px;color:var(--sub);text-align:center}
 .foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-size:13.5px;color:var(--sub);margin-bottom:12px}
 .flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9;transition:opacity .3s}
@@ -207,12 +234,9 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
       <img class="me" id="rimg" alt="">
       <h2 id="rname"></h2>
       <p class="quote" id="rquote"></p>
+      <p class="because" id="rbecause"></p>
     </div>
-    <p class="desc" id="rdesc"></p>
-    <div class="sec"><h3>다섯 친구 중에 넌 여기</h3><div class="line5" id="line5"></div><div class="names" id="names"></div><div class="ends"><span>혼자서도 잘 돌아옴</span><span>지금은 쉬는 중</span></div></div>
-    <div class="sec"><h3>스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col" id="saw"></div></div></div>
-    <div class="row2"><button class="btn go" id="shareBtn">결과 공유하기</button><button class="btn line" id="copyBtn">링크 복사</button></div>
-    <div id="mhBox"></div>
+    <div id="resBody"></div>
     <div class="foot"><button id="againBtn">다시 하기</button><br>머해는 막지 않고, 한 번 잡아주는 앱이야</div>
   </section>
 </div>
@@ -374,63 +398,113 @@ async function openBox(){
 
 /* ===== 결과 ===== */
 const ansStr=()=>Object.keys(Q).filter(k=>k in A).map(k=>k+A[k]).join(' ');
+/* 그 사람이 실제로 고른 답 하나를 짧게 잇는다 */
+function becauseLine(){
+  if(type==='T'||type==='C')return '';
+  if(A.q6===2)return '돌아가야지 생각하면서도 계속 보게 된다고 했지.';
+  if(A.q6===1)return '돌아가야 하는 걸 알아도 조금 더 보게 된다고 했지.';
+  if(A.q3===2)return '30분이 지난 걸 알고도 "기왕 이렇게 된 거" 싶다고 했지.';
+  if(A.q3===1)return '30분이 지난 걸 알고도 "5분만 더"가 남는다고 했지.';
+  if(A.q1===2)return '"하나만" 하고 켰다가 끄는 타이밍을 놓친다고 했지.';
+  if(A.q1===1)return '"하나만" 하고 켰다가 몇 개 더 본다고 했지.';
+  return '';
+}
 function sawRows(){
   const pick=k=>`<div class="b"><small>${Q[k].t.replace(/\n/g,' ')}</small>${Q[k].o[A[k]]}</div>`;
-  const ks={T:['q1','q4','q3'],S:['q1','q4','q6'],D:['q1','q4','q6'],H:['q4','q7','q8'],C:['q4','q5']}[type];
+  const ks={T:['q1','q4'],S:['q1','q4'],D:['q1','q4'],H:['q7','q8'],C:['q4','q5']}[type];
   return ks.map(pick).join('');
 }
-function mhCard(){
-  const pic='../img/popup_jieun.jpg';
-  const head=`<div class="row"><img src="${pic}" alt=""><div><div class="k">이 테스트를 만든 앱, 머해</div><h4>막지 않아.<br>켜는 순간 한 번 잡아줘.</h4></div></div>`;
-  const alone=A.d2===0||A.d2===1?'<p>혼자 공부한다고 했지. 맞은편에 한 사람 앉혀봐.</p>':'';
-  const go=(where,big)=>IOS
-    ?`<a class="btn ${big?'go':'line'}" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}_ios',type:'${type}'})">아이폰 출시 알림 받기</a>`
-    :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`;
-  if(type==='T')return `<div class="mcta small"><h4>넌 필요 없겠다.</h4><p>대신 주변에 강아지 한 마리쯤 있지? 보내줘.</p><button class="btn go" onclick="share('friend')">주변 강아지한테 보내주기</button></div>`;
-  if(type==='C'){
-    const first=A.cat===2?'딱 떠오르는 사람이나 캐릭터는 없구나. 필요할 때 이런 방식도 있다는 것만 알아둬.':'지금은 공부에 마음이 없다고 했지. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
-    return `<div class="mcta small">${head}<p class="first">${first}</p><p>사진도 한마디도 네가 정해. 막지도 않고, 시키지도 않아.</p><a class="btn line" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'insta',type:'C'})">머해 구경하기</a></div>`;
-  }
-  if(type==='S'){
-    const first=['돌아오는 데 5분도 안 걸린다고 했지.','돌아오는 데 5분에서 15분쯤 걸린다고 했지.','돌아오는 데 15분 이상 걸린다고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
-    return `<div class="mcta small">${head}<p class="first">${first}</p><p>딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 조금 더 일찍 돌아올 계기가 되게.</p>${alone}${go('small',false)}</div>`;
-  }
-  /* 강아지·햄스터: 막아두는 앱 경험과 그 이유로 첫 줄을 고른다 */
-  let first;
-  if(A.d3===1)first=[
+/* 막아두는 앱 경험과 그 이유로 고르는 한 줄 (강아지·햄스터) */
+function lockLine(){
+  if(A.d3===1)return [
     '막아두는 앱, 결국 네가 제한을 풀어버렸다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야. 어떤 느낌인지만 봐.',
     '필요한 순간에도 막혀서 불편했다고 했지. 머해는 막지 않아. 계속 볼 수도 있고, 돌아갈 수도 있어.',
     '설정하고 켜는 게 번거로웠다고 했지. 머해는 처음부터 꾸밀 필요는 없어. 기본 응원으로 먼저 시작하고, 사진과 한마디는 원할 때 바꿔도 돼.',
     '막아두는 앱은 지금 안 쓴다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fdel];
-  else if(A.d3===0)first=A.fuse===2
+  if(A.d3===0)return A.fuse===2
     ?'공부 중 제한을 풀고 딴짓한 적은 없다고 했지. 머해는 막는 대신, 켜는 순간 한 번 잡아주는 방식이야.'
     :'제한을 풀고 계속 본 적이 있다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.';
-  else first=[
+  return [
     '막히는 게 싫다고 했지. 머해는 네 선택은 남겨 두고, 한 번 잡아주기만 해.',
     '막아두는 앱은 필요를 못 느꼈다고 했지. 머해는 이렇게 생긴 앱이야. 필요할 때 떠올려줘.',
     '그런 앱이 있는지 몰랐다고 했지. 막는 앱도 있고, 머해처럼 안 막고 한 번 잡아주는 앱도 있어.',
     '막아두는 앱은 안 써봤다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fno];
-  const more=A.q4===2?'네가 말한 "한두 번"이, 조금이라도 늘게.':'스스로 돌아오는 횟수가, 조금이라도 늘게.';
-  const second=type==='D'
-    ?`딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. ${more}`
-    :`${A.q8===0?'다시 해보자는 다짐은 이미 자주 한다고 했지. 다짐':'해보고 싶은 마음은 이미 있다고 했지. 마음'}은 하기 전에만 힘을 줘. 머해는 새는 그 순간에, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘.`;
-  return `<div class="mcta">${head}<p class="first">${first}</p><p>${second}</p>${alone}${go('big',true)}<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어'}</p></div>`;
+}
+/* 실제 앱 화면: 언제 뜨고, 무엇이 보이고, 무엇을 고를 수 있는지 */
+function demoHtml(now){
+  return `<div class="phone"><video muted loop playsinline preload="none" poster="img/demo_poster.webp"${now?' src="img/demo.mp4"':''}></video></div>
+  <ol class="steps"><li>공부 중에, 내가 정해둔 앱을 켜면</li><li>내가 고른 사진과 한마디, 오늘 할 공부가 뜨고</li><li>돌아갈지 계속 볼지는 내가 골라</li></ol>
+  <p class="key">앱을 막지는 않아.<br>계속 볼지, 돌아갈지는 네가 골라.</p>`;
+}
+function tryBtn(where,big){
+  return (IOS
+    ?`<a class="btn ${big?'go':'line'}" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}_ios',type:'${type}'})">아이폰 출시 알림 받기</a>`
+    :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`)
+    +`<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어'}</p>`;
+}
+function armDemo(root){
+  const v=root.querySelector('video');if(!v)return;
+  if(!v.getAttribute('src'))v.src='img/demo.mp4';
+  let seen=false;v.addEventListener('playing',()=>{if(!seen){seen=true;log('demo_play',{type});}});
+  v.addEventListener('click',()=>{v.paused?v.play().catch(()=>{}):v.pause();});
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause();}),{threshold:.4}).observe(v);}
+  else v.play().catch(()=>{});
+}
+function openDemo(btn){
+  const box=btn.closest('.mh2');box.classList.add('open');log('demo_open',{type});armDemo(box);
+}
+/* 머해 영역: 강아지·햄스터는 크게 바로, 다람쥐·고양이는 작게 펼쳐서, 거북이는 없음 */
+function mhCard(){
+  const alone=A.d2===0||A.d2===1?'<p>혼자 공부한다고 했지. 맞은편에 한 사람 앉혀봐.</p>':'';
+  if(type==='T')return '';
+  if(type==='D'||type==='H'){
+    const head=type==='D'?'그 "아 맞다"를 떠올릴<br>계기 하나 더.':'이번엔 진짜 한다는 마음,<br>폰을 켠 순간에도 생각나게.';
+    const easy=type==='H'?'<p>처음부터 꾸밀 필요는 없어. 기본 응원으로 먼저 시작해도 돼.</p>':'';
+    return `<div class="mh2"><div class="k">머해</div><h4>${head}</h4><p class="first">${lockLine()}</p>${demoHtml(true)}${easy}${alone}${tryBtn('big',true)}</div>`;
+  }
+  if(type==='S'){
+    const t=['돌아오기까지 5분 미만이라고 했지.','돌아오기까지 5분 이상~15분 미만이라고 했지.','돌아오기까지 15분 이상이라고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
+    return `<div class="mh2 small"><div class="k">머해</div><h4>스스로 돌아오는 너에게,<br>생각날 계기 하나 더.</h4><p class="first">${t} 그 사이에 하려던 공부가 한 번 생각나면 어떨까?</p>
+      <button class="btn line opener" onclick="openDemo(this)">잡아주는 화면 보기</button>
+      <div class="more">${demoHtml(false)}${alone}${tryBtn('small',false)}</div></div>`;
+  }
+  const none=A.cat===2;
+  return `<div class="mh2 small"><div class="k">머해</div><h4>네가 공부하기로 한 날엔,<br>네 취향으로 한 번 잡아줄게.</h4>
+    <p class="first">${none?'딱 떠오르는 사람이나 캐릭터는 없구나. 필요할 때 이런 방식도 있다는 것만 알아둬.':'좋아하는 사진에, 네가 듣고 싶은 한마디를 적어 둬. 공부 중 딴길로 샜을 때 한 번 보여줄게.'}</p>
+    <button class="btn line opener" onclick="openDemo(this)">${none?'머해 구경하기':'어떤 모습인지 보기'}</button>
+    <div class="more">${demoHtml(false)}${tryBtn('small',false)}</div></div>`;
+}
+function partDesc(){return `<p class="desc">${R[type].desc}</p>`;}
+function partSaw(){return `<div class="sec"><h3>스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col">${sawRows()}</div></div></div>`;}
+function partLine(){
+  return `<div class="sec"><h3>다섯 친구 중에 넌 여기</h3><div class="line5">${ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('')}</div>
+    <div class="names">${ORDER.map(k=>`<span class="${k===type?'me':''}">${R[k].name}</span>`).join('')}</div><div class="ends"><span>혼자서도 잘 돌아옴</span><span>지금은 쉬는 중</span></div></div>`;
+}
+function partShare(primary){
+  const label=type==='T'?'친구는 어떤 동물일까?':'결과 공유하기';
+  return `<div class="row2${type==='T'?' one':''}"><button class="btn ${primary?'go':'line'}" onclick="share('${type==='T'?'friend':'native'}')">${label}</button><button class="btn line" onclick="copyLink(false)">링크 복사</button></div>`;
 }
 function renderResult(){
-  const r=R[type];
+  const r=R[type], big=type==='D'||type==='H';
+  $('#hero').classList.toggle('compact',big||type==='S');
   $('#rimg').src='img/'+r.img+'.webp';$('#rimg').alt=r.name;
-  $('#rname').textContent=r.name;$('#rquote').textContent=r.quote;$('#rdesc').textContent=r.desc;
-  $('#line5').innerHTML=ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('');
-  $('#names').innerHTML=ORDER.map(k=>`<span class="${k===type?'me':''}">${R[k].name}</span>`).join('');
-  $('#saw').innerHTML=sawRows();
-  $('#mhBox').innerHTML=mhCard();
+  $('#rname').textContent=r.name;$('#rquote').textContent=r.quote;$('#rbecause').textContent=becauseLine();
+  /* 강아지·햄스터: 짧은 결과 → 머해와 실제 화면 → 써보기 → 자세한 설명·공유 */
+  const order={
+    D:[mhCard,partDesc,partSaw,partLine,()=>partShare(false)],
+    H:[mhCard,partDesc,partSaw,partLine,()=>partShare(false)],
+    S:[mhCard,partDesc,partSaw,partLine,()=>partShare(true)],
+    C:[partDesc,()=>partShare(true),mhCard,partSaw,partLine],
+    T:[partDesc,()=>partShare(true),partSaw,partLine]}[type];
+  const body=$('#resBody');body.innerHTML=order.map(f=>f()).join('');
   log('result',{type,answers:ansStr(),where:SRC});
-  const el=$('#mhBox .mcta');
-  if(el&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type});}},{threshold:.5});io.observe(el);}
+  const el=body.querySelector('.mh2');
+  if(el&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type});}},{threshold:.3});io.observe(el);}
+  if(big)armDemo(body);
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
 async function share(how){
-  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 다섯 석관 중에 너랑 닮은 친구가 있대.':`스핑크스가 맞춘 나: ${r.name} ${r.quote}`;
+  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 다섯 석관 중에 너랑 닮은 친구가 있대.':`스핑크스가 맞힌 나: ${r.name} ${r.quote}`;
   log('share',{how,type});
   if(navigator.share){try{await navigator.share({title:'스핑크스가 맞혀볼게',text,url:shareUrl()});return;}catch(e){if(e&&e.name==='AbortError')return;}}
   copyLink(true);
@@ -442,8 +516,6 @@ async function copyLink(silent){
 
 $('#startBtn').onclick=run;
 $('#openBtn').onclick=openBox;
-$('#shareBtn').onclick=()=>share('native');
-$('#copyBtn').onclick=()=>copyLink(false);
 $('#againBtn').onclick=()=>{log('restart',{type});show('#s-start');};
 log('visit',{where:SRC});
 </script>
