@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>스핑크스가 맞혀볼게 · 머해 테스트</title>
+<meta name="description" content="석관 다섯 개 중에 네가 있다. 스핑크스가 몇 가지만 묻고 맞혀볼게.">
+<meta property="og:title" content="스핑크스가 맞혀볼게 · 머해 테스트">
+<meta property="og:description" content="석관 다섯 개 중에 네가 있다. 몇 가지만 묻고 맞혀볼게.">
+<meta property="og:image" content="https://snowf1ower.github.io/meohae-test/sphinx/img/og.jpg">
+<meta property="og:url" content="https://snowf1ower.github.io/meohae-test/sphinx/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFAF4">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/sphinx_ask.webp">
+<style>
+:root{--bg:#FFFAF4;--ink:#3A2A22;--sub:#8E7B6E;--line:#EADFD2;--soft:#F6ECDD;--peach:#FFEFE3;--acc:#F2733A;--acc2:#FFB07A}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;background:var(--bg)}
+body{font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--ink);line-height:1.5;word-break:keep-all;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.jua{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400}
+.wrap{position:relative;max-width:430px;margin:0 auto;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:18px 22px 30px;overflow:hidden}
+.head{width:76%;margin:0 auto;padding-bottom:8px;border-bottom:1.5px solid rgba(58,42,34,.55);position:relative;z-index:1}
+.scr{display:none;flex:1;flex-direction:column;position:relative;z-index:1}
+.scr.on{display:flex}
+.dunes{position:absolute;left:0;right:0;bottom:0;width:100%;height:130px;z-index:0;pointer-events:none}
+.wrap.res .dunes{display:none}
+.stack{margin-top:auto;padding-top:24px}
+.tiny{font-size:12.5px;color:var(--sub);text-align:center}
+
+.btn{appearance:none;border:0;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:58px;padding:8px 18px;border-radius:999px;font-family:Jua,"Noto Sans KR",sans-serif;font-size:21px;text-decoration:none;color:var(--ink);background:#fff;transition:transform .08s}
+.btn:active{transform:scale(.98)}
+.btn.go{background:linear-gradient(180deg,#F58742,var(--acc));color:#fff;box-shadow:0 8px 18px rgba(242,115,58,.28)}
+.btn.go:after{content:"";width:9px;height:9px;border-right:2.5px solid #fff;border-top:2.5px solid #fff;transform:rotate(45deg);margin-left:2px}
+.btn.line{border:1.5px solid var(--line)}
+
+/* 시작 */
+.pill{align-self:center;margin-top:22px;background:var(--peach);color:var(--sub);font-size:13px;font-weight:700;border-radius:999px;padding:4px 14px}
+h1{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:44px;line-height:1.16;text-align:center;margin-top:10px}
+h1 em{font-style:normal;color:var(--acc);position:relative;display:inline-block}
+.spark{position:absolute;width:26px;height:26px}
+.spark i{position:absolute;left:0;top:50%;width:11px;height:3.5px;border-radius:9px;background:var(--acc2);transform-origin:26px 50%}
+.spark i:nth-child(1){transform:rotate(-28deg)}.spark i:nth-child(3){transform:rotate(28deg)}
+h1 .spark.l{left:-38px;top:50%;margin-top:-13px}
+h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
+.heroS{position:relative;width:62%;margin:16px auto 0}
+.heroS img{animation:bob 3.4s ease-in-out infinite}
+.heroS .spark{right:-14px;top:14%;transform:scaleX(-1) rotate(-30deg)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.lead{color:var(--sub);text-align:center;margin-top:12px;font-size:15.5px;line-height:1.65}
+.shelf{display:flex;justify-content:center;align-items:flex-end;gap:12px}
+.shelf img{width:42px;transition:opacity .5s,filter .5s,transform .5s;transform-origin:50% 100%}
+#s-start .shelf{margin-top:20px}#s-start .shelf img{width:50px}
+.shelf img.dim{opacity:.3;filter:grayscale(1) brightness(1.15);transform:scale(.9)}
+
+/* 문항 */
+.prog{height:10px;border-radius:99px;background:#F3E6D8;overflow:hidden;margin-top:22px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc2),var(--acc));border-radius:99px;transition:width .35s ease}
+#s-quiz .shelf{margin-top:22px}
+.talk{display:flex;gap:6px;align-items:center;margin-top:24px}
+.talk .who{position:relative;width:104px;flex:none}
+.talk .who .spark{right:-2px;top:-6px;transform:scaleX(-1) rotate(-40deg) scale(.8)}
+.talk .who img.nod{animation:nod .32s}
+@keyframes nod{0%{transform:scale(.93)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.say{position:relative;flex:1;background:var(--soft);border-radius:24px;padding:16px 18px;font-size:18.5px;font-weight:500;line-height:1.5;min-height:92px;display:flex;align-items:center}
+.say:before{content:"";position:absolute;left:-7px;bottom:26px;width:16px;height:16px;background:var(--soft);border-radius:0 0 0 12px;transform:skewX(28deg)}
+.opts{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.opt{appearance:none;position:relative;width:100%;min-height:60px;padding:15px 46px 15px 20px;background:#fff;border:1.5px solid var(--line);border-radius:16px;font-family:inherit;font-size:16.5px;font-weight:500;line-height:1.4;text-align:left;color:var(--ink);transition:transform .08s,background .15s,border-color .15s}
+.opt:after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;margin-top:-5px;border-right:2px solid var(--sub);border-top:2px solid var(--sub);transform:rotate(45deg)}
+.opt:active{transform:scale(.99)}
+.opt.sel{background:var(--peach);border-color:var(--acc);color:#C9521C;font-weight:700}
+.opt.sel:after{right:14px;margin-top:-11px;width:22px;height:22px;border:0;border-radius:50%;transform:none;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M6.5 11.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/22px no-repeat}
+.opts.hide{visibility:hidden}
+.skip{margin-top:14px;font-size:12.5px;color:var(--sub);text-align:center;min-height:19px}
+
+/* 석관 열기 */
+.say.big{font-family:Jua,"Noto Sans KR",sans-serif;font-size:24px;min-height:78px}
+.pit{position:relative;height:330px;margin-top:18px}
+.pit .coffin{position:absolute;left:50%;bottom:10px;height:290px;margin-left:-88px;transform-origin:50% 92%;animation:rock 2.4s ease-in-out infinite}
+@keyframes rock{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.pit .coffin.shake{animation:shake 1.2s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake{0%{transform:rotate(0)}8%{transform:rotate(-5deg)}16%{transform:rotate(5deg)}24%{transform:rotate(-7deg) translateY(-3px)}32%{transform:rotate(7deg)}40%{transform:rotate(-9deg) translateY(-5px)}48%{transform:rotate(9deg)}56%{transform:rotate(-11deg) translateY(-7px)}64%{transform:rotate(11deg)}72%{transform:rotate(-12deg) translateY(-9px) scale(1.03)}80%{transform:rotate(12deg) scale(1.05)}90%{transform:rotate(-6deg) scale(1.07)}100%{transform:rotate(0) scale(1.08)}}
+.pit .opened,.pit .pet,.pit .tw{display:none}
+.pit.open .coffin{display:none}
+.pit.open .opened{display:block;position:absolute;left:50%;bottom:8px;height:300px;transform:translateX(-46%);animation:pop .45s cubic-bezier(.2,.9,.3,1.3) both}
+.pit.open .pet{display:block;position:absolute;left:50%;bottom:14px;height:196px;transform:translateX(-78%);animation:rise .6s cubic-bezier(.2,.9,.3,1.3) .12s both}
+@keyframes pop{0%{opacity:0;scale:.8}100%{opacity:1;scale:1}}
+@keyframes rise{0%{opacity:0;translate:0 40px;scale:.6}70%{scale:1.06}100%{opacity:1;translate:0 0;scale:1}}
+.pit.open .tw{display:block;position:absolute;width:22px;height:22px;background:var(--acc2);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:tw 1.4s ease-in-out infinite}
+.pit .tw.a{left:12%;top:16%}.pit .tw.b{right:10%;bottom:30%;animation-delay:.5s;scale:.8}
+@keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+
+/* 결과 */
+.hero{margin:22px -6px 0;padding:22px 16px 26px;border-radius:30px;text-align:center;background:var(--peach)}
+.hero .from{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:var(--sub)}
+.hero .me{height:214px;margin:12px auto 0;object-fit:contain;animation:rise .6s cubic-bezier(.2,.9,.3,1.3) both;filter:drop-shadow(0 10px 16px rgba(58,42,34,.12))}
+.hero h2{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:44px;line-height:1.1;margin-top:10px}
+.hero .quote{font-family:Jua,"Noto Sans KR",sans-serif;font-size:21px;margin-top:6px;color:var(--acc)}
+.desc{font-size:16px;line-height:1.75;margin-top:22px}
+.sec{margin-top:32px}
+.sec h3{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:21px}
+.line5{display:flex;align-items:flex-end;margin-top:36px;border-bottom:1.5px solid var(--line)}
+.line5 .a{flex:1;position:relative;opacity:.32;filter:grayscale(.9)}
+.line5 .a img{width:100%;height:52px;object-fit:contain;object-position:50% 100%}
+.line5 .a.me{opacity:1;filter:none}
+.line5 .a.me img{height:82px}
+.line5 .a.me:after{content:"넌 여기";position:absolute;left:50%;top:-26px;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:2px 10px}
+.names{display:flex;margin-top:6px}
+.names span{flex:1;text-align:center;font-size:12px;font-weight:500;color:var(--sub)}
+.names span.me{color:var(--ink);font-weight:800}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:8px}
+.saw{display:flex;gap:8px;align-items:flex-start;margin-top:14px}
+.saw>img{width:62px;flex:none}
+.saw .col{flex:1;display:flex;flex-direction:column;gap:8px}
+.saw .b{background:var(--soft);border-radius:6px 20px 20px 20px;padding:12px 16px;font-size:15.5px;font-weight:700;line-height:1.45}
+.saw .b small{display:block;font-size:12.5px;color:var(--sub);font-weight:500;margin-bottom:1px}
+.row2{display:grid;grid-template-columns:1.3fr 1fr;gap:10px;margin-top:32px}
+.row2 .btn{min-height:54px;font-size:19px}
+.row2 .btn.go:after{display:none}
+.mcta{margin-top:32px;border:1.5px solid var(--acc);border-radius:24px;padding:18px 16px;background:#fff}
+.mcta .row{display:flex;gap:12px;align-items:center}
+.mcta .row img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center 15%;flex:none}
+.mcta .k{font-size:12.5px;font-weight:700;color:var(--acc)}
+.mcta h4{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:20px;line-height:1.3;margin-top:1px}
+.mcta p{font-size:15px;line-height:1.65;margin-top:10px}
+.mcta p.first{font-weight:800}
+.mcta .btn{margin-top:16px;min-height:54px;font-size:19px}
+.mcta .btn.go:after{display:none}
+.mcta.small{border-color:var(--line)}
+.mcta.small .k{color:var(--sub)}
+.foot{margin-top:28px;font-size:12.5px;color:var(--sub);text-align:center}
+.foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-size:13.5px;color:var(--sub);margin-bottom:12px}
+.flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9;transition:opacity .3s}
+.flash.on{opacity:1}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;padding:10px 16px;border-radius:99px;opacity:0;transition:opacity .25s;z-index:20;pointer-events:none}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <svg class="dunes" viewBox="0 0 430 130" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M250 74l34-44 34 44zM300 74l20-26 20 26z" fill="#FBE3C6"/>
+    <path d="M0 78c60-26 120-24 190 0s150 26 240-10v62H0z" fill="#FCEBD7"/>
+    <path d="M0 104c80-22 150-16 230 2s130 14 200-6v30H0z" fill="#FADFC2"/>
+  </svg>
+  <img class="head" src="img/icons.webp" alt="">
+
+  <section class="scr on" id="s-start">
+    <span class="pill">머해 테스트</span>
+    <h1>스핑크스가<br><em><span class="spark l"><i></i><i></i><i></i></span>맞혀볼게<span class="spark r"><i></i><i></i><i></i></span></em></h1>
+    <div class="heroS"><img src="img/sphinx_ask.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div>
+    <p class="lead">석관 다섯 개 중 하나에 네가 들어 있다.<br>몇 개만 묻고 맞혀보지!</p>
+    <div class="shelf"><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""><img src="img/sarc_closed.webp" alt=""></div>
+    <div class="stack"><button class="btn go" id="startBtn">맞혀봐</button></div>
+  </section>
+
+  <section class="scr" id="s-quiz">
+    <div class="prog"><i id="bar"></i></div>
+    <div class="shelf" id="sarcs"></div>
+    <div class="talk"><div class="who"><img id="sph" src="img/sphinx_ask.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div><div class="say" id="qtext"></div></div>
+    <div class="opts" id="opts"></div>
+    <div class="skip" id="skip"></div>
+  </section>
+
+  <section class="scr" id="s-reveal">
+    <div class="talk" style="margin-top:34px"><div class="who"><img id="sph2" src="img/sphinx_aha.webp" alt="스핑크스"><span class="spark"><i></i><i></i><i></i></span></div><div class="say big" id="rvtext">아, 알 것 같다!</div></div>
+    <div class="pit" id="pit">
+      <img class="coffin" id="box" src="img/sarc_closed.webp" alt="석관">
+      <img class="opened" src="img/sarc_open.webp" alt=""><img class="pet" id="pet" alt="">
+      <i class="tw a"></i><i class="tw b"></i>
+    </div>
+    <div class="stack"><button class="btn go" id="openBtn">석관 열기</button></div>
+  </section>
+
+  <section class="scr" id="s-result">
+    <div class="hero" id="hero">
+      <span class="from">석관에서 나온 건</span>
+      <img class="me" id="rimg" alt="">
+      <h2 id="rname"></h2>
+      <p class="quote" id="rquote"></p>
+    </div>
+    <p class="desc" id="rdesc"></p>
+    <div class="sec"><h3>다섯 중에 넌 여기</h3><div class="line5" id="line5"></div><div class="names" id="names"></div><div class="ends"><span>잘 안 샘</span><span>안 돌아감</span></div></div>
+    <div class="sec"><h3>스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col" id="saw"></div></div></div>
+    <div class="row2"><button class="btn go" id="shareBtn">결과 공유하기</button><button class="btn line" id="copyBtn">링크 복사</button></div>
+    <div id="mhBox"></div>
+    <div class="foot"><button id="againBtn">다시 하기</button><br>머해는 막지 않고, 한 번 잡아주는 앱이야</div>
+  </section>
+</div>
+<div class="flash" id="flash"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== 기록 ===== */
+const SHEET_URL="https://script.google.com/macros/s/AKfycbzUDtHeLIdithkGoPez5AQN8cy8NPDVxUpRIp3bbMw8uLIqRvCsj_0Bz6deCYW1thwjUQ/exec";
+const P=new URLSearchParams(location.search);
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+const rnd=n=>Math.random().toString(36).slice(2,2+n);
+let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
+const SID=DID+'.'+rnd(4);                       /* 폰 고유 번호 . 이번 방문 */
+const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
+if(P.get('nolog')==='1')ls('meohae_nolog','1');
+const NOLOG=ls('meohae_nolog')==='1'||!/^https?:$/.test(location.protocol)||/^(localhost|127\.)/.test(location.hostname);
+function log(ev,x){
+  if(NOLOG)return;
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:'s1 '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},x||{}));
+  try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
+}
+
+/* ===== 문항 ===== (선지는 앞에서부터 2·1·0점) */
+const Q={
+ q1:{t:'"딱 하나만 보고 끄자."\n그래서?',o:['진짜 껐다','세 개쯤 봤다','해가 떴다']},
+ q2:{t:'공부 중에 알림이 울렸다.',o:['이따 본다','확인만 하고 내려놓았다… 고 생각했다','답장하다 다른 앱까지 한 바퀴 돌았다']},
+ q3:{t:'30분 날린 걸\n깨달은 순간.',o:['"지금이라도 하자"','"5분만 더 보고…"','"기왕 이렇게 된 거"']},
+ q4:{t:'10번 흔들리면,\n다시 책으로 돌아가는 건?',o:['거의 다','절반쯤','한두 번, 아니면 0번']},
+ q5:{t:'하루를 날린 날,\n자기 전에 드는 생각.',o:['"내일은 진짜 한다"','"아… 또 이랬네"','"뭐, 재밌었으니 됐다"']},
+ q6:{t:'보던 걸 스스로 끈\n마지막 기억.',o:['오늘도 껐다','이번 주에 한 번쯤','배터리가 대신 꺼줬다']},
+ q7:{t:'공부자극 영상이나\n스터디윗미.',o:['자주 본다. 보고 나면 이미 공부한 기분이다','가끔 본다','안 본다']},
+ q8:{t:'다짐이나 계획을\n써서 붙여본 적.',o:['지금도 붙어 있다','붙였다가 민망해서 뗐다','그런 건 안 한다']},
+ cat:{t:'좋아하는 사람이나 캐릭터,\n있나?',o:['있다, 딱 한 명','많아서 못 고른다','딱히 없다']},
+ d1:{t:'하루 폰 사용 시간은?',o:['3시간 이하','4~6시간','7시간 이상','무서워서 안 본다'],keep:1},
+ d2:{t:'공부는 주로 어디서?',o:['집·자취방에서 혼자','독서실·스터디카페에서 혼자','누가 같이 있는 데서'],keep:1},
+ d3:{t:'잠금 앱, 써봤나?',o:['지금 쓴다','써봤는데 지웠다','안 써봤다'],keep:1},
+ fdel:{t:'왜 지웠나?',o:['내가 풀어버려서','급할 때 막혀서 짜증 나서','귀찮아서'],keep:1},
+ fuse:{t:'걸어놓고 푼 적은?',o:['자주','가끔','없다'],keep:1},
+ fno:{t:'왜 안 써봤나?',o:['막히는 게 싫어서','필요 없을 것 같아서','몰라서'],keep:1},
+ fsq:{t:'딴 데 갔다가\n돌아오기까지 보통?',o:['금방','10분쯤','한참'],keep:1}
+};
+/* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
+const ORDER=['T','S','D','H','C'];
+const R={
+ T:{name:'거북이',img:'turtle',tint:'#E4F2E1',quote:'"폰? 가방에 있을걸."',desc:'흔들리는 일이 드물다. 흔들려도 티가 안 난다. 친구들이 "쟤는 원래 저래" 하는 그 사람. 단점은 필기 빌려달라는 연락이 많다는 것.'},
+ S:{name:'다람쥐',img:'squirrel',tint:'#FFE8DA',quote:'"아 맞다, 공부."',desc:'딴 데 갔다가도 혼자 돌아올 줄 안다. 문제는 돌아오는 데 걸리는 시간. 잠깐 다녀온다는 게 도토리 묻고 오느라 한참이다.'},
+ D:{name:'강아지',img:'dog',tint:'#FFF0D2',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 돌아가는 건 열 번에 한두 번. 못 돌아가는 게 아니라 잡아주는 게 없었던 것. 한 번 잡아주면 돌아갈 줄은 안다.'},
+ H:{name:'햄스터',img:'hamster',tint:'#FFE9E2',quote:'"내일부터 진짜 한다."',desc:'의욕은 다섯 중 1등. 공부자극 영상도 보고 다짐도 써 붙였다. 그런데 쳇바퀴만 열심히 돌았다. 유혹 앞에서 다짐은 3초를 못 버틴다.'},
+ C:{name:'고양이',img:'cat',tint:'#EEE7F8',quote:'"됐어, 재밌었잖아."',desc:'한번 누우면 끝. 잡아줘도 안 간다. 그런데 후회도 없다. 그건 좀 부럽다.'}
+};
+const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="../install.html?src=sphinx", INSTA="https://instagram.com/meohae.project";
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
+
+/* ===== 화면 ===== */
+const $=s=>document.querySelector(s);
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));$('#wrap').classList.toggle('res',id==='#s-result');window.scrollTo(0,0);}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function mood(m){const e=$('#sph');e.src='img/sphinx_'+m+'.webp';e.classList.remove('nod');void e.offsetWidth;e.classList.add('nod');}
+
+let A={},type='',asked=0,total=12,running=false;
+const pts=k=>2-A[k];                             /* 0번 선지=2점 */
+
+function drawSarcs(keep){
+  const box=$('#sarcs');
+  if(!box.children.length)box.innerHTML=ORDER.map(()=>'<img src="img/sarc_closed.webp" alt="">').join('');
+  [...box.children].forEach((e,i)=>e.classList.toggle('dim',!!keep&&!keep.includes(ORDER[i])));
+}
+function ask(key){
+  return new Promise(res=>{
+    const q=Q[key];mood('ask');
+    $('#qtext').innerHTML=q.t.replace(/\n/g,'<br>');
+    $('#skip').textContent='';
+    const idx=q.o.map((_,i)=>i), ord=q.keep?idx:shuffle(idx);
+    const box=$('#opts');box.classList.remove('hide');box.innerHTML='';
+    ord.forEach(i=>{const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{if(box.dataset.lock)return;box.dataset.lock=1;b.classList.add('sel');A[key]=i;asked++;
+        $('#bar').style.width=Math.min(100,asked/total*100)+'%';
+        log('q',{where:key,how:String(i)});
+        setTimeout(()=>{delete box.dataset.lock;res(i);},260);};
+      box.appendChild(b);});
+  });
+}
+function say(text,m,ms){
+  return new Promise(res=>{
+    mood(m||'hmm');$('#qtext').innerHTML=text.replace(/\n/g,'<br>');
+    $('#opts').classList.add('hide');$('#skip').textContent='화면을 누르면 넘어가';
+    let done=false;const fin=()=>{if(done)return;done=true;document.removeEventListener('click',fin,true);res();};
+    setTimeout(()=>document.addEventListener('click',fin,true),250);
+    setTimeout(fin,ms||1900);
+  });
+}
+
+async function run(){
+  if(running)return;running=true;
+  A={};type='';asked=0;total=12;$('#bar').style.width='0';
+  $('#sarcs').innerHTML='';drawSarcs(null);show('#s-quiz');log('start');
+  for(const k of['q1','q2','q3','q4','q5'])await ask(k);
+  const r=pts('q1')+pts('q2')+pts('q3')+pts('q4');
+  if(r>=7){
+    type='T';total=8;drawSarcs(['T']);log('path',{type:'T',score:String(r)});
+    await say('…벌써 알겠다.\n확인만 좀 하자.','aha');
+  }else if(r<=3&&A.q5===2){
+    type='C';total=9;drawSarcs(['C']);log('path',{type:'C',score:String(r)});
+    await say('…벌써 알 것 같은데.\n하나만 더 묻자.','aha');
+    await ask('cat');
+  }else{
+    drawSarcs(['S','D','H']);log('path',{type:'mid',score:String(r)});
+    await say('흠…\n양 끝 둘은 아니군.','hmm');
+    for(const k of['q6','q7','q8'])await ask(k);
+    const r2=r+pts('q6'), ritual=pts('q7')+pts('q8');
+    type=r2>=5?'S':(ritual>=2?'H':'D');
+    drawSarcs([type]);log('path',{type,score:r2+'/'+ritual});
+    await say('거의 다 왔다.\n확인만 좀 하자.','hmm');
+  }
+  for(const k of['d1','d2','d3'])await ask(k);
+  if(type==='D'||type==='H')await ask(['fuse','fdel','fno'][A.d3]);
+  if(type==='S')await ask('fsq');
+  running=false;reveal();
+}
+
+let opened=false;
+function reveal(){
+  opened=false;$('#pit').classList.remove('open');$('#box').classList.remove('shake');
+  $('#pet').src='img/'+R[type].img+'.webp';
+  $('#rvtext').textContent='아, 알 것 같다!';$('#sph2').src='img/sphinx_aha.webp';
+  $('#openBtn').textContent='석관 열기';$('#openBtn').style.visibility='visible';
+  show('#s-reveal');
+}
+async function openBox(){
+  const btn=$('#openBtn');
+  if(opened){                                   /* 두 번째 누름: 결과 보기 */
+    $('#flash').classList.add('on');await sleep(260);
+    renderResult();show('#s-result');await sleep(60);$('#flash').classList.remove('on');return;
+  }
+  btn.style.visibility='hidden';$('#rvtext').textContent='나온다, 나온다…';
+  const b=$('#box');b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
+  log('open',{type});
+  await sleep(1200);
+  $('#pit').classList.add('open');$('#rvtext').textContent='역시!';
+  await sleep(650);
+  opened=true;btn.textContent='결과 확인하기';btn.style.visibility='visible';
+}
+
+/* ===== 결과 ===== */
+const ansStr=()=>Object.keys(Q).filter(k=>k in A).map(k=>k+A[k]).join(' ');
+function sawRows(){
+  const pick=k=>`<div class="b"><small>${Q[k].t.replace(/\n/g,' ')}</small>${Q[k].o[A[k]]}</div>`;
+  const ks={T:['q1','q4','q3'],S:['q1','q4','q6'],D:['q1','q4','q6'],H:['q4','q7','q8'],C:['q4','q5']}[type];
+  return ks.map(pick).join('');
+}
+function mhCard(){
+  const pic='../img/popup_jieun.jpg';
+  const head=`<div class="row"><img src="${pic}" alt=""><div><div class="k">이 테스트를 만든 앱, 머해</div><h4>막지 않아.<br>켜는 순간 한 번 잡아줘.</h4></div></div>`;
+  const alone=A.d2===0||A.d2===1?'<p>혼자 공부한다고 했지. 맞은편에 한 사람 앉혀봐.</p>':'';
+  const go=(where,big)=>IOS
+    ?`<a class="btn ${big?'go':'line'}" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}_ios',type:'${type}'})">아이폰 출시 알림 받기</a>`
+    :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`;
+  if(type==='T')return `<div class="mcta small"><h4>넌 필요 없겠다.</h4><p>대신 주변에 강아지 한 마리쯤 있지? 보내줘.</p><button class="btn go" onclick="share('friend')">주변 강아지한테 보내주기</button></div>`;
+  if(type==='C'){
+    const first=A.cat===2?'좋아하는 것도 딱히 없다고? 진짜 고양이네. 이런 게 있다는 것만 알아둬.':'하기 싫은 건 알겠어. 근데 네가 좋아하는 그 사람이 "너 머해?" 하면 좀 다를걸? ㅋㅋ';
+    return `<div class="mcta small">${head}<p class="first">${first}</p><p>사진도 한마디도 네가 정해. 막지도 않고, 시키지도 않아.</p><a class="btn line" href="${INSTA}" target="_blank" rel="noopener" onclick="log('cta',{where:'insta',type:'C'})">머해 구경하기</a></div>`;
+  }
+  if(type==='S'){
+    const first=A.fsq===0?'금방 돌아온다고 했지. 그 금방이 더 짧아지게.':`돌아오는 데 ${Q.fsq.o[A.fsq]} 걸린다고 했지.`;
+    return `<div class="mcta small">${head}<p class="first">${first}</p><p>딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 돌아오는 시간이 짧아지게.</p>${alone}${go('small',false)}</div>`;
+  }
+  let first;
+  if(A.d3===1)first=['잠금 앱, 네가 풀어버려서 지웠다고 했지. 머해는 안 막아.','급할 때 막혀서 지웠다고 했지. 머해는 안 막아.','귀찮아서 지웠다고 했지. 머해는 사진 한 장, 한마디만 정하면 끝이야.'][A.fdel];
+  else if(A.d3===0)first=A.fuse===2?'잠금은 잘 지킨다고 했지. 머해는 그 옆에서, 안 막고 잡아주는 쪽이야.':'걸어놓고도 푼다고 했지. 막는 건 결국 네가 이겨.';
+  else first=A.fno===0?'막히는 게 싫다고 했지. 머해는 안 막아.':'잠금 앱은 안 써봤다고 했지. 머해는 막는 앱이 아니야.';
+  const second=type==='D'
+    ?'딴 앱을 켜는 순간, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘. 열 번에 한두 번이, 조금이라도 늘게.'
+    :'다짐은 이미 충분해. 다짐은 하기 전에만 힘을 줘. 머해는 새는 그 순간에, 내가 고른 사람이 "너 머해?" 하고 한 번 잡아줘.';
+  return `<div class="mcta">${head}<p class="first">${first}</p><p>${second}</p>${alone}${go('big',true)}<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'비공개 테스트라 버튼 세 번이면 설치 끝'}</p></div>`;
+}
+function renderResult(){
+  const r=R[type];
+  $('#rimg').src='img/'+r.img+'.webp';$('#rimg').alt=r.name;
+  $('#rname').textContent=r.name;$('#rquote').textContent=r.quote;$('#rdesc').textContent=r.desc;
+  $('#line5').innerHTML=ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('');
+  $('#names').innerHTML=ORDER.map(k=>`<span class="${k===type?'me':''}">${R[k].name}</span>`).join('');
+  $('#saw').innerHTML=sawRows();
+  $('#mhBox').innerHTML=mhCard();
+  log('result',{type,answers:ansStr(),where:SRC});
+  const el=$('#mhBox .mcta');
+  if(el&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type});}},{threshold:.5});io.observe(el);}
+}
+function shareUrl(){return location.origin+location.pathname+'?from='+type;}
+async function share(how){
+  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 석관 다섯 개 중에 네가 있대.':`스핑크스가 맞춘 나: ${r.name} ${r.quote}`;
+  log('share',{how,type});
+  if(navigator.share){try{await navigator.share({title:'스핑크스가 맞혀볼게',text,url:shareUrl()});return;}catch(e){if(e&&e.name==='AbortError')return;}}
+  copyLink(true);
+}
+async function copyLink(silent){
+  if(!silent)log('share',{how:'copy',type});
+  try{await navigator.clipboard.writeText(shareUrl());toast('링크를 복사했어');}catch(e){toast('주소창의 링크를 복사해줘');}
+}
+
+$('#startBtn').onclick=run;
+$('#openBtn').onclick=openBox;
+$('#shareBtn').onclick=()=>share('native');
+$('#copyBtn').onclick=()=>copyLink(false);
+$('#againBtn').onclick=()=>{log('restart',{type});show('#s-start');};
+log('visit',{where:SRC});
+</script>
+</body>
+</html>
