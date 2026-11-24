@@ -24,5 +24,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # 묶은 파일이 준비되기 전에 게시가 시작돼 실패하는 일을 막는다
+      - name: Wait for the uploaded artifact
+        run: sleep 15
       - id: deployment
         uses: actions/deploy-pages@v4
