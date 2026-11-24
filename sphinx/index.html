@@ -183,6 +183,34 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .rend{margin-top:30px;text-align:center}
 .rend .inote{margin:0 0 8px}
 
+/* 시작 화면은 스크롤 없이 한 화면에: 화면 높이에 맞춰 줄어든다 */
+.wrap.start{padding-top:clamp(10px,2vh,18px);padding-bottom:calc(min(100vw,430px)*.19)}
+#s-start .pill{margin-top:clamp(6px,1.8vh,22px)}
+#s-start h1{font-size:clamp(31px,5.4vh,44px);margin-top:clamp(3px,1vh,10px)}
+#s-start .heroS{width:min(62%,23vh);margin-top:clamp(5px,1.6vh,16px)}
+#s-start .lead{margin-top:clamp(5px,1.2vh,12px);font-size:clamp(14.5px,2vh,16px)}
+#s-start .shelf{margin-top:clamp(7px,1.8vh,20px)}
+#s-start .shelf img{width:clamp(36px,6vh,50px)}
+#s-start .stack{margin-top:clamp(9px,2vh,24px)}
+#s-start .stack .btn{min-height:clamp(50px,7vh,58px)}
+#s-start .stack .tiny{margin-top:clamp(6px,1.2vh,12px)!important}
+@supports (height:1svh){
+ .wrap.start{padding-top:clamp(10px,2svh,18px)}
+ #s-start .pill{margin-top:clamp(6px,1.8svh,22px)}
+ #s-start h1{font-size:clamp(31px,5.4svh,44px);margin-top:clamp(3px,1svh,10px)}
+ #s-start .heroS{width:min(62%,23svh);margin-top:clamp(5px,1.6svh,16px)}
+ #s-start .lead{margin-top:clamp(5px,1.2svh,12px);font-size:clamp(14.5px,2svh,16px)}
+ #s-start .shelf{margin-top:clamp(7px,1.8svh,20px)}
+ #s-start .shelf img{width:clamp(36px,6svh,50px)}
+ #s-start .stack{margin-top:clamp(9px,2svh,24px)}
+ #s-start .stack .btn{min-height:clamp(50px,7svh,58px)}
+}
+/* 머해 소개로 넘어갈 때: 아래에서 떠오르며 나타난다 */
+@keyframes introIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+#s-intro.on.enter{animation:introIn .5s cubic-bezier(.2,.8,.2,1) both}
+#s-intro.on.enter .intro h3{animation:introIn .5s .12s cubic-bezier(.2,.8,.2,1) both}
+#s-intro.on.enter .ex{animation:introIn .55s .24s cubic-bezier(.2,.8,.2,1) both}
+
 .foot{margin-top:28px;font-size:12.5px;color:var(--sub);text-align:center}
 .foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-size:13.5px;color:var(--sub);margin-bottom:12px}
 .flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9;transition:opacity .3s}
@@ -203,7 +231,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 </style>
 </head>
 <body>
-<div class="wrap" id="wrap">
+<div class="wrap start" id="wrap">
   <img class="head" src="img/icons.webp" alt="">
 
   <section class="scr on" id="s-start">
@@ -323,18 +351,18 @@ function decideMid(a){const r2=P2(a,'q1')+P2(a,'q2')+P2(a,'q3')+P2(a,'q4')+P2(a,
 /* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
 const ORDER=['T','S','D','H','C'];
 const R={
- T:{"name": "거북이", "img": "turtle", "card": "img/cards/turtle.png", "nickname": "자기 페이스 지키는", "quote": "“하던 거 마저 하고 볼게.”", "headline": "", "cardLine": "잠깐 흔들려도, 금방 하던 공부로 돌아와.", "summaries": [{"title": "잠깐 흔들려도, 다시 공부로.", "lines": ["재밌는 게 보이면 너도 눈길이 가.", "그래도 대체로 하던 공부로 금방 돌아와."]}, {"title": "“이따 볼게”를 진짜로 해.", "lines": ["조금 아쉬워도 폰을 내려놓는 편이야.", "해야 할 일을 먼저 챙길 줄 알지."]}], "traits": [["내 흐름을 다시 찾는 편", "잠깐 시선이 새도 하던 일을 이어갈 여지가 있어."], ["멈출 때를 비교적 잘 알아", "재미가 남아 있어도 지금 할 일을 챙기는 쪽이야."], ["네 페이스로 꾸준히", "크게 다짐하기보다 다시 앉는 행동이 익숙한 편이야."]]},
- S:{"name": "다람쥐", "img": "squirrel", "card": "img/cards/squirrel.png", "nickname": "돌아올 길은 아는", "quote": "“잠깐만… 아, 하던 거 해야지.”", "headline": "혼자 돌아오는 너에게,\n조금 더 일찍 생각날 계기.", "cardLine": "딴길에 들러도 스스로 돌아올 줄 알아.", "summaries": [{"title": "딴길로 새도, 돌아올 줄 알아.", "lines": ["궁금한 게 생기면 잠깐 들르기도 해.", "그러다 스스로 “공부해야지” 하고 돌아와."]}, {"title": "돌아오는 데 걸리는 시간은 달라.", "lines": ["금방 끌 때도, 조금 더 머물 때도 있어.", "구경거리가 많으면 길어지기도 하지."]}], "traits": [["구경은 해도 돌아올 길은 알아", "호기심이 생겨도 하던 일을 다시 이어가는 편이야."], ["스스로 다시 시작할 힘", "누가 옆에 없어도 돌아오려는 행동이 나오는 쪽이야."], ["왕복 시간은 그때그때", "돌아오는 건 익숙해도, 딴길에 머무는 길이는 달라질 수 있어."]]},
- D:{"name": "강아지", "img": "dog", "card": "img/cards/dog.png", "nickname": "딴길 산책 중인", "quote": "“아 맞아… 나 해야 해…”", "headline": "그 ‘아 맞다’를,\n한 번 더.", "cardLine": "공부가 떠올라도 ‘이것까지만’ 보고 싶어.", "summaries": [{"title": "“아 맞다”는 떠오르는데.", "lines": ["해야 할 공부가 문득 떠올라.", "그래도 보던 걸 바로 끄기는 아쉬워."]}, {"title": "“이것까지만”에 자꾸 붙잡혀.", "lines": ["돌아갈까 하다가 조금만 더 보게 돼.", "그 사이 공부로 돌아갈 순간이 늦어지지."]}], "traits": [["알아차려도, 이것까지만", "시간이 지난 걸 알아도 당장 끄기는 아쉬워."], ["생각과 행동 사이에 틈이 있어", "“해야지”가 바로 “폰 내려놓기”로 이어지지는 않아."], ["복귀 타이밍을 놓치기도", "눈앞의 재미가 남아 있으면 돌아갈 순간이 뒤로 밀려."]]},
- H:{"name": "햄스터", "img": "hamster", "card": "img/cards/hamster.png", "nickname": "다짐은 다시 켜지는", "quote": "“이번엔 진짜 한다.”", "headline": "이번엔 진짜 한다는 마음,\n폰을 켠 순간에도.", "cardLine": "다시 해볼 마음은 있는데, 폰 앞에서 흔들려.", "summaries": [{"title": "다시 해보려는 마음은 있어.", "lines": ["“이번엔 진짜 한다”는 마음이 들어.", "마음속에선 벌써 새 출발이야."]}, {"title": "막상 폰을 켜면 또 흔들려.", "lines": ["눈앞의 재미를 지나치기는 어려워.", "다시 하려던 마음이 잠깐 뒤로 밀려나."]}], "traits": [["다시 해보려는 마음은 있어", "흐름이 끊겨도 이번에는 해보고 싶은 마음이 남아 있어."], ["눈앞의 재미에 쉽게 흔들려", "계획할 때의 마음이 폰 앞에서는 잠깐 작아지기도 해."], ["실행은 그 순간이 어려워", "다짐을 떠올리는 일과 바로 행동하는 일 사이가 멀게 느껴질 수 있어."]]},
- C:{"name": "고양이", "img": "cat", "card": "img/cards/cat.png", "nickname": "지금은 내 마음이 먼저인", "quote": "“됐어, 재밌었잖아.”", "headline": "네가 고른 이미지와 한마디로,\n가볍게 응원받아봐.", "cardLine": "요즘은 공부보다 당장 끌리는 게 먼저야.", "summaries": [{"title": "지금은 공부보다 재밌는 게 먼저야.", "lines": ["당장 끌리는 일에 시간을 쓰고 싶어.", "누가 재촉해도 공부할 마음이 생기진 않지."]}, {"title": "이건 ‘요즘의 너’를 말하는 거야.", "lines": ["항상 의욕이 없다는 뜻은 아니야.", "다시 해보고 싶어지면, 시작도 네 방식대로."]}], "traits": [["지금 끌리는 쪽이 먼저", "해야 한다는 이유만으로 바로 움직이지는 않는 편이야."], ["내 타이밍을 중요하게", "쉬고 싶은 지금의 마음도 네 상태의 일부야."], ["선택은 내가 할래", "다시 시작할 때도 네가 고른 방식이 편할 수 있어."]]}
+ T:{"name": "거북이", "img": "turtle", "card": "img/cards/turtle.png?v=2", "nickname": "자기 페이스 지키는", "quote": "“하던 거 마저 하고 볼게.”", "headline": "", "cardLine": "잠깐 흔들려도, 금방 하던 공부로 돌아와.", "summaries": [{"title": "잠깐 흔들려도, 다시 공부로.", "lines": ["재밌는 게 보이면 너도 눈길이 가.", "그래도 대체로 하던 공부로 금방 돌아와."]}, {"title": "“이따 볼게”를 진짜로 해.", "lines": ["조금 아쉬워도 폰을 내려놓는 편이야.", "해야 할 일을 먼저 챙길 줄 알지."]}], "traits": [["내 흐름을 다시 찾는 편", "잠깐 시선이 새도 하던 일을 이어갈 여지가 있어."], ["멈출 때를 비교적 잘 알아", "재미가 남아 있어도 지금 할 일을 챙기는 쪽이야."], ["네 페이스로 꾸준히", "크게 다짐하기보다 다시 앉는 행동이 익숙한 편이야."]]},
+ S:{"name": "다람쥐", "img": "squirrel", "card": "img/cards/squirrel.png?v=2", "nickname": "돌아올 길은 아는", "quote": "“잠깐만… 아, 하던 거 해야지.”", "headline": "혼자 돌아오는 너에게,\n조금 더 일찍 생각날 계기.", "cardLine": "딴길에 들러도 스스로 돌아올 줄 알아.", "summaries": [{"title": "딴길로 새도, 돌아올 줄 알아.", "lines": ["궁금한 게 생기면 잠깐 들르기도 해.", "그러다 스스로 “공부해야지” 하고 돌아와."]}, {"title": "돌아오는 데 걸리는 시간은 달라.", "lines": ["금방 끌 때도, 조금 더 머물 때도 있어.", "구경거리가 많으면 길어지기도 하지."]}], "traits": [["구경은 해도 돌아올 길은 알아", "호기심이 생겨도 하던 일을 다시 이어가는 편이야."], ["스스로 다시 시작할 힘", "누가 옆에 없어도 돌아오려는 행동이 나오는 쪽이야."], ["왕복 시간은 그때그때", "돌아오는 건 익숙해도, 딴길에 머무는 길이는 달라질 수 있어."]]},
+ D:{"name": "강아지", "img": "dog", "card": "img/cards/dog.png?v=2", "nickname": "딴길 산책 중인", "quote": "“아 맞아… 나 해야 해…”", "headline": "그 ‘아 맞다’를,\n한 번 더.", "cardLine": "공부가 떠올라도 ‘이것까지만’ 보고 싶어.", "summaries": [{"title": "“아 맞다”는 떠오르는데.", "lines": ["해야 할 공부가 문득 떠올라.", "그래도 보던 걸 바로 끄기는 아쉬워."]}, {"title": "“이것까지만”에 자꾸 붙잡혀.", "lines": ["돌아갈까 하다가 조금만 더 보게 돼.", "그 사이 공부로 돌아갈 순간이 늦어지지."]}], "traits": [["알아차려도, 이것까지만", "시간이 지난 걸 알아도 당장 끄기는 아쉬워."], ["생각과 행동 사이에 틈이 있어", "“해야지”가 바로 “폰 내려놓기”로 이어지지는 않아."], ["복귀 타이밍을 놓치기도", "눈앞의 재미가 남아 있으면 돌아갈 순간이 뒤로 밀려."]]},
+ H:{"name": "햄스터", "img": "hamster", "card": "img/cards/hamster.png?v=2", "nickname": "다짐은 다시 켜지는", "quote": "“이번엔 진짜 한다.”", "headline": "이번엔 진짜 한다는 마음,\n폰을 켠 순간에도.", "cardLine": "다시 해볼 마음은 있는데, 폰 앞에서 흔들려.", "summaries": [{"title": "다시 해보려는 마음은 있어.", "lines": ["“이번엔 진짜 한다”는 마음이 들어.", "마음속에선 벌써 새 출발이야."]}, {"title": "막상 폰을 켜면 또 흔들려.", "lines": ["눈앞의 재미를 지나치기는 어려워.", "다시 하려던 마음이 잠깐 뒤로 밀려나."]}], "traits": [["다시 해보려는 마음은 있어", "흐름이 끊겨도 이번에는 해보고 싶은 마음이 남아 있어."], ["눈앞의 재미에 쉽게 흔들려", "계획할 때의 마음이 폰 앞에서는 잠깐 작아지기도 해."], ["실행은 그 순간이 어려워", "다짐을 떠올리는 일과 바로 행동하는 일 사이가 멀게 느껴질 수 있어."]]},
+ C:{"name": "고양이", "img": "cat", "card": "img/cards/cat.png?v=2", "nickname": "지금은 내 마음이 먼저인", "quote": "“됐어, 재밌었잖아.”", "headline": "네가 고른 이미지와 한마디로,\n가볍게 응원받아봐.", "cardLine": "요즘은 공부보다 당장 끌리는 게 먼저야.", "summaries": [{"title": "지금은 공부보다 재밌는 게 먼저야.", "lines": ["당장 끌리는 일에 시간을 쓰고 싶어.", "누가 재촉해도 공부할 마음이 생기진 않지."]}, {"title": "이건 ‘요즘의 너’를 말하는 거야.", "lines": ["항상 의욕이 없다는 뜻은 아니야.", "다시 해보고 싶어지면, 시작도 네 방식대로."]}], "traits": [["지금 끌리는 쪽이 먼저", "해야 한다는 이유만으로 바로 움직이지는 않는 편이야."], ["내 타이밍을 중요하게", "쉬고 싶은 지금의 마음도 네 상태의 일부야."], ["선택은 내가 할래", "다시 시작할 때도 네가 고른 방식이 편할 수 있어."]]}
 };
 const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="../install.html?src=sphinx", INSTA="https://instagram.com/meohae.project";
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 
 /* ===== 화면 ===== */
 const $=s=>document.querySelector(s);
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -409,11 +437,14 @@ function clearState(){try{localStorage.removeItem(AKEY);}catch(e){}}
 function loadState(){try{const o=JSON.parse(localStorage.getItem(AKEY)||'null');return o&&o.v===1&&o.type&&Date.now()-o.t<6*3600*1000?o:null;}catch(e){return null;}}
 
 /* 마지막 답을 고른 뒤: 거북이는 바로 석관, 나머지는 머해 소개를 한 번 거친다 */
-function finish(){
+async function finish(){
   ST={introSeen:false,resultLogged:false,stage:'done'};
   log('done',{type,how:type==='T'?'skip':'intro',answers:ansStr()});
   saveState();
-  if(type==='T')reveal();else showIntro();
+  if(type==='T'){reveal();return;}
+  await say('알아냈어!\n결과를 준비할게.','aha',1300);      /* 한 박자 쉬고 */
+  const f=$('#flash');f.classList.add('on');await sleep(260);   /* 화면이 밝아졌다가 */
+  showIntro(true);f.classList.remove('on');                     /* 소개가 떠오른다 */
 }
 
 /* ===== 결과 전 머해 소개 ===== */
@@ -473,7 +504,8 @@ if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{
 else demo.vis=true;
 document.addEventListener('visibilitychange',()=>{document.hidden?demoPause():demoRun();});
 
-function showIntro(){
+function showIntro(animate){
+  $('#s-intro').classList.toggle('enter',!!animate);
   $('#inHead').textContent=R[type].headline;$('#inMine').textContent=introLine();
   tryLink($('#inTry'),'intro');
   $('#inNote').textContent=IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어';
