@@ -432,6 +432,17 @@ function introLine(){
   if(type==='C')return A.cat===2?'':'좋아하는 사람이나 캐릭터가 있다고 했지. 그 사진에 듣고 싶은 한마디를 적어 둘 수 있어.';
   return '';
 }
+/* 신청 버튼이 실제로 화면에 보인 순간: 소개 화면과 결과 맨 아래 각각 응시당 한 번 */
+function seeCta(el,where){
+  if(!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(es=>{
+    if(!es.some(e=>e.isIntersecting))return;
+    ST.cv=ST.cv||{};if(ST.cv[where]){io.disconnect();return;}
+    ST.cv[where]=1;saveState();io.disconnect();
+    log('cta_view',{where:where+(IOS?'_ios':''),type});
+  },{threshold:.6});
+  io.observe(el);
+}
 function tryLink(el,where){
   el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 출시 알림 받기':'머해 먼저 써보기 · Android';
   el.onclick=()=>log('cta',{where:where+(IOS?'_ios':''),type});
@@ -470,6 +481,7 @@ function showIntro(){
   ST.stage='intro';
   if(!ST.introSeen){ST.introSeen=true;log('intro_view',{type});}
   saveState();demoRun();
+  seeCta($('#inTry'),'intro');
 }
 function goResult(where){
   demoPause();log('go_result',{where,type});
@@ -548,7 +560,7 @@ function renderResult(){
   const r=R[type];
   $('#cardImg').src=r.card;$('#cardImg').alt=`${r.nickname} ${r.name}. ${r.quote} ${r.cardLine}`;
   $('#resBody').innerHTML=partSums()+partTraits()+partSaw()+partLine()+partEnd();
-  const e=$('#endTry');if(e)tryLink(e,'result_end');
+  const e=$('#endTry');if(e){tryLink(e,'result_end');seeCta(e,'result_end');}
   loadCard();
   ST.stage='result';
   if(!ST.resultLogged){ST.resultLogged=true;log('result',{type,answers:ansStr(),where:SRC,how:type==='T'?'skip':'intro'});}  /* 같은 응시는 한 번만 센다 */
