@@ -113,23 +113,6 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .spot.out{opacity:0}
 
 /* 결과 */
-.sec{margin-top:32px}
-.sec h3{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:21px}
-.line5{display:flex;align-items:flex-end;margin-top:36px;border-bottom:1.5px solid var(--line)}
-.line5 .a{flex:1;position:relative;opacity:.32;filter:grayscale(.9)}
-.line5 .a img{width:100%;height:52px;object-fit:contain;object-position:50% 100%}
-.line5 .a.me{opacity:1;filter:none}
-.line5 .a.me img{height:82px}
-.line5 .a.me:after{content:"넌 여기";position:absolute;left:50%;top:-26px;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:2px 10px}
-.names{display:flex;margin-top:6px}
-.names span{flex:1;text-align:center;font-size:12px;font-weight:500;color:var(--sub)}
-.names span.me{color:var(--ink);font-weight:800}
-.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:8px}
-.saw{display:flex;gap:8px;align-items:flex-start;margin-top:14px}
-.saw>img{width:62px;flex:none}
-.saw .col{flex:1;display:flex;flex-direction:column;gap:8px}
-.saw .b{background:var(--soft);border-radius:6px 20px 20px 20px;padding:12px 16px;font-size:15.5px;font-weight:700;line-height:1.45}
-.saw .b small{display:block;font-size:12.5px;color:var(--sub);font-weight:500;margin-bottom:1px}
 
 /* ===== 결과 전 머해 소개, 결과 카드 화면 ===== */
 .wrap.plain{padding-top:0}
@@ -161,27 +144,6 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .b2:disabled{opacity:.55}
 .b2:active{transform:scale(.99)}
 .inote{margin-top:10px;font-size:12px;line-height:1.5;color:#82776E;text-align:center}
-.card{margin-top:22px;border-radius:12px;overflow:hidden;outline:1px solid #EEE5DC}
-.card img{display:block;width:100%;height:auto;aspect-ratio:4/5;background:#fff}
-.acts{display:flex;gap:8px;margin-top:12px}
-.acts .b2{flex:1;min-width:0;font-size:15px;margin:0}
-.fb{margin-top:10px;color:#654D3F;font-size:13px;line-height:1.6}
-.fb:empty{display:none}
-.linkcopy{display:block;margin:12px auto 0;background:none;border:0;color:var(--sub);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;min-height:36px}
-.sum{margin-top:28px;text-align:left}
-.sum+.sum{margin-top:24px}
-.sum h3{font-size:17.5px;line-height:1.5;font-weight:800;letter-spacing:-.5px;overflow-wrap:anywhere}
-.sum p{margin-top:7px;font-size:15.5px;line-height:1.7;color:#534A42;overflow-wrap:anywhere}
-.sum p span{display:block}
-.sec h3.plainh{font-family:inherit;font-weight:800;font-size:17.5px;letter-spacing:-.5px}
-.traits{list-style:none;margin-top:13px}
-.traits li{border-top:1px solid var(--line);padding:14px 0;display:flex;gap:12px;align-items:flex-start}
-.traits li:last-child{border-bottom:1px solid var(--line)}
-.traits i{flex:none;width:8px;height:8px;margin-top:8px;border-radius:50%;background:#F7AD71}
-.traits strong{display:block;font-size:15px;line-height:1.5;font-weight:700}
-.traits span{display:block;margin-top:3px;font-size:13px;line-height:1.65;color:var(--sub)}
-.rend{margin-top:30px;text-align:center}
-.rend .inote{margin:0 0 8px}
 
 /* 시작 화면은 스크롤 없이 한 화면에: 화면 높이에 맞춰 줄어든다 */
 .wrap.start{padding-top:clamp(10px,2vh,18px);padding-bottom:calc(min(100vw,430px)*.19)}
@@ -211,8 +173,67 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 #s-intro.on.enter .intro h3{animation:introIn .5s .12s cubic-bezier(.2,.8,.2,1) both}
 #s-intro.on.enter .ex{animation:introIn .55s .24s cubic-bezier(.2,.8,.2,1) both}
 
-.foot{margin-top:28px;font-size:12.5px;color:var(--sub);text-align:center}
-.foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-size:13.5px;color:var(--sub);margin-bottom:12px}
+/* ===== 결과: 내 카드 → 스핑크스가 본 것 → 머해 체험 → 다섯 친구, 저장·공유는 아래에 고정 ===== */
+#s-result{--rk:#362A23;--rs:#695D54;--rl:#E8E2DC;--ro:#974010;color:var(--rk);padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+#s-result [hidden]{display:none!important}
+.rcard{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px;height:auto;aspect-ratio:1170/1200;background:#fff}
+.rbody{padding-top:14px;font-size:15px;line-height:1.6}
+.rbody h2{font-size:21px;font-weight:800;line-height:1.35;letter-spacing:-.8px}
+.sr-heading{display:flex;gap:10px;align-items:center;margin-bottom:9px}
+.sr-heading img{width:44px;height:44px;object-fit:contain}
+.sr-meaning{color:#55483E}
+.sr-meaning strong{color:var(--ro);font-weight:700}
+.sr-answers summary{padding:9px 0;width:fit-content;min-height:42px;color:var(--rs);font-size:12.5px;font-weight:700;line-height:1.8;cursor:pointer}
+.sr-answers dl{border-left:2px solid #E8BC9A;padding:0 0 0 12px;margin:2px 0 12px}
+.sr-answers dt{color:var(--rs);font-size:12.5px}
+.sr-answers dd{font-size:15px;font-weight:700}
+.sr-answers dd+dt{margin-top:9px}
+.sr-promo{padding:18px;margin:12px 0 24px;border-radius:14px;background:#FFF4E9}
+.sr-promo .sr-brand{font-size:13px;font-weight:800;line-height:1.3;color:var(--ro);margin-bottom:6px}
+.sr-promo h2{font-size:20px;letter-spacing:-.65px;line-height:1.36}
+.sr-promo .sr-copy{margin:8px 0 12px;color:#5E4D40;font-size:14px;line-height:1.65}
+.sr-try{appearance:none;border:0;border-radius:10px;background:#AE4714;color:#fff;display:block;width:100%;padding:11px 12px;min-height:46px;font-size:14.5px;font-weight:700;line-height:1.4}
+.sr-go{display:flex;min-height:44px;width:fit-content;align-items:center;justify-content:center;margin:4px auto -6px;color:#70482D;text-underline-offset:3px;text-decoration:underline;font-size:13px;font-weight:700;line-height:1.4}
+.sr-promo[data-weight=light]{border-top:1px solid var(--rl);background:#fff;padding:16px 0 0;border-radius:0;margin-top:12px}
+.sr-promo[data-weight=light] h2{font-size:17px}
+.sr-promo[data-weight=light] .sr-try{color:var(--ro);border:1px solid #E6C6AF;background:#fff}
+.sr-demo{margin-top:12px}
+.sr-select{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:0 auto 8px}
+.sr-select button,.sr-replay{appearance:none;border:0;background:transparent;color:var(--rs);font-size:12.5px;font-weight:700;line-height:1.3;min-height:42px;padding:6px 9px}
+.sr-select button[aria-pressed=true]{color:var(--ro);text-decoration:underline;text-underline-offset:4px;font-weight:800}
+.sr-device{position:relative;width:min(100%,236px);margin:0 auto;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E6DED7}
+.sr-device img{width:100%;height:auto;display:block}
+.sr-hot{appearance:none;position:absolute;border:0;border-radius:5px;background:transparent;color:transparent;left:4%;width:92%;padding:0;height:7.6%}
+.sr-hot[data-choice=study]{top:81.5%}
+.sr-hot[data-choice=watch]{top:89.2%}
+.sr-hot[data-choice=close]{left:auto;top:0;right:0;height:9%;width:18%}
+.sr-hot:focus-visible{outline:3px solid #403125;outline-offset:-3px}
+.sr-feedback{padding:13px 12px 6px;border-radius:10px;background:#fff;text-align:center}
+.sr-feedback p{font-size:14px;line-height:1.6;color:#4C3E34}
+.sr-replay{display:block;margin:auto;color:var(--ro);text-decoration:underline;text-underline-offset:3px}
+.sr-lineup{border-top:1px solid var(--rl);padding-top:18px;margin-top:6px}
+.sr-lineup .sr-invite{margin:4px 0 10px;color:var(--rs);font-size:13px}
+.sr-friends{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;align-items:start}
+.sr-friend{appearance:none;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 0 3px;background:transparent;color:var(--rs);border:1px solid transparent;border-radius:10px;line-height:1.35;font-size:12px;font-weight:700}
+.sr-friend img{height:46px;width:100%;object-fit:contain;filter:saturate(.7)}
+.sr-friend[aria-pressed=true]{background:#FFF5EB;border-color:#E8BB99;color:var(--rk)}
+.sr-friend[aria-pressed=true] img,.sr-friend[data-own=true] img{filter:none}
+.sr-pin{font-size:10.5px;font-weight:800;color:var(--ro);line-height:1.6}
+.sr-compare{margin-top:9px;color:#594B41;font-size:14px;line-height:1.5}
+.sr-compare strong{color:var(--ro)}
+.rfoot{margin-top:22px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.rfoot button{appearance:none;display:inline-flex;align-items:center;padding:6px 0;min-height:44px;background:transparent;border:0;text-decoration:underline;text-underline-offset:3px;font-size:12.5px;font-weight:700;color:var(--rs)}
+.dock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:8;border-top:1px solid #E8E2DC;background:#fff;padding:9px 13px calc(10px + env(safe-area-inset-bottom,0px))}
+.dock[hidden]{display:none}
+.dock .notice{color:#705440;font-size:12px;line-height:1.4;margin-bottom:6px}
+.dock .notice:empty{display:none}
+.dock .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dock .acts button{appearance:none;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:9px 2px;min-height:48px;border:1px solid #DFD8D1;border-radius:12px;background:#fff;color:#362A23;font-size:14.5px;font-weight:700;line-height:1.3}
+.dock .acts button:disabled{opacity:.5}
+.dock .acts .share{border-color:#EDD1BC;color:#924217;background:#FFF1E6}
+.dock .acts svg{width:16px;height:16px;flex:none}
+@media(max-width:350px){.rbody h2{font-size:19px}.sr-promo{padding:14px}.sr-friend img{height:38px}.dock .acts button{font-size:13.5px}}
+
 .flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9;transition:opacity .3s}
 .flash.on{opacity:1}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13.5px;font-weight:700;padding:10px 16px;border-radius:99px;opacity:0;transition:opacity .25s;z-index:20;pointer-events:none}
@@ -286,17 +307,20 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
   </section>
 
   <section class="scr" id="s-result">
-    <header class="topbar"><h2>내 집중 동물</h2></header>
-    <figure class="card"><img id="cardImg" width="1080" height="1350" alt=""></figure>
-    <div class="acts"><button type="button" class="b2 pri" id="saveBtn" disabled>결과 카드 저장</button><button type="button" class="b2 sec2" id="shareBtn" disabled>친구에게 공유</button></div>
-    <p class="fb" id="cardFb" role="status" aria-live="polite"></p>
-    <button type="button" class="linkcopy" id="copyBtn">테스트 링크 복사</button>
-    <div id="resBody"></div>
-    <div class="foot"><button id="againBtn">다시 하기</button></div>
+    <img class="rcard" id="cardImg" width="1170" height="1200" alt="">
+    <div class="rbody" id="resBody"></div>
+    <div class="rfoot"><button type="button" id="copyBtn">테스트 링크 복사</button><button type="button" id="againBtn">다시 하기</button></div>
   </section>
 </div>
 <div class="ground"></div>
 <div class="spot" id="spot" aria-hidden="true"><i class="rays"></i><i class="glow"></i><img src="img/sarc_closed.webp" alt=""></div>
+<footer class="dock" id="dock" aria-label="결과 카드 저장과 공유" hidden>
+  <p class="notice" id="cardFb" role="status" aria-live="polite"></p>
+  <div class="acts">
+    <button type="button" id="saveBtn" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>결과 카드 저장</button>
+    <button type="button" class="share" id="shareBtn" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>친구에게 공유</button>
+  </div>
+</footer>
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"></div>
 
@@ -308,7 +332,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u3';                                 /* 화면 버전: 결과 전 소개 + 결과 카드 (설문 버전과 따로) */
+const UIV='u4';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -351,18 +375,18 @@ function decideMid(a){const r2=P2(a,'q1')+P2(a,'q2')+P2(a,'q3')+P2(a,'q4')+P2(a,
 /* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
 const ORDER=['T','S','D','H','C'];
 const R={
- T:{"name": "거북이", "img": "turtle", "card": "img/cards/turtle.png?v=2", "nickname": "자기 페이스 지키는", "quote": "“하던 거 마저 하고 볼게.”", "headline": "", "cardLine": "잠깐 흔들려도, 금방 하던 공부로 돌아와.", "summaries": [{"title": "잠깐 흔들려도, 다시 공부로.", "lines": ["재밌는 게 보이면 너도 눈길이 가.", "그래도 대체로 하던 공부로 금방 돌아와."]}, {"title": "“이따 볼게”를 진짜로 해.", "lines": ["조금 아쉬워도 폰을 내려놓는 편이야.", "해야 할 일을 먼저 챙길 줄 알지."]}], "traits": [["내 흐름을 다시 찾는 편", "잠깐 시선이 새도 하던 일을 이어갈 여지가 있어."], ["멈출 때를 비교적 잘 알아", "재미가 남아 있어도 지금 할 일을 챙기는 쪽이야."], ["네 페이스로 꾸준히", "크게 다짐하기보다 다시 앉는 행동이 익숙한 편이야."]]},
- S:{"name": "다람쥐", "img": "squirrel", "card": "img/cards/squirrel.png?v=2", "nickname": "돌아올 길은 아는", "quote": "“잠깐만… 아, 하던 거 해야지.”", "headline": "혼자 돌아오는 너에게,\n조금 더 일찍 생각날 계기.", "cardLine": "딴길에 들러도 스스로 돌아올 줄 알아.", "summaries": [{"title": "딴길로 새도, 돌아올 줄 알아.", "lines": ["궁금한 게 생기면 잠깐 들르기도 해.", "그러다 스스로 “공부해야지” 하고 돌아와."]}, {"title": "돌아오는 데 걸리는 시간은 달라.", "lines": ["금방 끌 때도, 조금 더 머물 때도 있어.", "구경거리가 많으면 길어지기도 하지."]}], "traits": [["구경은 해도 돌아올 길은 알아", "호기심이 생겨도 하던 일을 다시 이어가는 편이야."], ["스스로 다시 시작할 힘", "누가 옆에 없어도 돌아오려는 행동이 나오는 쪽이야."], ["왕복 시간은 그때그때", "돌아오는 건 익숙해도, 딴길에 머무는 길이는 달라질 수 있어."]]},
- D:{"name": "강아지", "img": "dog", "card": "img/cards/dog.png?v=2", "nickname": "딴길 산책 중인", "quote": "“아 맞아… 나 해야 해…”", "headline": "그 ‘아 맞다’를,\n한 번 더.", "cardLine": "공부가 떠올라도 ‘이것까지만’ 보고 싶어.", "summaries": [{"title": "“아 맞다”는 떠오르는데.", "lines": ["해야 할 공부가 문득 떠올라.", "그래도 보던 걸 바로 끄기는 아쉬워."]}, {"title": "“이것까지만”에 자꾸 붙잡혀.", "lines": ["돌아갈까 하다가 조금만 더 보게 돼.", "그 사이 공부로 돌아갈 순간이 늦어지지."]}], "traits": [["알아차려도, 이것까지만", "시간이 지난 걸 알아도 당장 끄기는 아쉬워."], ["생각과 행동 사이에 틈이 있어", "“해야지”가 바로 “폰 내려놓기”로 이어지지는 않아."], ["복귀 타이밍을 놓치기도", "눈앞의 재미가 남아 있으면 돌아갈 순간이 뒤로 밀려."]]},
- H:{"name": "햄스터", "img": "hamster", "card": "img/cards/hamster.png?v=2", "nickname": "다짐은 다시 켜지는", "quote": "“이번엔 진짜 한다.”", "headline": "이번엔 진짜 한다는 마음,\n폰을 켠 순간에도.", "cardLine": "다시 해볼 마음은 있는데, 폰 앞에서 흔들려.", "summaries": [{"title": "다시 해보려는 마음은 있어.", "lines": ["“이번엔 진짜 한다”는 마음이 들어.", "마음속에선 벌써 새 출발이야."]}, {"title": "막상 폰을 켜면 또 흔들려.", "lines": ["눈앞의 재미를 지나치기는 어려워.", "다시 하려던 마음이 잠깐 뒤로 밀려나."]}], "traits": [["다시 해보려는 마음은 있어", "흐름이 끊겨도 이번에는 해보고 싶은 마음이 남아 있어."], ["눈앞의 재미에 쉽게 흔들려", "계획할 때의 마음이 폰 앞에서는 잠깐 작아지기도 해."], ["실행은 그 순간이 어려워", "다짐을 떠올리는 일과 바로 행동하는 일 사이가 멀게 느껴질 수 있어."]]},
- C:{"name": "고양이", "img": "cat", "card": "img/cards/cat.png?v=2", "nickname": "지금은 내 마음이 먼저인", "quote": "“됐어, 재밌었잖아.”", "headline": "네가 고른 이미지와 한마디로,\n가볍게 응원받아봐.", "cardLine": "요즘은 공부보다 당장 끌리는 게 먼저야.", "summaries": [{"title": "지금은 공부보다 재밌는 게 먼저야.", "lines": ["당장 끌리는 일에 시간을 쓰고 싶어.", "누가 재촉해도 공부할 마음이 생기진 않지."]}, {"title": "이건 ‘요즘의 너’를 말하는 거야.", "lines": ["항상 의욕이 없다는 뜻은 아니야.", "다시 해보고 싶어지면, 시작도 네 방식대로."]}], "traits": [["지금 끌리는 쪽이 먼저", "해야 한다는 이유만으로 바로 움직이지는 않는 편이야."], ["내 타이밍을 중요하게", "쉬고 싶은 지금의 마음도 네 상태의 일부야."], ["선택은 내가 할래", "다시 시작할 때도 네가 고른 방식이 편할 수 있어."]]}
+ T:{name:'거북이',img:'turtle',nickname:'자기 페이스 지키는',headline:'',habit:'한눈팔아도 금방 공부로 돌아와.'},
+ S:{name:'다람쥐',img:'squirrel',nickname:'돌아올 길은 아는',headline:'혼자 돌아오는 너에게,\n조금 더 일찍 생각날 계기.',habit:'조금 더 봐도 내가 끄고 돌아와.'},
+ D:{name:'강아지',img:'dog',nickname:'딴길 산책 중인',headline:'그 ‘아 맞다’를,\n한 번 더.',habit:'돌아가야지 하면서도 조금 더 봐.'},
+ H:{name:'햄스터',img:'hamster',nickname:'다짐은 다시 켜지는',headline:'이번엔 진짜 한다는 마음,\n폰을 켠 순간에도.',habit:'다시 마음먹어도 눈앞의 재미에 흔들려.'},
+ C:{name:'고양이',img:'cat',nickname:'지금은 내 마음이 먼저인',headline:'네가 고른 이미지와 한마디로,\n가볍게 응원받아봐.',habit:'요즘은 내가 하고 싶은 게 먼저야.'}
 };
 const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="../install.html?src=sphinx", INSTA="https://instagram.com/meohae.project";
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 
 /* ===== 화면 ===== */
 const $=s=>document.querySelector(s);
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#dock').hidden=id!=='#s-result';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -476,7 +500,7 @@ function seeCta(el,where){
 }
 function tryLink(el,where){
   el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 출시 알림 받기':'머해 먼저 써보기 · Android';
-  el.onclick=()=>log('cta',{where:where+(IOS?'_ios':''),type});
+  el.onclick=()=>{if(where==='intro'){ST.ic=1;saveState();}log('cta',{where:where+(IOS?'_ios':''),type});};
 }
 /* 예시 전환: 화면에 보인 뒤 4초가 지나면 종이친구로 한 번 바뀌고 멈춘다 */
 const DEMO_MS=4000, REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -549,51 +573,204 @@ async function openBox(){
 
 /* ===== 결과 ===== */
 const ansStr=()=>Object.keys(Q).filter(k=>k in A).map(k=>k+A[k]).join(' ');
-function sawRows(){
-  const pick=k=>`<div class="b"><small>${Q[k].t.replace(/\n/g,' ')}</small>${Q[k].o[A[k]]}</div>`;
-  const ks={T:['q1','q4'],S:['q4','q6'],D:['q3','q6'],H:['q7','q8'],C:['q4','q5']}[type];
-  return ks.map(pick).join('');
-}
-function partSums(){return R[type].summaries.map(m=>`<section class="sum"><h3>${m.title}</h3><p>${m.lines.map(l=>`<span>${l}</span>`).join('')}</p></section>`).join('');}
-function partTraits(){return `<div class="sec"><h3 class="plainh">이런 모습, 좀 익숙하지?</h3><ul class="traits">${R[type].traits.map(t=>`<li><i aria-hidden="true"></i><div><strong>${t[0]}</strong><span>${t[1]}</span></div></li>`).join('')}</ul></div>`;}
-function partSaw(){return `<div class="sec"><h3 class="plainh">스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col">${sawRows()}</div></div></div>`;}
-function partLine(){
-  return `<div class="sec"><h3 class="plainh">다섯 친구 중에 넌 여기</h3><div class="line5">${ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('')}</div>
-    <div class="names">${ORDER.map(k=>`<span class="${k===type?'me':''}">${R[k].name}</span>`).join('')}</div><div class="ends"><span>혼자서도 잘 돌아옴</span><span>지금은 쉬는 중</span></div></div>`;
-}
-function partEnd(){return type==='T'?'':`<div class="rend"><p class="inote">막지 않고, 한 번 잡아주는 머해</p><a class="b2 sec2" id="endTry" target="_blank" rel="noopener"></a></div>`;}
 
-/* 화면에 보이는 그 PNG 파일을 그대로 저장·공유한다 */
-let cardBlob=null,cardFor='';
-const cardMsg=t=>{$('#cardFb').textContent=t||'';};
+/* 카드와 해석에 쓰는 문구. 답은 고정 번호(0·1·2)로만 읽는다. 동물 판정은 여기서 하지 않는다.
+   [카드에 쓰는 짧은 답, 그 답에서 읽은 한 문장, 그 문장에서 강조할 구절] */
+const CH={
+ q1:{label:'폰을 켜면',o:[['진짜 하나만 보고 꺼','하나만 보려고 켠 폰을 정말 하나만 보고 꺼.','하나만 보고 꺼'],['몇 개 더 보고 꺼','하나만 보려던 날에도 몇 개 더 보고 폰을 꺼.','몇 개 더 보고'],['끄는 타이밍을 놓치고 한참 봐','폰을 켜면 어느새 끌 타이밍을 놓치고 한참 봐.','끌 타이밍을 놓치고']]},
+ q2:{label:'공부 중 알림이 오면',o:[['하던 공부부터 하고 나중에 봐','공부 중에 온 알림은 나중에 확인하는 편이야.','나중에 확인'],['확인만 하고 다시 공부','알림은 확인만 하고 다시 공부해.','확인만 하고 다시 공부해'],['답장하다 다른 앱까지 한 바퀴','답장을 하다가 다른 앱까지 한 바퀴 돌아.','다른 앱까지 한 바퀴']]},
+ q3:{label:'딴짓한 지 30분',o:[['지금이라도 하자','30분이 지난 걸 알면 ‘지금이라도 하자’는 생각이 들어.','‘지금이라도 하자’'],['5분만 더 보고…','30분이 지난 걸 알아도 5분만 더 보고 싶어.','5분만 더'],['기왕 이렇게 된 거','30분이 훌쩍 지나면 ‘기왕 이렇게 된 거’ 하는 생각이 들어.','‘기왕 이렇게 된 거’']]},
+ q5:{label:'공부를 미룬 밤엔',o:[['내일은 꼭 해내고 싶어','공부를 미룬 밤엔 내일은 꼭 해보고 싶다는 마음이 들어.','내일은 꼭 해보고 싶다'],['해야 하는데… 또 미뤘네','공부를 미룬 밤엔 또 미뤘다는 생각이 남아.','또 미뤘다는 생각'],['지금은 공부에 별로 마음이 없어','공부를 미룬 밤에도, 요즘은 공부에 마음이 크지 않다고 느껴.','공부에 마음이 크지 않다']]},
+ q6:{label:'돌아갈 생각이 들면',o:[['더 보고 싶어도 끄고 돌아가','아직 재밌어도 공부가 생각나면 보던 걸 끄고 돌아가.','보던 걸 끄고 돌아가'],['조금 더 보다가 내가 끄고 돌아가','돌아갈 생각이 나면 조금 더 보다가 네 손으로 꺼.','네 손으로 꺼'],['돌아가야지 하면서도 계속 봐','공부가 떠오른 뒤에도 보던 걸 계속 보게 돼.','계속 보게 돼']]},
+ q7:{label:'공부를 잘하고 싶은 마음',o:[['이번엔 제대로 해보고 싶어','이번에는 공부를 제대로 해보고 싶은 마음이 커.','제대로 해보고 싶은 마음'],['해야겠다는 생각은 해','공부를 해야겠다는 생각은 하고 있어.','해야겠다는 생각'],['요즘은 그 마음이 별로 안 생겨','요즘은 공부를 잘해보고 싶은 마음이 크지 않아.','마음이 크지 않아']]},
+ q8:{label:'딴짓하고 나면',o:[['이번엔 해보자고 또 마음먹어','딴짓한 뒤엔 자주 새로 마음을 먹어.','자주 새로 마음을 먹어'],['가끔 다시 해보자고 다짐해','딴짓한 뒤 가끔 다시 해보자고 다짐해.','가끔 다시 해보자고 다짐해'],['그런 다짐은 잘 안 해','딴짓하고 나서 다시 다짐하는 일은 드문 편이야.','다시 다짐하는 일은 드문']]}
+};
+/* 동물별 근거 문항 두 개와, 승인된 예시 답·문구 */
+const CARD={
+ T:{keys:['q1','q2'],ex:[0,0],cap:['하나만 본다더니, ','진짜 하나만.'],mean:'하나만 보려고 켠 폰을 정말 하나만 보고 꺼. 알림이 와도 하던 공부부터 마치는 게 네 방식이야.',hl:'하나만 보고 꺼'},
+ S:{keys:['q1','q6'],ex:[1,1],cap:['구경은 좀 해도, ','내가 끄고 돌아와.'],mean:'구경하다 보면 하나만 보겠다는 약속은 슬쩍 넘어가. 그래도 폰을 내려놓고 다시 책을 펴는 건 너야.',hl:'폰을 내려놓고 다시 책을 펴는 건 너야'},
+ D:{keys:['q2','q6'],ex:[2,2],cap:['답장은 끝났는데, ','폰 구경은 계속.'],mean:'네가 딴길로 새기 쉬운 순간은 답장을 보낸 직후야. 공부가 떠올라도 어느새 다른 앱까지 가 있거든.',hl:'답장을 보낸 직후'},
+ H:{keys:['q1','q8'],ex:[2,0],cap:['폰은 한참 보고, ','다짐은 또 새로.'],mean:'폰을 보다 보면 끄려던 순간이 훌쩍 지나가. 그러고 나면 ‘이번엔 해보자’는 마음도 또 진심이야.',hl:'‘이번엔 해보자’는 마음'},
+ C:{keys:['q3','q5'],ex:[2,2],cap:['공부는 이따, ','지금은 이게 재밌어.'],mean:'딴짓한 걸 알아차려도 지금 재밌는 걸 조금 더 즐기고 싶어. 오늘 공부할 마음이 어떤지 네가 제일 잘 아는 편이야.',hl:'지금 재밌는 걸'}
+};
+const BACKCAP=[['아직 재밌어도, ','내가 먼저 꺼.'],['구경은 좀 해도, ','내가 끄고 돌아와.'],['공부가 떠올라도, ','조금만 더.']];
+const fid=(a,k)=>{const v=a?a[k]:null;return [0,1,2].includes(v)?v:(typeof v==='string'&&/^[012]$/.test(v)?+v:null);};
+function captionFor(t,i){
+  if(t==='T')return [['하나만 본다더니, ','진짜 하나만.'],['몇 개 더 보고, ','폰은 내가 꺼.'],['끄려고 했는데, ','어느새 한참.']][i.q1];
+  if(t==='S')return BACKCAP[i.q6];
+  if(t==='D')return i.q2===1&&i.q6===1?['알림은 바로 끄는데, ','재밌는 건 조금 더.']:BACKCAP[i.q6];
+  if(t==='H'){
+    if(i.q8===2)return [['이번엔 제대로, ','해보고 싶어.'],['공부할 생각은, ','나도 있어.'],['요즘 공부할 마음은, ','잠깐 쉬는 중.']][i.q7];
+    return i.q8===0?['딴짓한 뒤엔, ','다짐은 또 새로.']:['딴짓한 뒤엔, ','가끔 다시 다짐해.'];
+  }
+  return [['30분이 지났네, ','지금이라도 하자.'],['30분이 지나도, ','5분만 더.'],['공부는 이따, ','지금은 이게 재밌어.']][i.q3];
+}
+/* 실제로 고른 답으로 카드의 한 줄·응답 두 줄·스핑크스 해석을 만든다 */
+function cardModel(t,a){
+  const c=CARD[t], none={type:t,has:false,approved:false,cap:[],rows:[],mean:'',hl:''};
+  const i={};Object.keys(CH).forEach(k=>i[k]=fid(a,k));
+  /* 햄스터인데 다짐은 잘 안 한다고 답했으면, 다짐 대신 본인이 답한 의욕을 보여준다 */
+  const keys=t==='H'&&i.q8===2?['q1','q7']:c.keys;
+  if(keys.some(k=>i[k]===null)||(t==='H'&&i.q8===null))return none;
+  const rows=keys.map(k=>({key:k,id:i[k],label:CH[k].label,value:CH[k].o[i[k]][0]}));
+  const approved=c.keys.every((k,n)=>i[k]===c.ex[n]);
+  if(approved)return {type:t,has:true,approved,cap:c.cap,rows,mean:c.mean,hl:c.hl};
+  const last=rows[rows.length-1];                       /* 강조는 한 구절만: 그 동물을 가장 잘 보여주는 두 번째 답에서 */
+  return {type:t,has:true,approved,cap:captionFor(t,i),rows,mean:rows.map(r=>CH[r.key].o[r.id][1]).join(' '),hl:CH[last.key].o[last.id][2]};
+}
+
+/* 카드 한 장을 그려서 화면·저장·공유가 모두 같은 PNG를 쓴다 */
+let cardBlob=null,cardUrl='',cardSeq=0,fontsReady=null;
+const CF='"MeohaeCardKR","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+function cardFonts(){
+  if(!fontsReady)fontsReady=Promise.all([['regular','400'],['bold','700']].map(async([n,w])=>{
+    if(!('FontFace' in window))return;const f=new FontFace('MeohaeCardKR','url("font/card-'+n+'.woff")',{weight:w});document.fonts.add(await f.load());
+  })).catch(()=>{});
+  return fontsReady;
+}
+function loadImg(src){return new Promise((ok,no)=>{const im=new Image();im.onload=()=>ok(im);im.onerror=()=>no(new Error('img'));im.src=src;});}
+async function drawCard(m){
+  await cardFonts();
+  const art=await loadImg('img/'+R[m.type].img+'.webp');
+  const cv=document.createElement('canvas');cv.width=1170;cv.height=1200;const c=cv.getContext('2d');
+  c.fillStyle='#fff';c.fillRect(0,0,1170,1200);c.scale(3,3);                 /* 390×400 기준 좌표 */
+  const font=(s,b)=>{c.font=(b?'700 ':'400 ')+s+'px '+CF;};
+  const wid=(t,s,b)=>{font(s,b);return c.measureText(t).width;};
+  const put=(t,x,y,s,col,b,al)=>{font(s,b);c.fillStyle=col;c.textAlign=al||'left';c.textBaseline='alphabetic';c.fillText(t,x,y);};
+  put('공부할 때의 나',195,28,13,'#76665b',false,'center');
+  const title=R[m.type].nickname+' '+R[m.type].name;
+  put(title,195,61,24*Math.min(1,346/wid(title,24,true)),'#372a23',true,'center');
+  const box=m.has?{x:40,y:67,w:310,h:190}:{x:40,y:84,w:310,h:270};        /* 동물을 가운데에 크게 */
+  const sc=Math.min(box.w/art.naturalWidth,box.h/art.naturalHeight),iw=art.naturalWidth*sc,ih=art.naturalHeight*sc;
+  c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+  c.drawImage(art,box.x+(box.w-iw)/2,box.y+(box.h-ih)/2,iw,ih);
+  if(m.has){
+    const [lead,acc]=m.cap,lw=wid(lead,17),aw=wid(acc,20.5,true),fit=Math.min(1,358/(lw+aw)),left=(390-fit*(lw+aw))/2;
+    put(lead,left,280,17*fit,'#372a23');put(acc,left+fit*lw,280,20.5*fit,'#a64012',true);
+    c.fillStyle='#dfd7cf';c.fillRect(26,297,338,2/3);
+    m.rows.forEach((r,n)=>{
+      const y=320+n*30,room=338-8-wid(r.label,13),s=15.2*Math.min(1,room/wid(r.value,15.2,true));
+      put(r.label,26,y,13,'#76665b');put(r.value,364,y,s,'#372a23',true,'right');
+    });
+  }
+  put('스핑크스가 맞혀보는 내 집중 동물',26,387,11.5,'#766b63');put('머해',364,387,11.5,'#6d6056',true,'right');
+  return new Promise((ok,no)=>cv.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png'));
+}
+let msgT=0;const cardMsg=t=>{clearTimeout(msgT);$('#cardFb').textContent=t||'';if(t)msgT=setTimeout(()=>{$('#cardFb').textContent='';},7000);};
 const cardName=()=>`내-집중-동물-${R[type].name}.png`;
-async function loadCard(){
-  const want=type;cardBlob=null;cardFor='';$('#saveBtn').disabled=$('#shareBtn').disabled=true;cardMsg('');
-  try{const r=await fetch(R[want].card);if(!r.ok)throw 0;const bl=await r.blob();if(want!==type)return;cardBlob=bl;cardFor=want;$('#saveBtn').disabled=$('#shareBtn').disabled=false;}
-  catch(e){if(want===type)cardMsg('위 카드를 길게 눌러 저장해 줘.');}
+async function makeCard(m){
+  const seq=++cardSeq, img=$('#cardImg');                          /* 이전 응시의 카드가 잠깐이라도 보이지 않게 먼저 비운다 */
+  cardBlob=null;if(cardUrl){URL.revokeObjectURL(cardUrl);cardUrl='';}
+  img.removeAttribute('src');$('#saveBtn').disabled=$('#shareBtn').disabled=true;cardMsg('');
+  img.alt=R[m.type].nickname+' '+R[m.type].name+(m.has?'. '+m.cap.join('')+' '+m.rows.map(r=>r.label+', '+r.value).join('. '):'');
+  try{
+    const b=await drawCard(m);if(seq!==cardSeq)return;              /* 그리는 사이에 다시 시작했으면 버린다 */
+    cardBlob=b;cardUrl=URL.createObjectURL(b);img.src=cardUrl;$('#saveBtn').disabled=$('#shareBtn').disabled=false;
+  }catch(e){if(seq===cardSeq)cardMsg('카드를 준비하지 못했어. 화면을 새로 열어줘.');}
 }
 function saveCard(){
   if(!cardBlob)return;
-  const url=URL.createObjectURL(cardBlob),a=document.createElement('a');a.href=url;a.download=cardName();document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  const a=document.createElement('a');a.href=cardUrl;a.download=cardName();document.body.appendChild(a);a.click();a.remove();
   log('card_save',{type});
   cardMsg('다운로드가 시작되지 않으면 위 카드를 길게 눌러 저장해 줘.');
 }
 async function shareCard(){
   if(!cardBlob)return;
-  const no='이 환경에서는 위의 ‘결과 카드 저장’을 눌러 이미지를 받은 뒤 친구에게 보내줘.';
+  const no='이 환경에서는 ‘결과 카드 저장’을 누르거나 카드를 길게 눌러 저장한 뒤 친구에게 보내줘.';
   let file=null;try{file=new File([cardBlob],cardName(),{type:'image/png'});}catch(e){}
   if(!file||!navigator.share||!navigator.canShare||!navigator.canShare({files:[file]})){cardMsg(no);log('share',{how:'card_unsupported',type});return;}
   cardMsg('');log('share',{how:'card_open',type});            /* 공유 창을 연 것일 뿐, 보낸 것은 아니다 */
   try{await navigator.share({files:[file]});log('share',{how:'card_done',type});}
   catch(e){if(e&&e.name==='AbortError')log('share',{how:'card_cancel',type});else{cardMsg(no);log('share',{how:'card_fail',type});}}
 }
+
+/* 스핑크스가 본 것: 고른 답에서 읽은 해석 + 실제 질문과 답 전문 */
+const esc=t=>String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+function partSaw(m){
+  let mean=esc(m.has?m.mean:R[type].habit);
+  if(m.has&&m.hl&&mean.includes(esc(m.hl)))mean=mean.replace(esc(m.hl),'<strong>'+esc(m.hl)+'</strong>');
+  const ans=m.has?`<details class="sr-answers"><summary>내가 고른 답 보기</summary><dl>${m.rows.map(r=>`<dt>${esc(Q[r.key].t)}</dt><dd>${esc(Q[r.key].o[r.id])}</dd>`).join('')}</dl></details>`:'';
+  return `<section><header class="sr-heading"><img src="img/sphinx_hmm.webp" alt=""><h2>스핑크스가 본 것</h2></header><p class="sr-meaning">${mean}</p>${ans}</section>`;
+}
+/* 머해 제안: 그 사람이 실제로 고른 답과 부딪히지 않는 문장만 쓴다 */
+function promoCopy(){
+  if(type==='D'){
+    const t=fid(A,'q2')===2?'답장 끝. 다음 앱을 누르는 순간엔?':fid(A,'q6')===2?'돌아가야지 하면서도 계속 볼 때, 한 번 잡아준다면?':fid(A,'q6')===1?'‘조금만 더’ 보려는 그 순간, 한 번 잡아준다면?':'공부하다 네가 정한 앱을 여는 순간엔?';
+    return {w:'main',pic:'human',t,b:'네가 정한 앱을 열면, 좋아하는 사진과 네가 쓴 한마디가 한 번 잡아줘. 앱은 잠기지 않아. 계속 볼지도 네가 골라.'};
+  }
+  if(type==='H'){
+    const t=fid(A,'q8')===0?'다음에 폰을 열 때, 아까 한 다짐이 뜬다면?':fid(A,'q8')===1?'가끔 하는 그 다짐이, 폰을 열 때 뜬다면?':'오늘 하려던 공부가 폰을 켤 때 보인다면?';
+    return {w:'main',pic:'paper',t,b:'오늘 하려던 공부를 한 줄 적어둬. 네가 정한 앱을 열면 사진과 함께 그 한 줄이 떠. 계속 볼지 공부로 돌아갈지는 네가 골라.'};
+  }
+  if(type==='S')return {w:'light',pic:'human',t:'오늘은 조금 일찍 돌아오고 싶다면',b:'네가 정한 앱을 열 때 한마디가 뜨게 할 수 있어. 보고 나서 끌 때는 네가 정해.'};
+  if(type==='C')return A.cat===0||A.cat===1
+    ?{w:'light',pic:'human',t:'네가 좋아하는 사진이 “너 머해?” 하면?',b:'좋아하는 사진을 넣으면 어떤 느낌인지 가볍게 눌러봐. 계속 보고 싶은 날엔 그대로 볼 수 있어.'}
+    :{w:'light',pic:'paper',t:'종이친구가 “너 머해?” 하면?',b:'기본 종이친구가 어떤 느낌인지 가볍게 눌러봐. 계속 보고 싶은 날엔 그대로 볼 수 있어.'};
+  return null;
+}
+function partPromo(){
+  const p=promoCopy();if(!p)return '';
+  return `<section class="sr-promo" data-weight="${p.w}" data-picture="${p.pic}">
+    <p class="sr-brand">머해</p><h2>${esc(p.t)}</h2><p class="sr-copy">${esc(p.b)}</p>
+    <button type="button" class="sr-try" id="tryBtn" aria-expanded="false" aria-controls="tryDemo">팝업 한 번 체험하기</button>
+    <div class="sr-demo" id="tryDemo" hidden>
+      <div class="sr-select" role="group" aria-label="팝업 사진 예시"><button type="button" data-photo="human" aria-pressed="false">내 사진 예시</button><button type="button" data-photo="paper" aria-pressed="false">기본 종이친구</button></div>
+      <div class="sr-device"><img id="tryShot" width="452" height="920" alt="">
+        <button type="button" class="sr-hot" data-choice="close" aria-label="팝업 체험 닫기"></button>
+        <button type="button" class="sr-hot" data-choice="study" aria-label="공부로 돌아갈게"></button>
+        <button type="button" class="sr-hot" data-choice="watch" aria-label="계속 볼게"></button></div>
+      <div class="sr-feedback" id="tryFb" hidden><p role="status"></p><button type="button" class="sr-replay" id="tryAgain">다시 체험하기</button></div>
+    </div>
+    <a class="sr-go" id="endTry" target="_blank" rel="noopener"></a></section>`;
+}
+/* 결과 안 팝업 체험: 전부 선택 사항이고, 참여 안내 클릭과는 따로 기록한다 */
+function armTry(){
+  const box=$('#resBody .sr-promo');if(!box)return;
+  const launch=$('#tryBtn'),demo=$('#tryDemo'),modes=box.querySelector('.sr-select'),device=box.querySelector('.sr-device'),shot=$('#tryShot'),fb=$('#tryFb');
+  let opened=0;
+  const choose=pic=>{
+    modes.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.photo===pic)));
+    shot.src=pic==='human'?'img/demo_human.webp':'img/demo_paper.webp';
+    shot.alt=pic==='human'?'인물 사진으로 설정한 실제 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 토익 RC공부.':'기본 종이친구의 실제 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 경영통계 2강 듣기.';
+  };
+  const play=()=>{fb.hidden=true;device.hidden=false;modes.hidden=false;};
+  const close=()=>{demo.hidden=true;launch.setAttribute('aria-expanded','false');launch.textContent='팝업 한 번 체험하기';launch.focus();};
+  modes.querySelectorAll('button').forEach(b=>b.onclick=()=>{choose(b.dataset.photo);log('try_photo',{how:b.dataset.photo,type});});
+  launch.onclick=()=>{
+    if(!demo.hidden){close();return;}
+    choose(box.dataset.picture);play();demo.hidden=false;launch.setAttribute('aria-expanded','true');launch.textContent='체험 접기';
+    ST.tried=1;saveState();
+    log('try_open',{how:opened++?'again':'first',type});
+  };
+  device.querySelectorAll('.sr-hot').forEach(b=>b.onclick=()=>{
+    if(b.dataset.choice==='close'){close();return;}
+    modes.hidden=true;device.hidden=true;fb.hidden=false;
+    fb.querySelector('p').textContent=b.dataset.choice==='study'?'공부로 돌아가기를 골랐어. 앱에서도 보던 걸 내려놓을 순간을 이렇게 네가 정해.':'계속 보기를 골랐어. 앱을 그대로 볼 수 있어. 다음 선택도 네가 해.';
+    log('try_pick',{how:b.dataset.choice,type});                 /* 체험 안의 선택일 뿐, 참여 안내 클릭이 아니다 */
+    $('#tryAgain').focus();
+  });
+  $('#tryAgain').onclick=()=>{play();log('try_open',{how:'again',type});device.querySelector('[data-choice="study"]').focus();};
+}
+/* 다섯 친구: 누른 동물의 한 줄만 바뀌고 '내 결과' 표시는 그대로 */
+function partLine(){
+  return `<section class="sr-lineup"><h2>다섯 친구 중에 넌 여기</h2><p class="sr-invite">친구는 어느 쪽 같아? 동물을 눌러봐.</p>
+    <div class="sr-friends" role="group" aria-label="동물별 공부 습관 비교">${ORDER.map(k=>`<button type="button" class="sr-friend" data-k="${k}" data-own="${k===type}" aria-pressed="${k===type}" aria-label="${R[k].name}${k===type?' (내 결과)':''} 습관 보기"><img src="img/${R[k].img}.webp" alt=""><span>${R[k].name}</span>${k===type?'<span class="sr-pin">내 결과</span>':''}</button>`).join('')}</div>
+    <p class="sr-compare" aria-live="polite"><strong>${R[type].name} · </strong><span>${R[type].habit}</span></p></section>`;
+}
+function armLine(){
+  const fr=[...document.querySelectorAll('#resBody .sr-friend')],name=$('#resBody .sr-compare strong'),line=$('#resBody .sr-compare span');
+  fr.forEach(f=>f.onclick=()=>{
+    fr.forEach(x=>x.setAttribute('aria-pressed',String(x===f)));
+    name.textContent=R[f.dataset.k].name+' · ';line.textContent=R[f.dataset.k].habit;
+    log('friend',{how:f.dataset.k,type});
+  });
+}
 function renderResult(){
-  const r=R[type];
-  $('#cardImg').src=r.card;$('#cardImg').alt=`${r.nickname} ${r.name}. ${r.quote} ${r.cardLine}`;
-  $('#resBody').innerHTML=partSums()+partTraits()+partSaw()+partLine()+partEnd();
-  const e=$('#endTry');if(e){tryLink(e,'result_end');seeCta(e,'result_end');}
-  loadCard();
+  const m=cardModel(type,A);
+  $('#resBody').innerHTML=partSaw(m)+partPromo()+partLine();
+  const e=$('#endTry');
+  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 출시 알림 받기':'Android 테스트 참여 방법 보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
+  armTry();armLine();makeCard(m);
   ST.stage='result';
   if(!ST.resultLogged){ST.resultLogged=true;log('result',{type,answers:ansStr(),where:SRC,how:type==='T'?'skip':'intro'});}  /* 같은 응시는 한 번만 센다 */
   saveState();
@@ -608,7 +785,7 @@ $('#saveBtn').onclick=saveCard;$('#shareBtn').onclick=shareCard;$('#copyBtn').on
 let attempted=false;                            /* 첫 응시는 방문 때의 번호를 그대로 쓰고, 다시 할 때만 새 번호 */
 $('#startBtn').onclick=()=>{clearState();if(attempted)SID=DID+'.'+rnd(4);attempted=true;run();};
 $('#openBtn').onclick=openBox;
-$('#againBtn').onclick=()=>{log('restart',{type});clearState();SID=DID+'.'+rnd(4);ST={introSeen:false,resultLogged:false,stage:''};show('#s-start');};
+$('#againBtn').onclick=()=>{log('restart',{type});clearState();SID=DID+'.'+rnd(4);ST={introSeen:false,resultLogged:false,stage:''};cardSeq++;cardBlob=null;$('#cardImg').removeAttribute('src');show('#s-start');};
 /* 같은 응시로 돌아왔을 때: 결과는 다시 세지 않고, 소개는 다시 자동으로 띄우지 않는다 */
 (function(){
   const o=loadState();if(!o)return;
