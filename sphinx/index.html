@@ -94,34 +94,26 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .pit .tw.a{left:12%;top:16%}.pit .tw.b{right:10%;bottom:30%;animation-delay:.5s;scale:.8}
 @keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
 
-/* 석관 열기: 닫힌 석관이 살짝 움직이고 → 뚜껑이 오른쪽으로 비켜나고 → 내 동물이 얼굴을 내민 뒤 → 결과 카드로 이어진다 */
-.spot{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;overflow:hidden;background:#fff;transition:background-color .16s}
+/* 석관 열기 연출: 주변이 어두워지고 석관이 커진 뒤 빛이 터지면서 결과로 넘어간다 */
+.spot{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;overflow:hidden;background:rgba(30,21,16,0);transition:background .4s,opacity .45s}
 .spot.on{display:flex}
-.sg{--sh:min(300px,76vw,44vh);position:relative;flex:none;height:var(--sh);width:calc(var(--sh)*546/640);margin-top:calc(var(--sh)*.3);transform:translateX(24.4%);transition:opacity .2s}
-.sg img{position:absolute;display:block;max-width:none;-webkit-user-drag:none;user-select:none}
-.sg .sbody,.sg .slidO{left:0;top:0;width:100%;height:100%}
-.sg .sbody{clip-path:polygon(49.45% 0.00%,49.45% 11.88%,48.26% 14.06%,48.08% 15.62%,47.53% 17.19%,46.89% 18.75%,46.25% 20.31%,45.88% 21.88%,45.15% 25.00%,44.23% 28.12%,43.50% 31.25%,42.77% 34.38%,42.22% 37.50%,41.48% 40.62%,40.93% 43.75%,40.38% 46.88%,39.84% 50.00%,39.38% 53.12%,38.92% 56.25%,38.37% 59.38%,37.82% 62.50%,37.27% 65.62%,36.72% 68.75%,36.36% 71.88%,35.81% 75.00%,35.44% 78.12%,35.38% 80.47%,35.53% 82.50%,35.99% 84.38%,36.54% 85.94%,37.45% 87.50%,38.74% 89.06%,40.57% 90.62%,43.13% 92.19%,46.52% 93.75%,47.99% 94.38%,47.99% 100.00%,0.00% 100.00%,0.00% 0.00%)}
-.sg .slidO{clip-path:polygon(49.45% 0.00%,49.45% 11.88%,48.26% 14.06%,48.08% 15.62%,47.53% 17.19%,46.89% 18.75%,46.25% 20.31%,45.88% 21.88%,45.15% 25.00%,44.23% 28.12%,43.50% 31.25%,42.77% 34.38%,42.22% 37.50%,41.48% 40.62%,40.93% 43.75%,40.38% 46.88%,39.84% 50.00%,39.38% 53.12%,38.92% 56.25%,38.37% 59.38%,37.82% 62.50%,37.27% 65.62%,36.72% 68.75%,36.36% 71.88%,35.81% 75.00%,35.44% 78.12%,35.38% 80.47%,35.53% 82.50%,35.99% 84.38%,36.54% 85.94%,37.45% 87.50%,38.74% 89.06%,40.57% 90.62%,43.13% 92.19%,46.52% 93.75%,47.99% 94.38%,47.99% 100.00%,100.00% 100.00%,100.00% 0.00%);transform-origin:66.8% 50%;opacity:0}
-.sg .slidC{left:-9.61%;top:0;width:70.51%;height:100%;transform-origin:50% 96%}
-.sg .pk{position:absolute;inset:0}
-.sg .sbody,.sg .pk{visibility:hidden}
-.spot.run .sbody,.spot.run .pk{animation:sgShow 0s linear .26s forwards}
-@keyframes sgShow{to{visibility:visible}}
-.sg .pk.bk{clip-path:polygon(-150% -200%,250% -200%,250% 100%,20.15% 94.53%,17.58% 92.19%,13.55% 78.12%,9.52% 62.50%,5.86% 46.88%,4.40% 39.06%,4.03% 36.25%,2.38% var(--cut,36.25%),-150% var(--cut,36.25%))}
-.sg .pk.cv{clip-path:polygon(47.99% 18.52%,27.84% 18.52%,25.27% 19.22%,23.53% 20.31%,21.15% 21.88%,19.69% 23.44%,18.59% 25.00%,17.49% 26.56%,16.58% 28.12%,15.84% 29.69%,15.11% 31.25%,14.38% 32.81%,13.83% 34.38%,13.46% 35.94%,13.28% 37.50%,13.46% 39.06%,13.64% 40.62%,14.56% 43.75%,15.29% 46.88%,17.12% 54.69%,19.14% 62.50%,21.15% 70.31%,23.17% 78.12%,23.63% 80.08%,36.63% 80.08%)}
-.sg .an{left:var(--ax);top:var(--ay);width:var(--aw);height:auto;transform:translateY(var(--af))}
-.spot.run .slidC{animation:sgNudge .15s ease-out both,sgLidC .35s cubic-bezier(.45,0,.2,1) .15s forwards}
-.spot.run .slidO{animation:sgLidO .35s cubic-bezier(.45,0,.2,1) .15s both}
-.spot.run .an{animation:sgUp .43s cubic-bezier(.2,.85,.3,1.14) .37s both}
-@keyframes sgNudge{0%{transform:none}45%{transform:scale(.972) rotate(-1.3deg)}100%{transform:none}}
-@keyframes sgLidC{0%{transform:none;opacity:1}24%{transform:translate(3%,-2.6%) rotate(1.6deg);opacity:1}80%{opacity:1}100%{transform:translate(58.4%,0) rotate(6deg) scaleX(.87);opacity:0}}
-@keyframes sgLidO{0%{transform:translate(-41.2%,0) rotate(-6deg) scaleX(1.15);opacity:0}24%{transform:translate(-39.1%,-2.6%) rotate(-4.4deg) scaleX(1.15);opacity:0}50%{opacity:0}80%{opacity:1}100%{transform:none;opacity:1}}
-@keyframes sgUp{from{transform:translateY(var(--af))}to{transform:none}}
-.spot .fly{position:fixed;display:none;max-width:none;transform-origin:0 0;z-index:2;pointer-events:none}
-.spot.out .sg{opacity:0}
-.spot.out .skipnow{visibility:hidden}
-.spot.clear{background-color:rgba(255,255,255,0);pointer-events:none}
-.skipnow{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);min-height:44px;padding:8px 14px;border:0;background:none;color:var(--sub);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.spot.dark{background:rgba(30,21,16,.84)}
+.spot img{position:relative;z-index:2;height:270px;transform:scale(.95);transition:transform .55s cubic-bezier(.2,.9,.3,1.25),opacity .2s}
+.spot.dark img{transform:scale(1.3)}
+.spot.shake img{animation:shake2 1.25s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake2{0%{transform:scale(1.3) rotate(0)}8%{transform:scale(1.3) rotate(-4deg)}16%{transform:scale(1.3) rotate(4deg)}24%{transform:scale(1.32) rotate(-6deg)}32%{transform:scale(1.32) rotate(6deg)}40%{transform:scale(1.34) rotate(-8deg)}48%{transform:scale(1.34) rotate(8deg)}56%{transform:scale(1.37) rotate(-10deg)}64%{transform:scale(1.37) rotate(10deg)}72%{transform:scale(1.4) rotate(-11deg)}80%{transform:scale(1.42) rotate(11deg)}90%{transform:scale(1.46) rotate(-6deg)}100%{transform:scale(1.5) rotate(0)}}
+.spot .rays{position:absolute;left:50%;top:50%;width:170vmax;height:170vmax;margin:-85vmax 0 0 -85vmax;background:repeating-conic-gradient(from 0deg,rgba(255,206,120,0) 0 9deg,rgba(255,214,140,.6) 9deg 18deg);-webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 16%,transparent 38%);mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 16%,transparent 38%);opacity:0;transition:opacity .7s;animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spot .glow{position:absolute;left:50%;top:50%;width:440px;height:440px;margin:-220px 0 0 -220px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.98) 0,rgba(255,196,110,.55) 36%,rgba(255,196,110,0) 70%);opacity:0;transform:scale(.5);transition:opacity .7s,transform 1.25s ease-in}
+.spot.glowing .rays{opacity:1}
+.spot.glowing .glow{opacity:1;transform:scale(1.2)}
+.spot.burst{background:#fff}
+.spot.burst .glow{background:radial-gradient(circle,#fff 0,#fff 56%,rgba(255,255,255,0) 72%);transform:scale(7);transition:transform .4s ease-in,opacity .2s}
+.spot.burst .rays,.spot.burst img{opacity:0}
+.spot.out{opacity:0}
+
+.skipnow{position:absolute;z-index:3;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);min-height:44px;padding:8px 14px;border:0;background:none;color:rgba(255,255,255,.82);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.spot.burst .skipnow,.spot.out .skipnow{visibility:hidden}
 /* 마지막 답 뒤: 스핑크스가 가운데에서 크게 한 번 끄덕인다 (말풍선 없이) */
 .aha{position:fixed;inset:0;z-index:25;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#fff;padding:0 22px 6vh}
 .aha.on{display:flex}
@@ -337,17 +329,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 </div>
 <div class="ground"></div>
 <div class="aha" id="aha" role="status"><img src="img/sphinx_aha.webp" alt="스핑크스"><p>알겠다. 이 석관이야!</p></div>
-<div class="spot" id="spot">
-  <div class="sg" id="sg" aria-hidden="true">
-    <div class="pk bk"><img class="an" alt=""></div>
-    <img class="sbody" src="img/sarc_open.webp" alt="">
-    <div class="pk cv"><img class="an" alt=""></div>
-    <img class="slidO" src="img/sarc_open.webp" alt="">
-    <img class="slidC" src="img/sarc_closed.webp" alt="">
-  </div>
-  <img class="fly" id="fly" alt="">
-  <button type="button" class="skipnow" id="skipNow">결과 바로 보기</button>
-</div>
+<div class="spot" id="spot"><i class="rays" aria-hidden="true"></i><i class="glow" aria-hidden="true"></i><img src="img/sarc_closed.webp" alt=""><button type="button" class="skipnow" id="skipNow">결과 바로 보기</button></div>
 <footer class="dock" id="dock" aria-label="결과 카드 저장과 공유" hidden>
   <p class="notice" id="cardFb" role="status" aria-live="polite"></p>
   <div class="acts">
@@ -366,7 +348,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u5';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u7';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -495,7 +477,7 @@ function clearState(){try{localStorage.removeItem(AKEY);}catch(e){}}
 function loadState(){try{const o=JSON.parse(localStorage.getItem(AKEY)||'null');return o&&o.v===1&&o.type&&Date.now()-o.t<6*3600*1000?o:null;}catch(e){return null;}}
 
 async function ahaBeat(){
-  const e=$('#aha');[SARC_OPEN,'img/'+R[type].img+'.webp'].forEach(u=>{new Image().src=u;});   /* 열릴 그림을 미리 받아 둔다 */
+  const e=$('#aha');
   e.classList.add('on');await sleep(REDUCE?1000:1500);e.classList.remove('on');
 }
 /* 마지막 답을 고른 뒤: 거북이는 바로 석관, 나머지는 머해 소개를 한 번 거친다 */
@@ -585,15 +567,6 @@ $('#skipTop').onclick=()=>goResult('top');
 $('#skipBottom').onclick=()=>goResult('bottom');
 
 /* ===== 석관 열기 ===== */
-const SARC_OPEN='img/sarc_open.webp';
-/* 동물마다 얼굴 위치가 달라서, 석관에서 내미는 크기·좌우·높이를 따로 맞춘다 (열린 석관 그림 546×640 기준) */
-const PEEK={
- T:{w:340,x:-66,y:-117,cut:128},
- S:{w:346,x:12,y:-178},
- D:{w:380,x:-77,y:-165,cut:86},
- H:{w:330,x:10,y:-161},
- C:{w:380,x:-40,y:-184,cut:120}
-};
 let opening=false,openSeq=0;
 function reveal(){
   opening=false;$('#box').style.opacity='1';
@@ -602,48 +575,31 @@ function reveal(){
   ST.stage='reveal';saveState();
   show('#s-reveal');
 }
-const imgReady=im=>im.complete&&im.naturalWidth?Promise.resolve():new Promise(r=>{im.onload=im.onerror=()=>r();});
 async function openBox(){
   if(opening)return;opening=true;                              /* 연타해도 석관은 한 번만 열린다 */
-  const sp=$('#spot'),tok=++openSeq,k=PEEK[type],src='img/'+R[type].img+'.webp';
+  const sp=$('#spot'),tok=++openSeq;
   $('#openBtn').style.visibility='hidden';log('open',{type,how:REDUCE?'reduced':'anim'});
   renderResult();                                              /* 카드는 미리 그려 두고, 기록은 카드가 보일 때 남긴다 */
   if(REDUCE){landResult();return;}                             /* 동작 줄이기: 바로 결과 */
-  const ans=[...sp.querySelectorAll('.an')];
-  ans.forEach(im=>{im.src=src;const st=im.style;st.setProperty('--aw',(k.w/546*100)+'%');st.setProperty('--ax',(k.x/546*100)+'%');st.setProperty('--ay',(k.y/640*100)+'%');});
-  sp.querySelector('.pk.bk').style.setProperty('--cut',((k.cut==null?232:k.cut)/640*100)+'%');
-  const fly=$('#fly');fly.style.cssText='';
-  sp.className='spot on';
-  await Promise.race([Promise.all([...ans,sp.querySelector('.sbody')].map(imgReady)),sleep(400)]);
-  if(tok!==openSeq)return;
-  const hpx=ans[0].getBoundingClientRect().height||1,sgH=$('#sg').getBoundingClientRect().height;
-  ans.forEach(im=>im.style.setProperty('--af',((330-k.y)/640*sgH/hpx*100)+'%'));   /* 처음엔 머리가 석관 안쪽에 있다 */
-  void sp.offsetWidth;sp.classList.add('run');                 /* ① 살짝 움직이고 ② 뚜껑이 비켜나고 ③ 얼굴이 올라온다 */
-  await sleep(1150);if(tok!==openSeq)return;                   /* 얼굴을 알아볼 시간을 남긴다 */
-  /* ④ 같은 동물이 결과 카드의 제자리로 옮겨 가며 카드가 나타난다 */
-  const from=ans[1].getBoundingClientRect();
-  show('#s-result');
-  await Promise.race([cardDone,sleep(450)]);if(tok!==openSeq)return;
-  const cr=$('#cardImg').getBoundingClientRect(),u=cr.width/390,nw=ans[1].naturalWidth||1,nh=ans[1].naturalHeight||1;
-  const fit=Math.min(310*u/nw,190*u/nh),tw=nw*fit,tx=cr.left+40*u+(310*u-tw)/2,ty=cr.top+67*u+(190*u-nh*fit)/2;
-  fly.src=src;fly.style.cssText=`display:block;left:${from.left}px;top:${from.top}px;width:${from.width}px;height:${from.height}px`;
-  ans.forEach(im=>im.style.visibility='hidden');
-  void fly.offsetWidth;sp.classList.add('out');
-  fly.style.transition='transform .28s cubic-bezier(.4,0,.2,1)';
-  fly.style.transform=`translate(${tx-from.left}px,${ty-from.top}px) scale(${tw/from.width})`;
-  await sleep(190);if(tok!==openSeq)return;
-  sp.classList.add('clear');
-  await sleep(140);if(tok!==openSeq)return;
-  landResult();
+  sp.className='spot on';void sp.offsetWidth;
+  sp.classList.add('dark');$('#box').style.opacity='0';      /* 주변이 어두워지고 석관이 커진다 */
+  await sleep(550);if(tok!==openSeq)return;
+  sp.classList.add('glowing','shake');                        /* 빛이 새어 나오며 흔들린다 */
+  await sleep(1300);if(tok!==openSeq)return;
+  sp.classList.add('burst');                                  /* 빛이 터진다 */
+  await sleep(520);if(tok!==openSeq)return;
+  landResult(true);                                           /* 결과 카드가 나타난다 */
+  sp.classList.add('out');await sleep(460);if(tok!==openSeq)return;
+  sp.className='spot';
 }
 /* 결과 카드가 실제로 화면에 나타난 시점: 여기서만 result를 남긴다 */
-function landResult(){
-  openSeq++;opening=false;
-  const sp=$('#spot');sp.className='spot';sp.querySelectorAll('.an').forEach(im=>im.style.visibility='');$('#fly').style.cssText='';
+function landResult(fade){
+  openSeq+=fade?0:1;opening=false;
+  if(!fade)$('#spot').className='spot';
   if(!$('#s-result').classList.contains('on'))show('#s-result');
   ST.stage='result';
   if(!ST.resultLogged){ST.resultLogged=true;log('result',{type,answers:ansStr(),where:SRC,how:type==='T'?'skip':'intro'});}  /* 같은 응시는 한 번만 센다 */
-  saveState();
+  saveState();cardSeen();
 }
 $('#skipNow').onclick=()=>{if(!opening)return;log('open_skip',{type});landResult();};
 
@@ -733,6 +689,11 @@ async function drawCard(m){
   return new Promise((ok,no)=>cv.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png'));
 }
 let msgT=0;const cardMsg=t=>{clearTimeout(msgT);$('#cardFb').textContent=t||'';if(t)msgT=setTimeout(()=>{$('#cardFb').textContent='';},7000);};
+function cardSeen(){
+  const img=$('#cardImg');
+  if(ST.cardSeen||ST.stage!=='result'||!cardBlob||!img.complete||!img.naturalWidth||!$('#s-result').classList.contains('on'))return;
+  ST.cardSeen=1;saveState();log('card_view',{type});
+}
 const cardName=()=>`내-집중-동물-${R[type].name}.png`;
 async function makeCard(m){
   const seq=++cardSeq, img=$('#cardImg');                          /* 이전 응시의 카드가 잠깐이라도 보이지 않게 먼저 비운다 */
@@ -741,7 +702,7 @@ async function makeCard(m){
   img.alt=R[m.type].nickname+' '+R[m.type].name+(m.has?'. '+m.cap.join('')+' '+m.rows.map(r=>r.label+', '+r.value).join('. '):'');
   try{
     const b=await drawCard(m);if(seq!==cardSeq)return;              /* 그리는 사이에 다시 시작했으면 버린다 */
-    cardBlob=b;cardUrl=URL.createObjectURL(b);img.src=cardUrl;$('#saveBtn').disabled=$('#shareBtn').disabled=false;
+    cardBlob=b;cardUrl=URL.createObjectURL(b);img.onload=cardSeen;img.src=cardUrl;$('#saveBtn').disabled=$('#shareBtn').disabled=false;
   }catch(e){if(seq===cardSeq)cardMsg('카드를 준비하지 못했어. 화면을 새로 열어줘.');}
 }
 function saveCard(){
@@ -828,21 +789,25 @@ function armTry(){
   $('#tryAgain').onclick=()=>{play();log('try_open',{how:'again',type});device.querySelector('[data-choice="study"]').focus();};
 }
 /* 다섯 친구: 누른 동물의 한 줄만 바뀌고 '내 결과' 표시는 그대로 */
+/* 내 동물 설명은 카드에 적힌 내 답 그대로 (답이 없으면 대표 문구) */
+let myLine='';
+const lineOf=k=>k===type&&myLine?myLine:R[k].habit;
 function partLine(){
   return `<section class="sr-lineup"><h2>다섯 친구 중에 넌 여기</h2><p class="sr-invite">친구는 어느 쪽 같아? 동물을 눌러봐.</p>
     <div class="sr-friends" role="group" aria-label="동물별 공부 습관 비교">${ORDER.map(k=>`<button type="button" class="sr-friend" data-k="${k}" data-own="${k===type}" aria-pressed="${k===type}" aria-label="${R[k].name}${k===type?' (내 결과)':''} 습관 보기"><img src="img/${R[k].img}.webp" alt=""><span>${R[k].name}</span>${k===type?'<span class="sr-pin">내 결과</span>':''}</button>`).join('')}</div>
-    <p class="sr-compare" aria-live="polite"><strong>${R[type].name} · </strong><span>${R[type].habit}</span></p></section>`;
+    <p class="sr-compare" aria-live="polite"><strong>${R[type].name} · </strong><span>${esc(lineOf(type))}</span></p></section>`;
 }
 function armLine(){
   const fr=[...document.querySelectorAll('#resBody .sr-friend')],name=$('#resBody .sr-compare strong'),line=$('#resBody .sr-compare span');
   fr.forEach(f=>f.onclick=()=>{
     fr.forEach(x=>x.setAttribute('aria-pressed',String(x===f)));
-    name.textContent=R[f.dataset.k].name+' · ';line.textContent=R[f.dataset.k].habit;
+    name.textContent=R[f.dataset.k].name+' · ';line.textContent=lineOf(f.dataset.k);
     log('friend',{how:f.dataset.k,type});
   });
 }
 function renderResult(){
   const m=cardModel(type,A);
+  myLine=m.has?m.rows[m.rows.length-1].value+'.':'';
   $('#resBody').innerHTML=partSaw(m)+partPromo()+partLine();
   const e=$('#endTry');
   if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 출시 알림 받기':'Android 테스트 참여 방법 보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
