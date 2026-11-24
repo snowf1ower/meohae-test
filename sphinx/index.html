@@ -50,9 +50,6 @@ h1 em{font-style:normal;color:var(--acc);position:relative;display:inline-block}
 .spark i:nth-child(1){transform:rotate(-28deg)}.spark i:nth-child(3){transform:rotate(28deg)}
 h1 .spark.l{left:-38px;top:50%;margin-top:-13px}
 h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
-.heroS{position:relative;width:62%;margin:16px auto 0}
-.heroS img{animation:bob 3.4s ease-in-out infinite}
-.heroS .spark{right:-14px;top:14%;transform:scaleX(-1) rotate(-30deg)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .lead{color:var(--ink);text-align:center;margin-top:12px;font-size:16px;line-height:1.65}
 .shelf{display:flex;justify-content:center;align-items:flex-end;gap:12px}
@@ -116,12 +113,6 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .spot.out{opacity:0}
 
 /* 결과 */
-.hero{margin:22px -6px 0;padding:22px 16px 26px;border-radius:30px;text-align:center;background:var(--peach)}
-.hero .from{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:var(--sub)}
-.hero .me{height:214px;margin:12px auto 0;object-fit:contain;animation:rise .6s cubic-bezier(.2,.9,.3,1.3) both;filter:drop-shadow(0 10px 16px rgba(58,42,34,.12))}
-.hero h2{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:44px;line-height:1.1;margin-top:10px}
-.hero .quote{font-family:Jua,"Noto Sans KR",sans-serif;font-size:21px;margin-top:6px;color:var(--acc)}
-.desc{font-size:16px;line-height:1.75;margin-top:22px}
 .sec{margin-top:32px}
 .sec h3{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:21px}
 .line5{display:flex;align-items:flex-end;margin-top:36px;border-bottom:1.5px solid var(--line)}
@@ -139,46 +130,58 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .saw .col{flex:1;display:flex;flex-direction:column;gap:8px}
 .saw .b{background:var(--soft);border-radius:6px 20px 20px 20px;padding:12px 16px;font-size:15.5px;font-weight:700;line-height:1.45}
 .saw .b small{display:block;font-size:12.5px;color:var(--sub);font-weight:500;margin-bottom:1px}
-.row2{display:grid;grid-template-columns:1.3fr 1fr;gap:10px;margin-top:32px}
-.row2 .btn{min-height:54px;font-size:19px}
-.row2 .btn.go:after{display:none}
-.row2.one{grid-template-columns:1fr}
-.mcta{margin-top:32px;border:1.5px solid var(--acc);border-radius:24px;padding:18px 16px;background:#fff}
-.mcta .row{display:flex;gap:12px;align-items:center}
-.mcta .row img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center 15%;flex:none}
-.mcta .k{font-size:12.5px;font-weight:700;color:var(--acc)}
-.mcta h4{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:20px;line-height:1.3;margin-top:1px}
-.mcta p{font-size:15px;line-height:1.65;margin-top:10px}
-.mcta p.first{font-weight:800}
-.mcta .btn{margin-top:16px;min-height:54px;font-size:19px}
-.mcta .btn.go:after{display:none}
-.mcta.small{border-color:var(--line)}
-.mcta.small .k{color:var(--sub)}
-/* 결과 바로 아래에 오는 머해 영역 */
-.hero.compact{padding:18px 16px 20px}
-.hero.compact .me{height:150px;margin-top:8px}
-.hero.compact h2{font-size:38px;margin-top:6px}
-.hero .because{font-size:15px;font-weight:600;line-height:1.55;margin-top:10px}
-.hero .because:empty{display:none}
-.mh2{margin-top:18px;border:2px solid var(--acc);border-radius:26px;padding:20px 16px 18px;background:#fff}
-.mh2 .k{font-family:Jua,"Noto Sans KR",sans-serif;font-size:17px;color:var(--acc)}
-.mh2 h4{font-family:Jua,"Noto Sans KR",sans-serif;font-weight:400;font-size:24px;line-height:1.3;margin-top:4px}
-.mh2 p{font-size:15px;line-height:1.65;margin-top:10px}
-.mh2 p.first{font-weight:700}
-.mh2 p.key{font-size:16.5px;font-weight:800;text-align:center;margin-top:14px}
-.mh2 .btn{margin-top:16px;min-height:56px;font-size:20px}
-.mh2 .btn.go:after{display:none}
-.mh2.small{border-color:var(--line);border-width:1.5px;margin-top:26px}
-.mh2.small h4{font-size:21px}
-.mh2.small .k{color:var(--sub)}
-.mh2 .more{display:none}
-.mh2.open .more{display:block}
-.mh2.open .opener{display:none}
-.phone{position:relative;width:66%;margin:16px auto 0;aspect-ratio:9/16;border:3px solid var(--ink);border-radius:28px;overflow:hidden;background:#fff url(img/demo_poster.webp) center/cover no-repeat;box-shadow:0 12px 26px rgba(46,33,27,.14)}
-.phone video{display:block;width:100%;height:100%;object-fit:cover}
-.steps{list-style:none;counter-reset:st;display:grid;gap:7px;margin-top:14px}
-.steps li{counter-increment:st;position:relative;padding-left:30px;font-size:14.5px;line-height:1.5}
-.steps li:before{content:counter(st);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--peach);color:#C24A0C;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* ===== 결과 전 머해 소개, 결과 카드 화면 ===== */
+.wrap.plain{padding-top:0}
+.wrap.plain .head{display:none}
+.topbar{min-height:62px;margin:0 -22px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #F4F0EB}
+.topbar .logo{color:var(--acc);font-size:24px;font-weight:800;letter-spacing:-1.5px}
+.topbar h2{font-size:20px;font-weight:800;letter-spacing:-.7px;line-height:1.4}
+.skip2{border:1px solid #E6DDD4;border-radius:999px;padding:9px 13px;min-height:44px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;white-space:nowrap}
+.intro{padding:22px 0 8px;text-align:center}
+.intro .eyebrow{color:var(--sub);font-size:12.5px;font-weight:600}
+.intro h3{font-size:29px;line-height:1.3;font-weight:800;letter-spacing:-1.2px;margin-top:7px;white-space:pre-line}
+.intro .mine{margin-top:12px;font-size:14.5px;line-height:1.6;font-weight:700}
+.intro .mine:empty{display:none}
+.intro .copy{font-size:14.5px;line-height:1.65;margin-top:12px;color:#62584F}
+.ex{margin:18px 0 14px}
+.exctl{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.exctl button{border:1px solid #DED7D2;min-height:44px;background:#fff;color:#433B35;border-radius:999px;padding:5px 12px;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.exctl button img{width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:50% 22%}
+.exctl button[aria-pressed="true"]{color:#8A3A09;border-color:#D97637;background:#FFF4E9}
+.exctl .motion{border-color:transparent;text-decoration:underline;text-underline-offset:3px;font-size:12.5px;color:#66574E;min-width:60px;justify-content:center;padding:6px 4px}
+.exshot{position:relative;width:min(100%,266px);aspect-ratio:452/920;margin:0 auto;border:1px solid #E4DFDB;border-radius:15px;overflow:hidden;background:#fff}
+.exshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .3s}
+.exshot img.on{opacity:1}
+.exnote{margin-top:9px;color:#615951;font-size:12.5px;line-height:1.5}
+.intro .choice{margin:14px 0 17px;font-size:15px;font-weight:700;line-height:1.55}
+.b2{appearance:none;display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;padding:12px;border-radius:14px;border:0;font-size:16px;font-weight:700;line-height:1.4;text-decoration:none;color:var(--ink);background:#fff}
+.b2.pri{background:var(--acc);color:#fff}
+.b2.sec2{border:1px solid #E8E1DB;margin-top:9px}
+.b2:disabled{opacity:.55}
+.b2:active{transform:scale(.99)}
+.inote{margin-top:10px;font-size:12px;line-height:1.5;color:#82776E;text-align:center}
+.card{margin-top:22px;border-radius:12px;overflow:hidden;outline:1px solid #EEE5DC}
+.card img{display:block;width:100%;height:auto;aspect-ratio:4/5;background:#fff}
+.acts{display:flex;gap:8px;margin-top:12px}
+.acts .b2{flex:1;min-width:0;font-size:15px;margin:0}
+.fb{margin-top:10px;color:#654D3F;font-size:13px;line-height:1.6}
+.fb:empty{display:none}
+.linkcopy{display:block;margin:12px auto 0;background:none;border:0;color:var(--sub);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;min-height:36px}
+.sum{margin-top:28px;text-align:left}
+.sum+.sum{margin-top:24px}
+.sum h3{font-size:17.5px;line-height:1.5;font-weight:800;letter-spacing:-.5px;overflow-wrap:anywhere}
+.sum p{margin-top:7px;font-size:15.5px;line-height:1.7;color:#534A42;overflow-wrap:anywhere}
+.sum p span{display:block}
+.sec h3.plainh{font-family:inherit;font-weight:800;font-size:17.5px;letter-spacing:-.5px}
+.traits{list-style:none;margin-top:13px}
+.traits li{border-top:1px solid var(--line);padding:14px 0;display:flex;gap:12px;align-items:flex-start}
+.traits li:last-child{border-bottom:1px solid var(--line)}
+.traits i{flex:none;width:8px;height:8px;margin-top:8px;border-radius:50%;background:#F7AD71}
+.traits strong{display:block;font-size:15px;line-height:1.5;font-weight:700}
+.traits span{display:block;margin-top:3px;font-size:13px;line-height:1.65;color:var(--sub)}
+.rend{margin-top:30px;text-align:center}
+.rend .inote{margin:0 0 8px}
 
 .foot{margin-top:28px;font-size:12.5px;color:var(--sub);text-align:center}
 .foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;font-size:13.5px;color:var(--sub);margin-bottom:12px}
@@ -228,16 +231,40 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
     <div class="stack"><button class="btn go" id="openBtn">석관 열기</button></div>
   </section>
 
-  <section class="scr" id="s-result">
-    <div class="hero" id="hero">
-      <span class="from">석관에서 나온 건</span>
-      <img class="me" id="rimg" alt="">
-      <h2 id="rname"></h2>
-      <p class="quote" id="rquote"></p>
-      <p class="because" id="rbecause"></p>
+  <section class="scr" id="s-intro">
+    <header class="topbar"><span class="logo">머해</span><button type="button" class="skip2" id="skipTop">내 결과 보기 →</button></header>
+    <div class="intro">
+      <p class="eyebrow">네 결과가 준비됐어</p>
+      <h3 id="inHead"></h3>
+      <p class="mine" id="inMine"></p>
+      <p class="copy">정해 둔 앱을 열면 내가 고른 사진과 한마디,<br>오늘 할 공부가 함께 떠.</p>
+      <div class="ex">
+        <div class="exctl" role="group" aria-label="머해 응원 예시 선택">
+          <button type="button" data-ex="human" aria-pressed="true"><img alt="" src="img/demo_human.webp">인물 사진</button>
+          <button type="button" data-ex="paper" aria-pressed="false"><img alt="" src="img/demo_paper.webp">종이친구</button>
+          <button type="button" class="motion" id="exMotion">이어보기</button>
+        </div>
+        <figure class="exshot" id="exShot">
+          <img class="on" data-still="human" width="452" height="920" src="img/demo_human.webp" alt="인물 사진으로 설정한 머해. ‘너 머해? ㅎㅎ’, ‘우리 하던 거 먼저 하자.’ 아래 오늘 목표 ‘토익 RC공부’와 ‘공부로 돌아갈게’, ‘계속 볼게’ 선택지가 보여.">
+          <img data-still="paper" width="452" height="920" src="img/demo_paper.webp" alt="종이친구로 설정한 머해. ‘너 머해?’, ‘우리 하던 거 먼저 하자.’ 아래 오늘 목표 ‘경영통계 2강 듣기’와 ‘공부로 돌아갈게’, ‘계속 볼게’ 선택지가 보여.">
+        </figure>
+        <p class="exnote" aria-live="polite"><span id="exLabel">인물 사진 예시</span> · 실제 앱 화면</p>
+      </div>
+      <p class="choice">머해는 앱을 막지 않고 한 번 잡아줘.<br>계속 볼지, 돌아갈지는 네가 골라.</p>
+      <a class="b2 pri" id="inTry" target="_blank" rel="noopener"></a>
+      <button type="button" class="b2 sec2" id="skipBottom">내 결과 보기</button>
+      <p class="inote" id="inNote"></p>
     </div>
+  </section>
+
+  <section class="scr" id="s-result">
+    <header class="topbar"><h2>내 집중 동물</h2></header>
+    <figure class="card"><img id="cardImg" width="1080" height="1350" alt=""></figure>
+    <div class="acts"><button type="button" class="b2 pri" id="saveBtn" disabled>결과 카드 저장</button><button type="button" class="b2 sec2" id="shareBtn" disabled>친구에게 공유</button></div>
+    <p class="fb" id="cardFb" role="status" aria-live="polite"></p>
+    <button type="button" class="linkcopy" id="copyBtn">테스트 링크 복사</button>
     <div id="resBody"></div>
-    <div class="foot"><button id="againBtn">다시 하기</button><br>머해는 막지 않고, 한 번 잡아주는 앱이야</div>
+    <div class="foot"><button id="againBtn">다시 하기</button></div>
   </section>
 </div>
 <div class="ground"></div>
@@ -252,14 +279,15 @@ const P=new URLSearchParams(location.search);
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
-const SID=DID+'.'+rnd(4);                       /* 폰 고유 번호 . 이번 방문 */
+let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
+const UIV='u3';                                 /* 화면 버전: 결과 전 소개 + 결과 카드 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
 const NOLOG=ls('meohae_nolog')==='1'||!/^https?:$/.test(location.protocol)||/^(localhost|127\.)/.test(location.hostname);
 function log(ev,x){
   if(NOLOG)return;
-  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:SURVEY+' '+navigator.userAgent.slice(0,76),ts:new Date().toISOString()},x||{}));
+  const body=JSON.stringify(Object.assign({ev,sid:SID,from:FROM,ua:SURVEY+' '+UIV+' '+navigator.userAgent.slice(0,72),ts:new Date().toISOString()},x||{}));
   try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body});}catch(e){}
 }
 
@@ -295,18 +323,18 @@ function decideMid(a){const r2=P2(a,'q1')+P2(a,'q2')+P2(a,'q3')+P2(a,'q4')+P2(a,
 /* 줄 순서: 거북이 → 다람쥐 → 강아지 → 햄스터 → 고양이 */
 const ORDER=['T','S','D','H','C'];
 const R={
- T:{name:'거북이',img:'turtle',quote:'"폰? 가방에 있을걸."',desc:'흔들려도 대체로 자기 흐름을 금방 찾는 편. 친구들이 "쟤는 원래 저래" 하는 그 사람이다. 단점은 필기 빌려달라는 연락이 많다는 것.'},
- S:{name:'다람쥐',img:'squirrel',quote:'"아 맞다, 공부."',desc:'딴 데 갔다가도 대체로 혼자 돌아오는 편. 다만 잠깐 다녀온다는 게 도토리 묻고 오느라 길어지는 날이 있다.'},
- D:{name:'강아지',img:'dog',quote:'"아 맞아… 나 해야 해…"',desc:'지나가는 건 일단 따라간다. 공부하다 딴길로 새면 돌아올 타이밍을 놓치곤 한다. "아 맞다, 공부 중이었지" 하고 떠올릴 계기가 도움이 될 수 있는 편.'},
- H:{name:'햄스터',img:'hamster',quote:'"이번엔 진짜 한다."',desc:'다시 해보려는 마음은 있다. 마음먹는 것도 잘한다. 그런데 유혹 앞에서는 그 마음이 오래 못 버티는 편. 쳇바퀴는 열심히 도는데 제자리인 날이 많다.'},
- C:{name:'고양이',img:'cat',quote:'"됐어, 재밌었잖아."',desc:'지금은 공부에 마음이 별로 없다. 잡아줘도 누워 있는 편. 대신 마음이 생기는 날에는 누구보다 가볍게 일어날지도 모른다.'}
+ T:{"name": "거북이", "img": "turtle", "card": "img/cards/turtle.png", "nickname": "자기 페이스 지키는", "quote": "“하던 거 마저 하고 볼게.”", "headline": "", "cardLine": "잠깐 흔들려도, 금방 하던 공부로 돌아와.", "summaries": [{"title": "잠깐 흔들려도, 다시 공부로.", "lines": ["재밌는 게 보이면 너도 눈길이 가.", "그래도 대체로 하던 공부로 금방 돌아와."]}, {"title": "“이따 볼게”를 진짜로 해.", "lines": ["조금 아쉬워도 폰을 내려놓는 편이야.", "해야 할 일을 먼저 챙길 줄 알지."]}], "traits": [["내 흐름을 다시 찾는 편", "잠깐 시선이 새도 하던 일을 이어갈 여지가 있어."], ["멈출 때를 비교적 잘 알아", "재미가 남아 있어도 지금 할 일을 챙기는 쪽이야."], ["네 페이스로 꾸준히", "크게 다짐하기보다 다시 앉는 행동이 익숙한 편이야."]]},
+ S:{"name": "다람쥐", "img": "squirrel", "card": "img/cards/squirrel.png", "nickname": "돌아올 길은 아는", "quote": "“잠깐만… 아, 하던 거 해야지.”", "headline": "혼자 돌아오는 너에게,\n조금 더 일찍 생각날 계기.", "cardLine": "딴길에 들러도 스스로 돌아올 줄 알아.", "summaries": [{"title": "딴길로 새도, 돌아올 줄 알아.", "lines": ["궁금한 게 생기면 잠깐 들르기도 해.", "그러다 스스로 “공부해야지” 하고 돌아와."]}, {"title": "돌아오는 데 걸리는 시간은 달라.", "lines": ["금방 끌 때도, 조금 더 머물 때도 있어.", "구경거리가 많으면 길어지기도 하지."]}], "traits": [["구경은 해도 돌아올 길은 알아", "호기심이 생겨도 하던 일을 다시 이어가는 편이야."], ["스스로 다시 시작할 힘", "누가 옆에 없어도 돌아오려는 행동이 나오는 쪽이야."], ["왕복 시간은 그때그때", "돌아오는 건 익숙해도, 딴길에 머무는 길이는 달라질 수 있어."]]},
+ D:{"name": "강아지", "img": "dog", "card": "img/cards/dog.png", "nickname": "딴길 산책 중인", "quote": "“아 맞아… 나 해야 해…”", "headline": "그 ‘아 맞다’를,\n한 번 더.", "cardLine": "공부가 떠올라도 ‘이것까지만’ 보고 싶어.", "summaries": [{"title": "“아 맞다”는 떠오르는데.", "lines": ["해야 할 공부가 문득 떠올라.", "그래도 보던 걸 바로 끄기는 아쉬워."]}, {"title": "“이것까지만”에 자꾸 붙잡혀.", "lines": ["돌아갈까 하다가 조금만 더 보게 돼.", "그 사이 공부로 돌아갈 순간이 늦어지지."]}], "traits": [["알아차려도, 이것까지만", "시간이 지난 걸 알아도 당장 끄기는 아쉬워."], ["생각과 행동 사이에 틈이 있어", "“해야지”가 바로 “폰 내려놓기”로 이어지지는 않아."], ["복귀 타이밍을 놓치기도", "눈앞의 재미가 남아 있으면 돌아갈 순간이 뒤로 밀려."]]},
+ H:{"name": "햄스터", "img": "hamster", "card": "img/cards/hamster.png", "nickname": "다짐은 다시 켜지는", "quote": "“이번엔 진짜 한다.”", "headline": "이번엔 진짜 한다는 마음,\n폰을 켠 순간에도.", "cardLine": "다시 해볼 마음은 있는데, 폰 앞에서 흔들려.", "summaries": [{"title": "다시 해보려는 마음은 있어.", "lines": ["“이번엔 진짜 한다”는 마음이 들어.", "마음속에선 벌써 새 출발이야."]}, {"title": "막상 폰을 켜면 또 흔들려.", "lines": ["눈앞의 재미를 지나치기는 어려워.", "다시 하려던 마음이 잠깐 뒤로 밀려나."]}], "traits": [["다시 해보려는 마음은 있어", "흐름이 끊겨도 이번에는 해보고 싶은 마음이 남아 있어."], ["눈앞의 재미에 쉽게 흔들려", "계획할 때의 마음이 폰 앞에서는 잠깐 작아지기도 해."], ["실행은 그 순간이 어려워", "다짐을 떠올리는 일과 바로 행동하는 일 사이가 멀게 느껴질 수 있어."]]},
+ C:{"name": "고양이", "img": "cat", "card": "img/cards/cat.png", "nickname": "지금은 내 마음이 먼저인", "quote": "“됐어, 재밌었잖아.”", "headline": "네가 고른 이미지와 한마디로,\n가볍게 응원받아봐.", "cardLine": "요즘은 공부보다 당장 끌리는 게 먼저야.", "summaries": [{"title": "지금은 공부보다 재밌는 게 먼저야.", "lines": ["당장 끌리는 일에 시간을 쓰고 싶어.", "누가 재촉해도 공부할 마음이 생기진 않지."]}, {"title": "이건 ‘요즘의 너’를 말하는 거야.", "lines": ["항상 의욕이 없다는 뜻은 아니야.", "다시 해보고 싶어지면, 시작도 네 방식대로."]}], "traits": [["지금 끌리는 쪽이 먼저", "해야 한다는 이유만으로 바로 움직이지는 않는 편이야."], ["내 타이밍을 중요하게", "쉬고 싶은 지금의 마음도 네 상태의 일부야."], ["선택은 내가 할래", "다시 시작할 때도 네가 고른 방식이 편할 수 있어."]]}
 };
 const FORM="https://forms.gle/kUWucQ8Qv56563cZ8", INSTALL="../install.html?src=sphinx", INSTA="https://instagram.com/meohae.project";
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 
 /* ===== 화면 ===== */
 const $=s=>document.querySelector(s);
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));$('#wrap').classList.toggle('res',id==='#s-result');window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -370,14 +398,93 @@ async function run(){
   for(const k of['d1','d2','d3'])await ask(k);
   if(fixed==='D'||fixed==='H')await ask(['fuse','fdel','fno'][A.d3]);
   if(fixed==='S')await ask('fsq');
-  type=fixed;running=false;reveal();
+  type=fixed;running=false;finish();
 }
 
+/* ===== 응시 상태: 신청 페이지에 다녀와도 같은 응시를 이어 본다 ===== */
+const AKEY='mh_sx_attempt';
+let ST={introSeen:false,resultLogged:false,stage:''};
+function saveState(){try{localStorage.setItem(AKEY,JSON.stringify({v:1,t:Date.now(),sid:SID,A,type,st:ST}));}catch(e){}}
+function clearState(){try{localStorage.removeItem(AKEY);}catch(e){}}
+function loadState(){try{const o=JSON.parse(localStorage.getItem(AKEY)||'null');return o&&o.v===1&&o.type&&Date.now()-o.t<6*3600*1000?o:null;}catch(e){return null;}}
+
+/* 마지막 답을 고른 뒤: 거북이는 바로 석관, 나머지는 머해 소개를 한 번 거친다 */
+function finish(){
+  ST={introSeen:false,resultLogged:false,stage:'done'};
+  log('done',{type,how:type==='T'?'skip':'intro',answers:ansStr()});
+  saveState();
+  if(type==='T')reveal();else showIntro();
+}
+
+/* ===== 결과 전 머해 소개 ===== */
+function lockLine(){
+  if(A.d3===1)return [
+    '막아두는 앱, 결국 네가 제한을 풀어버렸다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.',
+    '필요한 순간에도 막혀서 불편했다고 했지. 머해는 막지 않아.',
+    '설정하고 켜는 게 번거로웠다고 했지. 머해는 기본 종이친구로 먼저 시작할 수 있어.',
+    ''][A.fdel];
+  if(A.d3===0)return A.fuse===2?'':'제한을 풀고 계속 본 적이 있다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.';
+  return ['막히는 게 싫다고 했지. 머해는 네 선택을 남겨 둬.','','그런 앱이 있는지 몰랐다고 했지. 막는 앱도 있고, 머해처럼 한 번 잡아주는 앱도 있어.',''][A.fno];
+}
+function introLine(){
+  if(type==='D'||type==='H')return lockLine();
+  if(type==='S')return ['돌아오기까지 5분 미만이라고 했지.','돌아오기까지 5분 이상~15분 미만이라고 했지.','돌아오기까지 15분 이상이라고 했지.',''][A.fsq]||'';
+  if(type==='C')return A.cat===2?'':'좋아하는 사람이나 캐릭터가 있다고 했지. 그 사진에 듣고 싶은 한마디를 적어 둘 수 있어.';
+  return '';
+}
+function tryLink(el,where){
+  el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 출시 알림 받기':'머해 먼저 써보기 · Android';
+  el.onclick=()=>log('cta',{where:where+(IOS?'_ios':''),type});
+}
+/* 예시 전환: 화면에 보인 뒤 4초가 지나면 종이친구로 한 번 바뀌고 멈춘다 */
+const DEMO_MS=4000, REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const demo={cur:'human',timer:null,left:DEMO_MS,t0:0,done:false,stopped:REDUCE,vis:false};
+function demoPaint(){
+  document.querySelectorAll('#exShot img').forEach(i=>i.classList.toggle('on',i.dataset.still===demo.cur));
+  document.querySelectorAll('.exctl [data-ex]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ex===demo.cur)));
+  $('#exLabel').textContent=demo.cur==='human'?'인물 사진 예시':'종이친구 예시';
+  $('#exMotion').textContent=(!demo.done&&!demo.stopped)?'멈추기':'이어보기';
+}
+function demoPause(){if(demo.timer){clearTimeout(demo.timer);demo.timer=null;demo.left=Math.max(0,demo.left-(performance.now()-demo.t0));}}
+function demoRun(){
+  if(demo.timer||demo.done||demo.stopped||!demo.vis||document.hidden||!$('#s-intro').classList.contains('on'))return;
+  demo.t0=performance.now();
+  demo.timer=setTimeout(()=>{demo.timer=null;demo.done=true;demo.cur=demo.cur==='human'?'paper':'human';demoPaint();log('demo',{how:'auto',type});},demo.left);
+}
+function demoReset(){demoPause();Object.assign(demo,{cur:'human',left:DEMO_MS,done:false,stopped:REDUCE});demoPaint();}
+document.querySelectorAll('.exctl [data-ex]').forEach(b=>b.onclick=()=>{demoPause();demo.stopped=true;demo.cur=b.dataset.ex;demoPaint();log('demo',{how:b.dataset.ex,type});});
+$('#exMotion').onclick=()=>{
+  if(!demo.done&&!demo.stopped){demoPause();demo.stopped=true;}        /* 멈추기 */
+  else{demo.stopped=false;demo.done=false;demo.left=DEMO_MS;demoRun();} /* 이어보기: 4초 뒤 다른 예시로 한 번 */
+  demoPaint();
+};
+if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{demo.vis=e.isIntersecting;demo.vis?demoRun():demoPause();}),{threshold:.6}).observe($('#exShot'));
+else demo.vis=true;
+document.addEventListener('visibilitychange',()=>{document.hidden?demoPause():demoRun();});
+
+function showIntro(){
+  $('#inHead').textContent=R[type].headline;$('#inMine').textContent=introLine();
+  tryLink($('#inTry'),'intro');
+  $('#inNote').textContent=IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어';
+  demoReset();show('#s-intro');
+  ST.stage='intro';
+  if(!ST.introSeen){ST.introSeen=true;log('intro_view',{type});}
+  saveState();demoRun();
+}
+function goResult(where){
+  demoPause();log('go_result',{where,type});
+  reveal();openBox();                                         /* '내 결과 보기' 한 번으로 석관이 열린다 */
+}
+$('#skipTop').onclick=()=>goResult('top');
+$('#skipBottom').onclick=()=>goResult('bottom');
+
+/* ===== 석관 열기 ===== */
 let opening=false;
 function reveal(){
   opening=false;$('#box').style.opacity='1';
   $('#rvtext').textContent='알아냈어. 네 정체는…!';$('#sph2').src='img/sphinx_aha.webp';
   $('#openBtn').style.visibility='visible';
+  ST.stage='reveal';saveState();
   show('#s-reveal');
 }
 async function openBox(){
@@ -398,125 +505,74 @@ async function openBox(){
 
 /* ===== 결과 ===== */
 const ansStr=()=>Object.keys(Q).filter(k=>k in A).map(k=>k+A[k]).join(' ');
-/* 그 사람이 실제로 고른 답 하나를 짧게 잇는다 */
-function becauseLine(){
-  if(type==='T'||type==='C')return '';
-  if(A.q6===2)return '돌아가야지 생각하면서도 계속 보게 된다고 했지.';
-  if(A.q6===1)return '돌아가야 하는 걸 알아도 조금 더 보게 된다고 했지.';
-  if(A.q3===2)return '30분이 지난 걸 알고도 "기왕 이렇게 된 거" 싶다고 했지.';
-  if(A.q3===1)return '30분이 지난 걸 알고도 "5분만 더"가 남는다고 했지.';
-  if(A.q1===2)return '"하나만" 하고 켰다가 끄는 타이밍을 놓친다고 했지.';
-  if(A.q1===1)return '"하나만" 하고 켰다가 몇 개 더 본다고 했지.';
-  return '';
-}
 function sawRows(){
   const pick=k=>`<div class="b"><small>${Q[k].t.replace(/\n/g,' ')}</small>${Q[k].o[A[k]]}</div>`;
-  const ks={T:['q1','q4'],S:['q1','q4'],D:['q1','q4'],H:['q7','q8'],C:['q4','q5']}[type];
+  const ks={T:['q1','q4'],S:['q4','q6'],D:['q3','q6'],H:['q7','q8'],C:['q4','q5']}[type];
   return ks.map(pick).join('');
 }
-/* 막아두는 앱 경험과 그 이유로 고르는 한 줄 (강아지·햄스터) */
-function lockLine(){
-  if(A.d3===1)return [
-    '막아두는 앱, 결국 네가 제한을 풀어버렸다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야. 어떤 느낌인지만 봐.',
-    '필요한 순간에도 막혀서 불편했다고 했지. 머해는 막지 않아. 계속 볼 수도 있고, 돌아갈 수도 있어.',
-    '설정하고 켜는 게 번거로웠다고 했지. 머해는 처음부터 꾸밀 필요는 없어. 기본 응원으로 먼저 시작하고, 사진과 한마디는 원할 때 바꿔도 돼.',
-    '막아두는 앱은 지금 안 쓴다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fdel];
-  if(A.d3===0)return A.fuse===2
-    ?'공부 중 제한을 풀고 딴짓한 적은 없다고 했지. 머해는 막는 대신, 켜는 순간 한 번 잡아주는 방식이야.'
-    :'제한을 풀고 계속 본 적이 있다고 했지. 머해는 막는 대신 한 번 잡아주는 방식이야.';
-  return [
-    '막히는 게 싫다고 했지. 머해는 네 선택은 남겨 두고, 한 번 잡아주기만 해.',
-    '막아두는 앱은 필요를 못 느꼈다고 했지. 머해는 이렇게 생긴 앱이야. 필요할 때 떠올려줘.',
-    '그런 앱이 있는지 몰랐다고 했지. 막는 앱도 있고, 머해처럼 안 막고 한 번 잡아주는 앱도 있어.',
-    '막아두는 앱은 안 써봤다고 했지. 머해는 막는 앱이 아니라, 한 번 잡아주는 앱이야.'][A.fno];
-}
-/* 실제 앱 화면: 언제 뜨고, 무엇이 보이고, 무엇을 고를 수 있는지 */
-function demoHtml(now){
-  return `<div class="phone"><video muted loop playsinline preload="none" poster="img/demo_poster.webp"${now?' src="img/demo.mp4"':''}></video></div>
-  <ol class="steps"><li>공부 중에, 내가 정해둔 앱을 켜면</li><li>내가 고른 사진과 한마디, 오늘 할 공부가 뜨고</li><li>돌아갈지 계속 볼지는 내가 골라</li></ol>
-  <p class="key">앱을 막지는 않아.<br>계속 볼지, 돌아갈지는 네가 골라.</p>`;
-}
-function tryBtn(where,big){
-  return (IOS
-    ?`<a class="btn ${big?'go':'line'}" href="${FORM}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}_ios',type:'${type}'})">아이폰 출시 알림 받기</a>`
-    :`<a class="btn ${big?'go':'line'}" href="${INSTALL}" target="_blank" rel="noopener" onclick="log('cta',{where:'${where}',type:'${type}'})">머해 먼저 써보기 (Android)</a>`)
-    +`<p class="tiny" style="margin-top:8px">${IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어'}</p>`;
-}
-function armDemo(root){
-  const v=root.querySelector('video');if(!v)return;
-  if(!v.getAttribute('src'))v.src='img/demo.mp4';
-  let seen=false;v.addEventListener('playing',()=>{if(!seen){seen=true;log('demo_play',{type});}});
-  v.addEventListener('click',()=>{v.paused?v.play().catch(()=>{}):v.pause();});
-  if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause();}),{threshold:.4}).observe(v);}
-  else v.play().catch(()=>{});
-}
-function openDemo(btn){
-  const box=btn.closest('.mh2');box.classList.add('open');log('demo_open',{type});armDemo(box);
-}
-/* 머해 영역: 강아지·햄스터는 크게 바로, 다람쥐·고양이는 작게 펼쳐서, 거북이는 없음 */
-function mhCard(){
-  const alone=A.d2===0||A.d2===1?'<p>혼자 공부한다고 했지. 맞은편에 한 사람 앉혀봐.</p>':'';
-  if(type==='T')return '';
-  if(type==='D'||type==='H'){
-    const head=type==='D'?'그 "아 맞다"를 떠올릴<br>계기 하나 더.':'이번엔 진짜 한다는 마음,<br>폰을 켠 순간에도 생각나게.';
-    const easy=type==='H'?'<p>처음부터 꾸밀 필요는 없어. 기본 응원으로 먼저 시작해도 돼.</p>':'';
-    return `<div class="mh2"><div class="k">머해</div><h4>${head}</h4><p class="first">${lockLine()}</p>${demoHtml(true)}${easy}${alone}${tryBtn('big',true)}</div>`;
-  }
-  if(type==='S'){
-    const t=['돌아오기까지 5분 미만이라고 했지.','돌아오기까지 5분 이상~15분 미만이라고 했지.','돌아오기까지 15분 이상이라고 했지.','돌아오는 데 걸리는 시간은 그때그때 다르다고 했지.'][A.fsq];
-    return `<div class="mh2 small"><div class="k">머해</div><h4>스스로 돌아오는 너에게,<br>생각날 계기 하나 더.</h4><p class="first">${t} 그 사이에 하려던 공부가 한 번 생각나면 어떨까?</p>
-      <button class="btn line opener" onclick="openDemo(this)">잡아주는 화면 보기</button>
-      <div class="more">${demoHtml(false)}${alone}${tryBtn('small',false)}</div></div>`;
-  }
-  const none=A.cat===2;
-  return `<div class="mh2 small"><div class="k">머해</div><h4>네가 공부하기로 한 날엔,<br>네 취향으로 한 번 잡아줄게.</h4>
-    <p class="first">${none?'딱 떠오르는 사람이나 캐릭터는 없구나. 필요할 때 이런 방식도 있다는 것만 알아둬.':'좋아하는 사진에, 네가 듣고 싶은 한마디를 적어 둬. 공부 중 딴길로 샜을 때 한 번 보여줄게.'}</p>
-    <button class="btn line opener" onclick="openDemo(this)">${none?'머해 구경하기':'어떤 모습인지 보기'}</button>
-    <div class="more">${demoHtml(false)}${tryBtn('small',false)}</div></div>`;
-}
-function partDesc(){return `<p class="desc">${R[type].desc}</p>`;}
-function partSaw(){return `<div class="sec"><h3>스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col">${sawRows()}</div></div></div>`;}
+function partSums(){return R[type].summaries.map(m=>`<section class="sum"><h3>${m.title}</h3><p>${m.lines.map(l=>`<span>${l}</span>`).join('')}</p></section>`).join('');}
+function partTraits(){return `<div class="sec"><h3 class="plainh">이런 모습, 좀 익숙하지?</h3><ul class="traits">${R[type].traits.map(t=>`<li><i aria-hidden="true"></i><div><strong>${t[0]}</strong><span>${t[1]}</span></div></li>`).join('')}</ul></div>`;}
+function partSaw(){return `<div class="sec"><h3 class="plainh">스핑크스가 본 것</h3><div class="saw"><img src="img/sphinx_hmm.webp" alt=""><div class="col">${sawRows()}</div></div></div>`;}
 function partLine(){
-  return `<div class="sec"><h3>다섯 친구 중에 넌 여기</h3><div class="line5">${ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('')}</div>
+  return `<div class="sec"><h3 class="plainh">다섯 친구 중에 넌 여기</h3><div class="line5">${ORDER.map(k=>`<div class="a${k===type?' me':''}"><img src="img/${R[k].img}.webp" alt=""></div>`).join('')}</div>
     <div class="names">${ORDER.map(k=>`<span class="${k===type?'me':''}">${R[k].name}</span>`).join('')}</div><div class="ends"><span>혼자서도 잘 돌아옴</span><span>지금은 쉬는 중</span></div></div>`;
 }
-function partShare(primary){
-  const label=type==='T'?'친구는 어떤 동물일까?':'결과 공유하기';
-  return `<div class="row2${type==='T'?' one':''}"><button class="btn ${primary?'go':'line'}" onclick="share('${type==='T'?'friend':'native'}')">${label}</button><button class="btn line" onclick="copyLink(false)">링크 복사</button></div>`;
+function partEnd(){return type==='T'?'':`<div class="rend"><p class="inote">막지 않고, 한 번 잡아주는 머해</p><a class="b2 sec2" id="endTry" target="_blank" rel="noopener"></a></div>`;}
+
+/* 화면에 보이는 그 PNG 파일을 그대로 저장·공유한다 */
+let cardBlob=null,cardFor='';
+const cardMsg=t=>{$('#cardFb').textContent=t||'';};
+const cardName=()=>`내-집중-동물-${R[type].name}.png`;
+async function loadCard(){
+  const want=type;cardBlob=null;cardFor='';$('#saveBtn').disabled=$('#shareBtn').disabled=true;cardMsg('');
+  try{const r=await fetch(R[want].card);if(!r.ok)throw 0;const bl=await r.blob();if(want!==type)return;cardBlob=bl;cardFor=want;$('#saveBtn').disabled=$('#shareBtn').disabled=false;}
+  catch(e){if(want===type)cardMsg('위 카드를 길게 눌러 저장해 줘.');}
+}
+function saveCard(){
+  if(!cardBlob)return;
+  const url=URL.createObjectURL(cardBlob),a=document.createElement('a');a.href=url;a.download=cardName();document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  log('card_save',{type});
+  cardMsg('다운로드가 시작되지 않으면 위 카드를 길게 눌러 저장해 줘.');
+}
+async function shareCard(){
+  if(!cardBlob)return;
+  const no='이 환경에서는 위의 ‘결과 카드 저장’을 눌러 이미지를 받은 뒤 친구에게 보내줘.';
+  let file=null;try{file=new File([cardBlob],cardName(),{type:'image/png'});}catch(e){}
+  if(!file||!navigator.share||!navigator.canShare||!navigator.canShare({files:[file]})){cardMsg(no);log('share',{how:'card_unsupported',type});return;}
+  cardMsg('');log('share',{how:'card_open',type});            /* 공유 창을 연 것일 뿐, 보낸 것은 아니다 */
+  try{await navigator.share({files:[file]});log('share',{how:'card_done',type});}
+  catch(e){if(e&&e.name==='AbortError')log('share',{how:'card_cancel',type});else{cardMsg(no);log('share',{how:'card_fail',type});}}
 }
 function renderResult(){
-  const r=R[type], big=type==='D'||type==='H';
-  $('#hero').classList.toggle('compact',big||type==='S');
-  $('#rimg').src='img/'+r.img+'.webp';$('#rimg').alt=r.name;
-  $('#rname').textContent=r.name;$('#rquote').textContent=r.quote;$('#rbecause').textContent=becauseLine();
-  /* 강아지·햄스터: 짧은 결과 → 머해와 실제 화면 → 써보기 → 자세한 설명·공유 */
-  const order={
-    D:[mhCard,partDesc,partSaw,partLine,()=>partShare(false)],
-    H:[mhCard,partDesc,partSaw,partLine,()=>partShare(false)],
-    S:[mhCard,partDesc,partSaw,partLine,()=>partShare(true)],
-    C:[partDesc,()=>partShare(true),mhCard,partSaw,partLine],
-    T:[partDesc,()=>partShare(true),partSaw,partLine]}[type];
-  const body=$('#resBody');body.innerHTML=order.map(f=>f()).join('');
-  log('result',{type,answers:ansStr(),where:SRC});
-  const el=body.querySelector('.mh2');
-  if(el&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();log('cta_view',{type});}},{threshold:.3});io.observe(el);}
-  if(big)armDemo(body);
+  const r=R[type];
+  $('#cardImg').src=r.card;$('#cardImg').alt=`${r.nickname} ${r.name}. ${r.quote} ${r.cardLine}`;
+  $('#resBody').innerHTML=partSums()+partTraits()+partSaw()+partLine()+partEnd();
+  const e=$('#endTry');if(e)tryLink(e,'result_end');
+  loadCard();
+  ST.stage='result';
+  if(!ST.resultLogged){ST.resultLogged=true;log('result',{type,answers:ansStr(),where:SRC,how:type==='T'?'skip':'intro'});}  /* 같은 응시는 한 번만 센다 */
+  saveState();
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
-async function share(how){
-  const r=R[type], text=how==='friend'?'스핑크스가 너도 맞혀본대. 다섯 석관 중에 너랑 닮은 친구가 있대.':`스핑크스가 맞힌 나: ${r.name} ${r.quote}`;
-  log('share',{how,type});
-  if(navigator.share){try{await navigator.share({title:'스핑크스가 맞혀볼게',text,url:shareUrl()});return;}catch(e){if(e&&e.name==='AbortError')return;}}
-  copyLink(true);
+async function copyLink(){
+  log('share',{how:'copy',type});
+  try{await navigator.clipboard.writeText(shareUrl());toast('테스트 링크를 복사했어');}catch(e){toast('주소창의 링크를 복사해줘');}
 }
-async function copyLink(silent){
-  if(!silent)log('share',{how:'copy',type});
-  try{await navigator.clipboard.writeText(shareUrl());toast('링크를 복사했어');}catch(e){toast('주소창의 링크를 복사해줘');}
-}
+$('#saveBtn').onclick=saveCard;$('#shareBtn').onclick=shareCard;$('#copyBtn').onclick=copyLink;
 
-$('#startBtn').onclick=run;
+let attempted=false;                            /* 첫 응시는 방문 때의 번호를 그대로 쓰고, 다시 할 때만 새 번호 */
+$('#startBtn').onclick=()=>{clearState();if(attempted)SID=DID+'.'+rnd(4);attempted=true;run();};
 $('#openBtn').onclick=openBox;
-$('#againBtn').onclick=()=>{log('restart',{type});show('#s-start');};
+$('#againBtn').onclick=()=>{log('restart',{type});clearState();SID=DID+'.'+rnd(4);ST={introSeen:false,resultLogged:false,stage:''};show('#s-start');};
+/* 같은 응시로 돌아왔을 때: 결과는 다시 세지 않고, 소개는 다시 자동으로 띄우지 않는다 */
+(function(){
+  const o=loadState();if(!o)return;
+  SID=o.sid||SID;attempted=true;A=o.A||{};type=o.type;ST=Object.assign({introSeen:false,resultLogged:false,stage:''},o.st||{});
+  if(ST.stage==='result'){renderResult();show('#s-result');}
+  else if(type!=='T'&&!ST.introSeen)showIntro();
+  else reveal();
+})();
 log('visit',{where:SRC});
 </script>
 </body>
