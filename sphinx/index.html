@@ -242,6 +242,10 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .rfoot button{appearance:none;display:inline-flex;align-items:center;padding:6px 0;min-height:44px;background:transparent;border:0;text-decoration:underline;text-underline-offset:3px;font-size:12.5px;font-weight:700;color:var(--rs)}
 .dock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:8;border-top:1px solid #E8E2DC;background:#fff;padding:9px 13px calc(10px + env(safe-area-inset-bottom,0px))}
 .dock[hidden]{display:none}
+.idock{padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+.idock .btn{min-height:56px;font-size:20px}
+#s-intro{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+#s-intro .b2.pri{background:#FFF4EA;color:#B4500F;border:1.5px solid #F2B98C}   /* 결과 버튼이 먼저 보이게, 앱 안내는 한 단계 낮춘다 */
 .dock .notice{color:#705440;font-size:12px;line-height:1.4;margin-bottom:6px}
 .dock .notice:empty{display:none}
 .dock .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -319,7 +323,6 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
       </div>
       <p class="choice">머해는 앱을 막지 않고 한 번 잡아줘.<br>계속 볼지, 돌아갈지는 네가 골라.</p>
       <a class="b2 pri" id="inTry" target="_blank" rel="noopener"></a>
-      <button type="button" class="b2 sec2" id="skipBottom">내 결과 보기</button>
       <p class="inote" id="inNote"></p>
     </div>
   </section>
@@ -333,6 +336,7 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 <div class="ground"></div>
 <div class="aha" id="aha" role="status"><img src="img/sphinx_aha.webp" alt="스핑크스"><p>알겠다. 이 석관이야!</p></div>
 <div class="spot" id="spot"><i class="rays" aria-hidden="true"></i><i class="glow" aria-hidden="true"></i><img src="img/sarc_closed.webp" alt=""><button type="button" class="skipnow" id="skipNow">결과 바로 보기</button></div>
+<footer class="dock idock" id="idock" aria-label="내 결과 보기" hidden><button type="button" class="btn go" id="skipBottom">석관 열고 내 결과 보기</button></footer>
 <footer class="dock" id="dock" aria-label="결과 카드 저장과 공유" hidden>
   <p class="notice" id="cardFb" role="status" aria-live="polite"></p>
   <div class="acts">
@@ -351,7 +355,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u7';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u8';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -405,7 +409,7 @@ const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 
 /* ===== 화면 ===== */
 const $=s=>document.querySelector(s);
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#dock').hidden=id!=='#s-result';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#dock').hidden=id!=='#s-result';$('#idock').hidden=id!=='#s-intro';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -521,7 +525,7 @@ function seeCta(el,where){
   io.observe(el);
 }
 function tryLink(el,where){
-  el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 출시 알림 받기':'머해 먼저 써보기 · Android';
+  el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 사전예약하기':'머해 먼저 써보기 · Android';
   el.onclick=()=>{if(where==='intro'){ST.ic=1;saveState();}log('cta',{where:where+(IOS?'_ios':''),type});};
 }
 /* 예시 전환: 화면에 보인 뒤 4초가 지나면 종이친구로 한 번 바뀌고 멈춘다 */
@@ -554,7 +558,7 @@ function showIntro(animate){
   $('#s-intro').classList.toggle('enter',!!animate);
   $('#inHead').textContent=R[type].headline;$('#inMine').textContent=introLine();
   tryLink($('#inTry'),'intro');
-  $('#inNote').textContent=IOS?'지금은 Android만 테스트 중이야':'Android 비공개 테스트로 먼저 써볼 수 있어';
+  $('#inNote').textContent=IOS?'아이폰은 준비 중이야. 사전예약하면 나올 때 알려줄게':'Android 비공개 테스트로 먼저 써볼 수 있어';
   demoReset();show('#s-intro');
   ST.stage='intro';
   if(!ST.introSeen){ST.introSeen=true;log('intro_view',{type});}
@@ -567,7 +571,7 @@ function goResult(where){
   reveal();openBox();                                         /* 위·아래 어느 버튼이든 같은 열기 동작으로 */
 }
 $('#skipTop').onclick=()=>goResult('top');
-$('#skipBottom').onclick=()=>goResult('bottom');
+$('#skipBottom').onclick=()=>goResult('dock');             /* 화면 아래에 고정된 버튼 */
 
 /* ===== 석관 열기 ===== */
 let opening=false,openSeq=0;
@@ -813,7 +817,7 @@ function renderResult(){
   myLine=m.has?m.rows[m.rows.length-1].value+'.':'';
   $('#resBody').innerHTML=partSaw(m)+partPromo()+partLine();
   const e=$('#endTry');
-  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 출시 알림 받기':'Android 테스트 참여 방법 보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
+  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 사전예약하기':'Android 테스트 참여 방법 보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
   armTry();armLine();cardDone=makeCard(m);
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
