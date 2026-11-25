@@ -319,6 +319,17 @@ html:has(.wrap.rs),body:has(.wrap.rs){background:#E9E1D7}
 #s-result .rbody>.sr-promo{background:#FFF3E6;border-color:#F1CFAF}
 #s-result .rbody>.sr-promo[data-weight=light]{background:#fff;border-color:#E6DCD1}
 #s-result .sr-promo[data-weight=light] .sr-feedback{background:#FBF5EE}
+/* 아이폰 사전예약: 다른 페이지로 보내지 않고 그 자리에서 이메일만 받는다 */
+.iosw{margin-top:10px;text-align:left}
+.iosw[hidden]{display:none}
+.iosw label{display:block;margin-bottom:6px;font-size:13px;font-weight:700;color:#5E4D40}
+.iosw-row{display:flex;gap:8px}
+.iosw input{flex:1;min-width:0;height:46px;padding:0 12px;border:1.5px solid #E2D5C8;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.iosw button{flex:none;height:46px;padding:0 14px;border:0;border-radius:10px;background:#F47119;color:#fff;font-size:14.5px;font-weight:700}
+.iosw-note{margin-top:6px;font-size:12px;line-height:1.5;color:#85746A}
+.iosw-msg{margin-top:6px;font-size:13.5px;font-weight:700;line-height:1.5;color:#974010}
+.iosw-msg:empty{display:none}
+.iosw.done label,.iosw.done .iosw-row,.iosw.done .iosw-note{display:none}
 /* 써보기·사전예약: 작은 밑줄 글씨 대신 눈에 띄는 버튼으로 */
 #s-result .sr-go{width:100%;min-height:46px;margin:8px 0 0;padding:10px 12px;border-radius:10px;border:1.5px solid #F2B98C;background:#FFF4EA;color:#B4500F;text-decoration:none;font-size:14.5px}
 .dock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:8;border-top:1px solid #E8E2DC;background:#fff;padding:9px 13px calc(10px + env(safe-area-inset-bottom,0px))}
@@ -436,7 +447,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u11';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u12';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -605,9 +616,36 @@ function seeCta(el,where){
   },{threshold:.6});
   io.observe(el);
 }
+/* 아이폰: 버튼을 누르면 그 아래에 이메일 한 칸이 열린다. 남긴 이메일은 ios_wait 기록의 answers 칸에만 담긴다 */
+const WKEY='mh_ios_wait';
+const iosWaited=()=>{try{return localStorage.getItem(WKEY)==='1';}catch(e){return false;}};
+function iosPaint(){
+  document.querySelectorAll('.iosw').forEach(b=>{const d=iosWaited();b.classList.toggle('done',d);if(d)b.querySelector('.iosw-msg').textContent='남겼어! 아이폰 버전이 나오면 제일 먼저 알려줄게.';});
+  if(iosWaited())document.querySelectorAll('[data-iosbtn]').forEach(a=>a.textContent='아이폰 사전예약 완료');
+}
+function iosForm(el,where,fire){
+  el.removeAttribute('target');el.href='#ios';el.setAttribute('role','button');el.dataset.iosbtn='1';
+  let box=el.nextElementSibling;
+  if(!box||!box.classList.contains('iosw')){
+    box=document.createElement('form');box.className='iosw';box.hidden=true;box.noValidate=true;
+    box.innerHTML=`<label for="iw_${where}">아이폰 버전이 나오면 메일로 알려줄게</label><div class="iosw-row"><input id="iw_${where}" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="이메일 주소"><button type="submit">알림 받기</button></div><p class="iosw-note">이메일은 출시 알림에만 쓰고, 알린 뒤에 지울게.</p><p class="iosw-msg" role="status" aria-live="polite"></p>`;
+    el.after(box);
+    box.querySelector('input').oninput=()=>{if(!iosWaited())box.querySelector('.iosw-msg').textContent='';};
+    box.onsubmit=e=>{
+      e.preventDefault();const inp=box.querySelector('input'),v=inp.value.trim(),msg=box.querySelector('.iosw-msg');
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){msg.textContent='이메일 주소를 다시 확인해줘.';inp.focus();return;}
+      log('ios_wait',{where,type,answers:v});try{localStorage.setItem(WKEY,'1');}catch(x){}
+      iosPaint();
+    };
+  }
+  el.onclick=e=>{e.preventDefault();fire();box.hidden=false;iosPaint();if(!iosWaited())box.querySelector('input').focus();};
+  iosPaint();
+}
 function tryLink(el,where){
   el.href=IOS?FORM:INSTALL;el.textContent=IOS?'아이폰 사전예약하기':'머해 먼저 써보기 · Android';
-  el.onclick=()=>{if(where==='intro'){ST.ic=1;saveState();}log('cta',{where:where+(IOS?'_ios':''),type});};
+  const fire=()=>{if(where==='intro'){ST.ic=1;saveState();}log('cta',{where:where+(IOS?'_ios':''),type});};
+  el.onclick=fire;
+  if(IOS)iosForm(el,where,fire);
 }
 /* 예시 전환: 화면에 보인 뒤 4초가 지나면 종이친구로 한 번 바뀌고 멈춘다 */
 const DEMO_MS=4000, REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -911,7 +949,7 @@ function renderResult(){
   myLine=m.has?m.rows[m.rows.length-1].value+'.':'';
   $('#resBody').innerHTML=partSaw(m)+partPromo()+partLine();
   const e=$('#endTry');
-  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 사전예약하기':'Android로 먼저 써보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
+  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 사전예약하기':'Android로 먼저 써보기';const fire=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});e.onclick=fire;if(IOS)iosForm(e,'result_end',fire);seeCta(e,'result_end');}
   armTry();armLine();cardDone=makeCard(m);
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
