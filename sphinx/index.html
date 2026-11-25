@@ -319,7 +319,8 @@ html:has(.wrap.rs),body:has(.wrap.rs){background:#E9E1D7}
 #s-result .rbody>.sr-promo{background:#FFF3E6;border-color:#F1CFAF}
 #s-result .rbody>.sr-promo[data-weight=light]{background:#fff;border-color:#E6DCD1}
 #s-result .sr-promo[data-weight=light] .sr-feedback{background:#FBF5EE}
-#s-result .sr-go{margin-bottom:-6px}
+/* 써보기·사전예약: 작은 밑줄 글씨 대신 눈에 띄는 버튼으로 */
+#s-result .sr-go{width:100%;min-height:46px;margin:8px 0 0;padding:10px 12px;border-radius:10px;border:1.5px solid #F2B98C;background:#FFF4EA;color:#B4500F;text-decoration:none;font-size:14.5px}
 .dock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:8;border-top:1px solid #E8E2DC;background:#fff;padding:9px 13px calc(10px + env(safe-area-inset-bottom,0px))}
 .dock[hidden]{display:none}
 .idock{padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px))}
@@ -435,7 +436,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u10';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u11';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -910,7 +911,7 @@ function renderResult(){
   myLine=m.has?m.rows[m.rows.length-1].value+'.':'';
   $('#resBody').innerHTML=partSaw(m)+partPromo()+partLine();
   const e=$('#endTry');
-  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 사전예약하기':'Android 테스트 참여 방법 보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
+  if(e){e.href=IOS?FORM:INSTALL;e.textContent=IOS?'아이폰 사전예약하기':'Android로 먼저 써보기';e.onclick=()=>log('cta',{where:'result_end'+(IOS?'_ios':''),type,how:(type==='T'?'no_intro':ST.ic?'intro_clicked':(ST.cv&&ST.cv.intro)?'intro_seen':'intro_passed')+(ST.tried?',tried':',direct')});seeCta(e,'result_end');}
   armTry();armLine();cardDone=makeCard(m);
 }
 function shareUrl(){return location.origin+location.pathname+'?from='+type;}
