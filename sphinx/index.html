@@ -151,8 +151,76 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .exctl button[aria-pressed="true"]{color:#8A3A09;border-color:#D97637;background:#FFF4E9}
 .exctl .motion{border-color:transparent;text-decoration:underline;text-underline-offset:3px;font-size:12.5px;color:#66574E;min-width:60px;justify-content:center;padding:6px 4px}
 .exshot{position:relative;width:min(100%,266px);aspect-ratio:452/920;margin:0 auto;border:1px solid #E4DFDB;border-radius:15px;overflow:hidden;background:#fff}
-.exshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .3s}
-.exshot img.on{opacity:1}
+.exshot>[data-still]{position:absolute;inset:0;width:100%;height:100%;opacity:0;visibility:hidden;transition:opacity .3s}
+.exshot>img{object-fit:contain}
+.exshot>[data-still].on{opacity:1;visibility:visible}
+/* 머해 팝업 예시 (예시 인물 사진). 크기는 상자 폭에 맞춰 글자 크기로 조절한다: 1em = 폭/24 */
+.pp{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1ED;font-size:10px;line-height:1.3;color:#222;text-align:left;user-select:none;-webkit-user-select:none}
+.pp *{box-sizing:border-box}
+.pp p{margin:0}
+.pp-app{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8em}
+.pp-tile{position:relative;display:block;width:6.2em;height:6.2em;border-radius:1.5em;background:#2E211B}
+.pp-tile:after{content:"";position:absolute;left:50%;top:50%;margin:-1.1em 0 0 -.7em;border-left:1.9em solid #fff;border-top:1.1em solid transparent;border-bottom:1.1em solid transparent}
+.pp-app span{font-size:1.15em;font-weight:700;color:#6B5E55}
+.pp-tap{position:absolute;display:block;width:4.4em;height:4.4em;border-radius:50%;background:rgba(244,113,25,.35);border:.2em solid rgba(244,113,25,.75);opacity:0;pointer-events:none}
+.pp-tap.a{left:50%;top:50%;margin:-2.8em 0 0 -2.2em}
+.pp-tap.g{right:14%;top:50%;margin-top:-2.2em}
+.pp-pop{position:absolute;inset:0;background:#fff}
+.pp-pic{position:relative;height:52.5%;overflow:hidden}
+.pp-pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.pp-pic:after{content:"";position:absolute;left:0;right:0;bottom:0;height:36%;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.pp-x{appearance:none;position:absolute;right:.9em;top:.9em;z-index:2;width:2.7em;height:2.7em;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:#333;font-size:1em;display:flex;align-items:center;justify-content:center}
+.pp-x:before{content:"✕";font-size:1.25em;line-height:1}
+.pp-body{position:absolute;left:0;right:0;top:51.6%;bottom:0;padding:0 1.25em}
+.pp-who{margin-left:3.3em!important;display:flex;align-items:baseline;gap:.45em}
+.pp-who b{font-size:1.1em;font-weight:800}
+.pp-who i{font-style:normal;font-size:.9em;color:#9A97A6}
+.pp-ln{display:flex;gap:.6em;margin-top:.55em;align-items:flex-start}
+.pp-av{display:block;width:2.7em;height:2.7em;border-radius:50%;overflow:hidden;flex:none;background:#eee}
+.pp-av img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.pp-av.sp{visibility:hidden;height:0}
+.pp-bb{background:#F2F2F4;border-radius:.4em 1.2em 1.2em 1.2em;padding:.5em .95em;font-size:1.08em;font-weight:700;line-height:1.3}
+.pp-ln.pb2 .pp-bb,.pp-ln.pre .pp-bb{border-radius:1.2em}
+.pp-st{position:relative}
+.pp-a,.pp-b{position:absolute;left:0;right:0;top:0}
+.pp-hint{margin:.75em 0 0 3.3em!important;font-size:.88em;color:#8A879A}
+.pp-task{display:inline-block;margin:.55em 0 0 3.3em!important;border:1px solid #ECECEF;border-radius:.85em;padding:.45em .85em;background:#fff}
+.pp-task small{display:block;font-size:.8em;color:#9A97A6;font-weight:600}
+.pp-task b{font-size:1em;font-weight:800}
+.pp-me{display:flex;justify-content:flex-end;margin-top:.6em!important}
+.pp-me span{background:#F47119;color:#fff;border-radius:1.2em .4em 1.2em 1.2em;padding:.5em .95em;font-size:1.08em;font-weight:700}
+.pp-btns{position:absolute;left:1.25em;right:1.25em;bottom:2.1em;display:flex;flex-direction:column;gap:.55em}
+.pp-btns button{appearance:none;position:relative;border:0;width:100%;height:2.85em;border-radius:.8em;font:inherit;font-size:1.15em;font-weight:800;padding:0}
+.pp-btns .go{background:#F47119;color:#fff}
+.pp-btns .stay{background:#F5F5F7;color:#333}
+.pp-foot{position:absolute;left:0;right:0;bottom:.7em;text-align:center;font-size:.75em;color:#9A97A6;font-weight:800;letter-spacing:.06em}
+/* 눌러볼 수 있는 고정 화면 (결과 페이지 체험, 동작 줄이기) */
+.pp.static .pp-app,.pp.static .pp-b,.pp.static .pp-tap{display:none}
+/* 작동 모습을 계속 되풀이해서 보여준다: 앱을 누름 → 팝업 → 한마디 → '공부로 돌아갈게' → 답 */
+.pp.play{pointer-events:none}
+.pp.play .pp-tap.a{animation:ppTapA 8s infinite}
+.pp.play .pp-pop{animation:ppPop 8s cubic-bezier(.2,.8,.2,1) infinite}
+.pp.play .pp-who,.pp.play .pp-ln.pb1{animation:ppIn1 8s infinite}
+.pp.play .pp-ln.pb2{animation:ppIn2 8s infinite}
+.pp.play .pp-a{animation:ppA 8s infinite}
+.pp.play .pp-btns{animation:ppBtns 8s infinite}
+.pp.play .pp-btns .go{animation:ppGo 8s infinite}
+.pp.play .pp-tap.g{animation:ppTapG 8s infinite}
+.pp.play .pp-me{animation:ppMe 8s infinite}
+.pp.play .pp-ln.pre{animation:ppRe 8s infinite}
+.pp.play .pp-b .pp-hint,.pp.play .pp-b .pp-task{animation:ppB 8s infinite}
+.exshot.paused .pp.play *,.exshot.paused .pp.play{animation-play-state:paused!important}
+@keyframes ppTapA{0%,5%{opacity:0;transform:scale(.45)}6%{opacity:.95;transform:scale(.5)}12%,100%{opacity:0;transform:scale(1.5)}}
+@keyframes ppPop{0%,11%{transform:translateY(102%)}17%,93%{transform:none;opacity:1}99%,100%{transform:none;opacity:0}}
+@keyframes ppIn1{0%,19%{opacity:0;transform:translateY(.7em)}22%,100%{opacity:1;transform:none}}
+@keyframes ppIn2{0%,27%{opacity:0;transform:translateY(.7em)}30%,100%{opacity:1;transform:none}}
+@keyframes ppA{0%,35%{opacity:0;transform:translateY(.7em)}38%,65%{opacity:1;transform:none}67%,100%{opacity:0;transform:none}}
+@keyframes ppBtns{0%,40%{opacity:0;transform:translateY(.7em)}43%,65%{opacity:1;transform:none}68%,100%{opacity:0;transform:none}}
+@keyframes ppGo{0%,61%{transform:none;filter:none}63%,65%{transform:scale(.97);filter:brightness(.9)}66%,100%{transform:none;filter:none}}
+@keyframes ppTapG{0%,60%{opacity:0;transform:scale(.45)}61%{opacity:.95;transform:scale(.5)}66%,100%{opacity:0;transform:scale(1.5)}}
+@keyframes ppMe{0%,67%{opacity:0;transform:translateY(.7em)}70%,100%{opacity:1;transform:none}}
+@keyframes ppRe{0%,75%{opacity:0;transform:translateY(.7em)}78%,100%{opacity:1;transform:none}}
+@keyframes ppB{0%,80%{opacity:0}83%,100%{opacity:1}}
 .exnote{margin-top:9px;color:#615951;font-size:12.5px;line-height:1.5}
 .intro .choice{margin:14px 0 17px;font-size:15px;font-weight:700;line-height:1.55}
 .b2{appearance:none;display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;padding:12px;border-radius:14px;border:0;font-size:16px;font-weight:700;line-height:1.4;text-decoration:none;color:var(--ink);background:#fff}
@@ -219,7 +287,9 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .sr-select button,.sr-replay{appearance:none;border:0;background:transparent;color:var(--rs);font-size:12.5px;font-weight:700;line-height:1.3;min-height:42px;padding:6px 9px}
 .sr-select button[aria-pressed=true]{color:var(--ro);text-decoration:underline;text-underline-offset:4px;font-weight:800}
 .sr-device{position:relative;width:min(100%,236px);margin:0 auto;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E6DED7}
-.sr-device img{width:100%;height:auto;display:block}
+.sr-device>img{width:100%;height:auto;display:block}
+.sr-device .pp{aspect-ratio:452/920;height:auto}
+.sr-device [hidden]{display:none!important}
 .sr-hot{appearance:none;position:absolute;border:0;border-radius:5px;background:transparent;color:transparent;left:4%;width:92%;padding:0;height:7.6%}
 .sr-hot[data-choice=study]{top:81.5%}
 .sr-hot[data-choice=watch]{top:89.2%}
@@ -321,15 +391,15 @@ html:has(.wrap.rs),body:has(.wrap.rs){background:#E9E1D7}
       <p class="copy">정해 둔 앱을 열면 내가 고른 사진과 한마디,<br>오늘 할 공부가 함께 떠.</p>
       <div class="ex">
         <div class="exctl" role="group" aria-label="머해 응원 예시 선택">
-          <button type="button" data-ex="human" aria-pressed="true"><img alt="" src="img/demo_human.webp">인물 사진</button>
+          <button type="button" data-ex="human" aria-pressed="true"><img alt="" src="img/demo_man.webp">인물 사진</button>
           <button type="button" data-ex="paper" aria-pressed="false"><img alt="" src="img/demo_paper.webp">종이친구</button>
-          <button type="button" class="motion" id="exMotion">이어보기</button>
+          <button type="button" class="motion" id="exMotion">멈추기</button>
         </div>
         <figure class="exshot" id="exShot">
-          <img class="on" data-still="human" width="452" height="920" src="img/demo_human.webp" alt="인물 사진으로 설정한 머해. ‘너 머해? ㅎㅎ’, ‘우리 하던 거 먼저 하자.’ 아래 오늘 목표 ‘토익 RC공부’와 ‘공부로 돌아갈게’, ‘계속 볼게’ 선택지가 보여.">
+          <div class="pp play on" data-still="human" id="exPP" role="img" aria-label="예시 인물 사진으로 설정한 머해 팝업이 작동하는 모습. 영상 앱을 열면 사진과 함께 ‘너 머해? ㅎㅎ’, ‘우리 하던 거 먼저 하자.’가 뜨고, 오늘 할 공부 ‘토익 RC공부’ 아래 ‘공부로 돌아갈게’와 ‘계속 볼게’ 중에 고른다. ‘공부로 돌아갈게’를 누르면 ‘응, 기다릴게.’라고 답한다."></div>
           <img data-still="paper" width="452" height="920" src="img/demo_paper.webp" alt="종이친구로 설정한 머해. ‘너 머해?’, ‘우리 하던 거 먼저 하자.’ 아래 오늘 목표 ‘경영통계 2강 듣기’와 ‘공부로 돌아갈게’, ‘계속 볼게’ 선택지가 보여.">
         </figure>
-        <p class="exnote" aria-live="polite"><span id="exLabel">인물 사진 예시</span> · 실제 앱 화면</p>
+        <p class="exnote" aria-live="polite" id="exLabel">예시 인물이야 · 실제 앱에선 내 사진을 넣어</p>
       </div>
       <p class="choice">머해는 앱을 막지 않고 한 번 잡아줘.<br>계속 볼지, 돌아갈지는 네가 골라.</p>
       <a class="b2 pri" id="inTry" target="_blank" rel="noopener"></a>
@@ -365,7 +435,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u9';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u10';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -540,29 +610,42 @@ function tryLink(el,where){
 }
 /* 예시 전환: 화면에 보인 뒤 4초가 지나면 종이친구로 한 번 바뀌고 멈춘다 */
 const DEMO_MS=4000, REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const demo={cur:'human',timer:null,left:DEMO_MS,t0:0,done:false,stopped:REDUCE,vis:false};
+/* 팝업 예시 그리기: 예시 인물 사진으로 만든 화면 (실제 캡처가 아니라서 '예시'라고 적는다) */
+const MAN='img/demo_man.webp';
+function ppHTML(){
+  const av=`<span class="pp-av"><img src="${MAN}" alt=""></span>`,hint='<p class="pp-hint">방금 시작했잖아, 조금만 더</p><p class="pp-task"><small>지금 할 공부</small><b>토익 RC공부</b></p>';
+  return `<div class="pp-app"><i class="pp-tile"></i><span>영상 앱</span><i class="pp-tap a"></i></div>
+  <div class="pp-pop"><div class="pp-pic"><img src="${MAN}" alt=""><button type="button" class="pp-x" data-choice="close" aria-label="팝업 닫기"></button></div>
+  <div class="pp-body"><p class="pp-who"><b>도윤</b><i>방금</i></p>
+   <div class="pp-ln pb1">${av}<span class="pp-bb">너 머해? ㅎㅎ</span></div>
+   <div class="pp-ln pb2"><span class="pp-av sp"></span><span class="pp-bb">우리 하던 거 먼저 하자.</span></div>
+   <div class="pp-st"><div class="pp-a">${hint}</div>
+    <div class="pp-b"><p class="pp-me"><span>공부로 돌아갈게</span></p><div class="pp-ln pre">${av}<span class="pp-bb">응, 기다릴게.</span></div>${hint}</div></div>
+   <div class="pp-btns"><button type="button" class="go" data-choice="study">공부로 돌아갈게<i class="pp-tap g"></i></button><button type="button" class="stay" data-choice="watch">계속 볼게</button></div>
+   <p class="pp-foot">MEOHAE</p></div></div>`;
+}
+function ppFit(el){const w=el.getBoundingClientRect().width;if(w)el.style.fontSize=(w/24)+'px';}
+function ppMake(el,play){
+  el.innerHTML=ppHTML();el.classList.toggle('play',play&&!REDUCE);el.classList.toggle('static',!play||REDUCE);
+  if(play)el.querySelectorAll('button').forEach(b=>{b.tabIndex=-1;b.setAttribute('aria-hidden','true');});
+  ppFit(el);if('ResizeObserver' in window)new ResizeObserver(()=>ppFit(el)).observe(el);
+}
+/* 소개 화면 예시: 인물 사진은 작동 모습을 계속 되풀이, 종이친구는 실제 앱 화면 */
+const demo={cur:'human',paused:false};
+ppMake($('#exPP'),true);
 function demoPaint(){
-  document.querySelectorAll('#exShot img').forEach(i=>i.classList.toggle('on',i.dataset.still===demo.cur));
+  document.querySelectorAll('#exShot [data-still]').forEach(i=>i.classList.toggle('on',i.dataset.still===demo.cur));
   document.querySelectorAll('.exctl [data-ex]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ex===demo.cur)));
-  $('#exLabel').textContent=demo.cur==='human'?'인물 사진 예시':'종이친구 예시';
-  $('#exMotion').textContent=(!demo.done&&!demo.stopped)?'멈추기':'이어보기';
+  $('#exLabel').textContent=demo.cur==='human'?'예시 인물이야 · 실제 앱에선 내 사진을 넣어':'종이친구 예시 · 실제 앱 화면';
+  $('#exShot').classList.toggle('paused',demo.paused);
+  const m=$('#exMotion');m.textContent=demo.paused?'이어보기':'멈추기';m.style.visibility=(demo.cur==='human'&&!REDUCE)?'visible':'hidden';
+  ppFit($('#exPP'));
 }
-function demoPause(){if(demo.timer){clearTimeout(demo.timer);demo.timer=null;demo.left=Math.max(0,demo.left-(performance.now()-demo.t0));}}
-function demoRun(){
-  if(demo.timer||demo.done||demo.stopped||!demo.vis||document.hidden||!$('#s-intro').classList.contains('on'))return;
-  demo.t0=performance.now();
-  demo.timer=setTimeout(()=>{demo.timer=null;demo.done=true;demo.cur=demo.cur==='human'?'paper':'human';demoPaint();log('demo',{how:'auto',type});},demo.left);
-}
-function demoReset(){demoPause();Object.assign(demo,{cur:'human',left:DEMO_MS,done:false,stopped:REDUCE});demoPaint();}
-document.querySelectorAll('.exctl [data-ex]').forEach(b=>b.onclick=()=>{demoPause();demo.stopped=true;demo.cur=b.dataset.ex;demoPaint();log('demo',{how:b.dataset.ex,type});});
-$('#exMotion').onclick=()=>{
-  if(!demo.done&&!demo.stopped){demoPause();demo.stopped=true;}        /* 멈추기 */
-  else{demo.stopped=false;demo.done=false;demo.left=DEMO_MS;demoRun();} /* 이어보기: 4초 뒤 다른 예시로 한 번 */
-  demoPaint();
-};
-if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{demo.vis=e.isIntersecting;demo.vis?demoRun():demoPause();}),{threshold:.6}).observe($('#exShot'));
-else demo.vis=true;
-document.addEventListener('visibilitychange',()=>{document.hidden?demoPause():demoRun();});
+function demoPause(){}
+function demoRun(){}
+function demoReset(){demo.cur='human';demo.paused=false;demoPaint();}
+document.querySelectorAll('.exctl [data-ex]').forEach(b=>b.onclick=()=>{demo.cur=b.dataset.ex;demoPaint();log('demo',{how:b.dataset.ex,type});});
+$('#exMotion').onclick=()=>{demo.paused=!demo.paused;demoPaint();log('demo',{how:demo.paused?'pause':'resume',type});};
 
 function showIntro(animate){
   $('#s-intro').classList.toggle('enter',!!animate);
@@ -769,7 +852,7 @@ function partPromo(){
     <button type="button" class="sr-try" id="tryBtn" aria-expanded="false" aria-controls="tryDemo">팝업 한 번 체험하기</button>
     <div class="sr-demo" id="tryDemo" hidden>
       <div class="sr-select" role="group" aria-label="팝업 사진 예시"><button type="button" data-photo="human" aria-pressed="false">내 사진 예시</button><button type="button" data-photo="paper" aria-pressed="false">기본 종이친구</button></div>
-      <div class="sr-device"><img id="tryShot" width="452" height="920" alt="">
+      <div class="sr-device"><div class="pp static" id="tryPP" role="group" aria-label="예시 인물 사진으로 설정한 머해 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 토익 RC공부." hidden></div><img id="tryShot" width="452" height="920" src="img/demo_paper.webp" alt="기본 종이친구의 실제 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 경영통계 2강 듣기.">
         <button type="button" class="sr-hot" data-choice="close" aria-label="팝업 체험 닫기"></button>
         <button type="button" class="sr-hot" data-choice="study" aria-label="공부로 돌아갈게"></button>
         <button type="button" class="sr-hot" data-choice="watch" aria-label="계속 볼게"></button></div>
@@ -780,30 +863,30 @@ function partPromo(){
 /* 결과 안 팝업 체험: 전부 선택 사항이고, 참여 안내 클릭과는 따로 기록한다 */
 function armTry(){
   const box=$('#resBody .sr-promo');if(!box)return;
-  const launch=$('#tryBtn'),demo=$('#tryDemo'),modes=box.querySelector('.sr-select'),device=box.querySelector('.sr-device'),shot=$('#tryShot'),fb=$('#tryFb');
-  let opened=0;
+  const launch=$('#tryBtn'),demo=$('#tryDemo'),modes=box.querySelector('.sr-select'),device=box.querySelector('.sr-device'),shot=$('#tryShot'),fb=$('#tryFb'),pp=$('#tryPP');
+  let opened=0;ppMake(pp,false);
   const choose=pic=>{
     modes.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.photo===pic)));
-    shot.src=pic==='human'?'img/demo_human.webp':'img/demo_paper.webp';
-    shot.alt=pic==='human'?'인물 사진으로 설정한 실제 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 토익 RC공부.':'기본 종이친구의 실제 팝업. 너 머해? 우리 하던 거 먼저 하자. 지금 할 공부는 경영통계 2강 듣기.';
+    const man=pic==='human';pp.hidden=!man;shot.hidden=man;device.querySelectorAll('.sr-hot').forEach(h=>h.hidden=man);   /* 인물 예시는 직접 그린 화면, 종이친구는 실제 캡처 */
+    if(man)ppFit(pp);
   };
   const play=()=>{fb.hidden=true;device.hidden=false;modes.hidden=false;};
   const close=()=>{demo.hidden=true;launch.setAttribute('aria-expanded','false');launch.textContent='팝업 한 번 체험하기';launch.focus();};
   modes.querySelectorAll('button').forEach(b=>b.onclick=()=>{choose(b.dataset.photo);log('try_photo',{how:b.dataset.photo,type});});
   launch.onclick=()=>{
     if(!demo.hidden){close();return;}
-    choose(box.dataset.picture);play();demo.hidden=false;launch.setAttribute('aria-expanded','true');launch.textContent='체험 접기';
+    demo.hidden=false;choose(box.dataset.picture);play();launch.setAttribute('aria-expanded','true');launch.textContent='체험 접기';
     ST.tried=1;saveState();
     log('try_open',{how:opened++?'again':'first',type});
   };
-  device.querySelectorAll('.sr-hot').forEach(b=>b.onclick=()=>{
+  device.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{
     if(b.dataset.choice==='close'){close();return;}
     modes.hidden=true;device.hidden=true;fb.hidden=false;
     fb.querySelector('p').textContent=b.dataset.choice==='study'?'공부로 돌아가기를 골랐어. 앱에서도 보던 걸 내려놓을 순간을 이렇게 네가 정해.':'계속 보기를 골랐어. 앱을 그대로 볼 수 있어. 다음 선택도 네가 해.';
     log('try_pick',{how:b.dataset.choice,type});                 /* 체험 안의 선택일 뿐, 참여 안내 클릭이 아니다 */
     $('#tryAgain').focus();
   });
-  $('#tryAgain').onclick=()=>{play();log('try_open',{how:'again',type});device.querySelector('[data-choice="study"]').focus();};
+  $('#tryAgain').onclick=()=>{play();if(!pp.hidden)ppFit(pp);log('try_open',{how:'again',type});const f=[...device.querySelectorAll('[data-choice="study"]')].find(x=>x.offsetParent);if(f)f.focus();};
 }
 /* 다섯 친구: 누른 동물의 한 줄만 바뀌고 '내 결과' 표시는 그대로 */
 /* 내 동물 설명은 카드에 적힌 내 답 그대로 (답이 없으면 대표 문구) */
