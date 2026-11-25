@@ -79,9 +79,11 @@ h1{font-family:Jua;font-weight:400;font-size:30px;line-height:1.25;margin-top:26
   <p class="lead">적을 건 없어요. 버튼을 위에서부터 하나씩 누르고, 끝나면 <b>이 페이지로 돌아와서</b> 다음 걸 누르면 돼요.</p>
   <div class="ios" id="ios">아이폰이네요. 지금은 Android만 테스트 중이에요. <a href="https://forms.gle/kUWucQ8Qv56563cZ8" target="_blank" rel="noopener" onclick="log('install_step',{where:'ios_form'})">여기에 남겨두면</a> iOS 나올 때 제일 먼저 알려드려요.</div>
 
+  <div class="ios" id="pc">PC로 보고 계시네요. 1·2단계는 PC에서도 되지만 <b>설치는 안드로이드 폰에서</b> 해야 해요. 폰 크롬에서 이 주소를 열면 제일 쉬워요. <button type="button" class="mark" id="copyUrl" style="margin-top:8px">이 주소 복사</button></div>
+
   <div class="gate" id="gate">
     <h2>먼저 크롬에서 열어주세요</h2>
-    <p>인스타 같은 앱 안에서는 구글 로그인이 막힐 때가 많아요. 버튼 한 번이면 크롬으로 넘어가서 그대로 이어져요.</p>
+    <p id="gateWhy">인스타 같은 앱 안에서는 구글 로그인이 막힐 때가 많아요. 버튼 한 번이면 크롬으로 넘어가서 그대로 이어져요.</p>
     <a class="btn" id="toChrome" href="#">크롬에서 이어서 하기</a>
     <button class="mark" id="stayHere" type="button">크롬이 안 열리면 여기서 계속하기</button>
   </div>
@@ -144,6 +146,9 @@ const UA=navigator.userAgent;
 const IS_ANDROID=/Android/.test(UA);
 const IS_IOS=/iPhone|iPad|iPod/.test(UA);
 const IN_APP=IS_ANDROID&&(/; wv\)/.test(UA)||/Instagram|FBAN|FBAV|KAKAOTALK|Barcelona/.test(UA));
+/* 크롬이 아닌 브라우저(삼성 인터넷 등)도 크롬으로 넘긴다: 크롬은 구글 계정이 이미 로그인돼 있어 제일 쉽다 */
+const OTHER_BROWSER=IS_ANDROID&&!IN_APP&&!(/Chrome\/\d/.test(UA)&&!/SamsungBrowser|EdgA|OPR\/|Whale|NAVER|DuckDuckGo|Firefox/.test(UA));
+const NEED_CHROME=IN_APP||OTHER_BROWSER;
 const STAY=Q.get('stay')==='1';
 const VIA=Q.get('via')||'';
 function chromeIntent(){
@@ -154,8 +159,9 @@ function chromeIntent(){
 }
 const gate=document.getElementById('gate'),flow=document.getElementById('flow');
 function showFlow(){gate.classList.remove('on');flow.classList.remove('off');}
-if(IN_APP&&!STAY){
+if(NEED_CHROME&&!STAY){
   gate.classList.add('on');flow.classList.add('off');
+  if(OTHER_BROWSER)document.getElementById('gateWhy').textContent='크롬은 구글 계정이 이미 로그인돼 있어서 제일 쉽게 끝나요. 버튼 한 번이면 크롬으로 넘어가서 그대로 이어져요.';
   const a=document.getElementById('toChrome');a.href=chromeIntent();
   a.addEventListener('click',()=>log('install_step',{where:'chrome'}));
   document.getElementById('stayHere').addEventListener('click',()=>{log('install_step',{where:'stay'});showFlow();});
@@ -199,7 +205,8 @@ document.querySelectorAll('.step').forEach(s=>{
 });
 paint();
 if(IS_IOS)document.getElementById('ios').classList.add('on');
-log('install_view',{where:getSrc(),how:(IN_APP&&!STAY)?'inapp':(VIA==='inapp'?'chrome':'browser')});
+if(!IS_ANDROID&&!IS_IOS){document.getElementById('pc').classList.add('on');document.getElementById('copyUrl').onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+location.pathname+(getSrc()?'?src='+getSrc():''));e.target.textContent='복사했어요';}catch(x){e.target.textContent='주소창에서 복사해 주세요';}};}
+log('install_view',{where:getSrc(),how:(IN_APP&&!STAY)?'inapp':(OTHER_BROWSER&&!STAY)?'otherbrowser':(VIA==='inapp'?'chrome':(!IS_ANDROID&&!IS_IOS?'pc':'browser'))});
 </script>
 </body>
 </html>

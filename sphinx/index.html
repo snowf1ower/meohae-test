@@ -240,6 +240,16 @@ h1 .spark.r{right:-38px;top:50%;margin-top:-13px;transform:scaleX(-1)}
 .sr-compare strong{color:var(--ro)}
 .rfoot{margin-top:22px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
 .rfoot button{appearance:none;display:inline-flex;align-items:center;padding:6px 0;min-height:44px;background:transparent;border:0;text-decoration:underline;text-underline-offset:3px;font-size:12.5px;font-weight:700;color:var(--rs)}
+/* 결과: 바깥은 옅은 모래색, 안쪽 내용은 흰 블록으로 나눈다 */
+.wrap.rs{background:#F4EEE7}
+html:has(.wrap.rs),body:has(.wrap.rs){background:#E9E1D7}
+#s-result .rcard{width:calc(100% + 16px);margin:12px -8px 0;border-radius:20px;border:1px solid #E6DCD1}
+#s-result .rbody{padding-top:0}
+#s-result .rbody>section{margin:12px -8px 0;padding:18px 18px 16px;border-radius:20px;background:#fff;border:1px solid #E6DCD1}
+#s-result .rbody>.sr-promo{background:#FFF3E6;border-color:#F1CFAF}
+#s-result .rbody>.sr-promo[data-weight=light]{background:#fff;border-color:#E6DCD1}
+#s-result .sr-promo[data-weight=light] .sr-feedback{background:#FBF5EE}
+#s-result .sr-go{margin-bottom:-6px}
 .dock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:8;border-top:1px solid #E8E2DC;background:#fff;padding:9px 13px calc(10px + env(safe-area-inset-bottom,0px))}
 .dock[hidden]{display:none}
 .idock{padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px))}
@@ -355,7 +365,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 const rnd=n=>Math.random().toString(36).slice(2,2+n);
 let DID=ls('mh_did');if(!DID){DID=rnd(6);ls('mh_did',DID);}
 let SID=DID+'.'+rnd(4);                         /* 폰 고유 번호 . 이번 응시 */
-const UIV='u8';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
+const UIV='u9';                                 /* 화면 버전: 맞춤 카드 + 결과 안 팝업 체험 (설문 버전과 따로) */
 const SRC=(P.get('src')||'').slice(0,20), FROM=(P.get('from')||'').slice(0,4);
 if(P.get('nolog')==='1')ls('meohae_nolog','1');
 if(P.get('nolog')==='0'){try{localStorage.removeItem('meohae_nolog');}catch(e){}}   /* 기록 차단 해제 */
@@ -409,7 +419,7 @@ const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 
 /* ===== 화면 ===== */
 const $=s=>document.querySelector(s);
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#dock').hidden=id!=='#s-result';$('#idock').hidden=id!=='#s-intro';$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on','#'+e.id===id));const pl=id==='#s-result'||id==='#s-intro';$('#dock').hidden=id!=='#s-result';$('#idock').hidden=id!=='#s-intro';$('#wrap').classList.toggle('rs',id==='#s-result');$('#wrap').classList.toggle('start',id==='#s-start');$('#wrap').classList.toggle('res',pl);$('#wrap').classList.toggle('plain',pl);window.scrollTo(0,0);}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600);}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
